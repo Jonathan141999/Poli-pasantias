@@ -5,6 +5,9 @@ const publicRoutes = {
   USERS_ID: `/usuario/:id`,
   //HOME: '/',
   EMAIL: '/activacion',
+};
+
+const privateRoutes = {
   LOGOUT: '/logout',
   PRIVATE: '/privada',
   CLIENTPRODUCTS: '/student-publications',
@@ -14,11 +17,7 @@ const publicRoutes = {
   PROFILE: '/profile',
   NEWORDER: '/neworder',
   REPORTS: '/reports',
-
-};
-
-const privateRoutes = {
-    
+  EDITPROFILE: '/edit-profile'    
 };
 
 const Routes = {
