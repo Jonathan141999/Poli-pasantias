@@ -22,7 +22,7 @@ import "../theme/toolbar.css";
 
 
 const ProductClientList = () => {
-
+/*
     const { products, isLoading, isError} = useProducts();
 
     const { requests,isLoadingRequest,isErrorRequest, mutate} = useRequests();
@@ -319,7 +319,7 @@ const ProductClientList = () => {
                         }
                     </IonList>
                     <IonItem>
-                        <IonLabel slot={"end"}> <div><p align={"right"}><strong>Subtotal: </strong>{total.toFixed(2)}</p></div></IonLabel>
+        
                     </IonItem>
                     <IonText>
                         <h3>Tipo de </h3>
@@ -359,8 +359,8 @@ const ProductClientList = () => {
                 isOpen={showAlert1}
                 onDidDismiss={()=>setShowAlert1(false)}
                 cssClass={'my-custom-class'}
-                header={'Carrito Vacio'}
-                message={'No puede realizar la compra porque el carrito esta vacio'}
+                header={'Postualación'}
+                message={'No puede postular a la misma postulacion dos veces'}
                 buttons={['OK']}
             />
             <IonAlert
@@ -368,11 +368,11 @@ const ProductClientList = () => {
                 onDidDismiss={()=>setShowAlert2(false)}
                 cssClass={'my-custom-class'}
                 header={'Sin stock'}
-                message={'No puede realizar la compra porque no existe suficiente stock'}
+                message={'No puede realizar la postuacion porque ya no existe'}
                 buttons={['OK']}
             />
         </>
     );
+    */
 };
-
 export default ProductClientList;

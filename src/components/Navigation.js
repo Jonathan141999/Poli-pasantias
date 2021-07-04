@@ -59,32 +59,29 @@ const Navigation = (props) => {
                         <img src={user} />
                     </IonAvatar>
                     <IonLabel>
-                        <h3>{currentUser.name}</h3>
+                        <h3>{currentUser.name} + " " + {currentUser.last_name}</h3>
                         <p>{currentUser.email}</p>
                     </IonLabel> 
                 </IonItem>
                 {currentUser.role==='ROLE_ADMIN'
                 ?   <Menu.Item key={Routes.OWNERPRODUCTS} icon={<FormOutlined/>} >
-                        <Link to={Routes.OWNERPRODUCTS} style={linkStyle}>Productos</Link>
+                        <Link to={Routes.OWNERPRODUCTS} style={linkStyle}>Publicaciones</Link>
                     </Menu.Item>
                 :   <Menu.Item key={Routes.CLIENTPRODUCTS} icon={<FormOutlined/>} >
-                        <Link to={Routes.CLIENTPRODUCTS} style={linkStyle}>Productos</Link>
+                        <Link to={Routes.CLIENTPRODUCTS} style={linkStyle}>Publicaciones</Link>
                     </Menu.Item>
                 }
                 {currentUser.role==='ROLE_ADMIN'
                 ?   <Menu.Item key={Routes.REGISTERPRODUCT} icon={<PlusCircleOutlined/>} >
-                        <Link to={Routes.REGISTERPRODUCT} style={linkStyle}>Registrar Producto</Link>
+                        <Link to={Routes.REGISTERPRODUCT} style={linkStyle}>Registrar Publicación</Link>
                     </Menu.Item>
                 :   <Menu.Item key={Routes.DAILYORDER} icon={<PlusCircleOutlined/>} >
-                        <Link to={Routes.DAILYORDER} style={linkStyle}>Estado de Orden</Link>
+                        <Link to={Routes.DAILYORDER} style={linkStyle}>Estado de Postulación</Link>
                     </Menu.Item>
                 }
                 {currentUser.role==='ROLE_ADMIN'
                 ?   <><Menu.Item key={Routes.NEWORDER} icon={<NotificationOutlined/>} >
-                        <Link to={Routes.NEWORDER} style={linkStyle}>Órdenes Nuevas</Link>
-                    </Menu.Item>
-                    <Menu.Item key={Routes.REPORTS} icon={<MonitorOutlined/>} >
-                        <Link to={Routes.REPORTS} style={linkStyle}>Reportes de Ventas</Link>
+                        <Link to={Routes.NEWORDER} style={linkStyle}>Órdenes de nuevas postulaciones</Link>
                     </Menu.Item>
                     <Menu.Item key={Routes.PROFILE} icon = {<UserOutlined/>}>
                         <Link to={Routes.PROFILE} style={linkStyle}>Perfil de Usuario</Link>
@@ -93,6 +90,15 @@ const Navigation = (props) => {
                         <Link to={Routes.PROFILE} style={linkStyle}>Perfil de Usuario</Link>
                     </Menu.Item>
                 }  
+                {currentUser.role==='ROLE_STUDENT'
+                ? <>  <Menu.Item key={Routes.REPORTS} icon={<MonitorOutlined/>} >
+                        <Link to={Routes.REPORTS} style={linkStyle}>Reportes de Publicación</Link>
+                    </Menu.Item></>
+                :   <Menu.Item key={Routes.PROFILE} icon = {<UserOutlined/>}>
+                     <Link to={Routes.PROFILE} style={linkStyle}>Reportes de Publicación</Link>
+                    </Menu.Item>
+                }
+            
                 <Menu.Item key={Routes.LOGIN}>
                     <Link to={Routes.LOGOUT} className='logout-link'>
                     {
