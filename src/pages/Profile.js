@@ -1,4 +1,5 @@
 import React from 'react';
+import Routes from '../constants/routes';
 import {
     IonHeader,
     IonPage,
@@ -9,7 +10,10 @@ import {
     IonCardHeader,
     IonCardTitle,
     IonImg,
+    IonButton
 } from "@ionic/react";
+import {Link} from 'react-router-dom';
+import { Form, Input, message, Select} from 'antd';
 import '../theme/app.css';
 import "../theme/toolbar.css";
 import Layouts from '../components/Layout';
@@ -44,6 +48,13 @@ const Profile = () => {
             }
           </IonCardHeader>
         </IonCard>
+        <Form.Item>
+          <Link to={ Routes.EDITPROFILE}>
+             <IonButton type='primary' className='login-form-button'>
+                 Actualizar Perfil
+             </IonButton>
+          </Link>
+        </Form.Item>
         </IonPage>
     </>
   );
