@@ -42,7 +42,7 @@ const ProductClientList = () => {
 
     console.log('search', searchProduct);
 
-    console.log("productos", products);
+    console.log("publicaciones", products);
 
     useEffect(()=>{
         let total2 = 0;
@@ -72,7 +72,7 @@ const ProductClientList = () => {
     }
 
     const onSearch = value =>{
-        console.log('producto', value);
+        console.log('publicaciones', value);
         setSearch(value);
 
     };
@@ -275,11 +275,11 @@ const ProductClientList = () => {
                 </IonRow>
             </IonGrid>
 
-            <Modal  title="Carrito de compras"
+            <Modal  title="Publicacion a Postulaciones"
                     visible={showCart}
                     closable={false}
                     footer={[
-                        <IonButton htmlType='submit' onClick={onCreate}>Realizar Compra</IonButton>,
+                        <IonButton htmlType='submit' onClick={onCreate}>Realizar una postulación</IonButton>,
                         <IonButton onClick={()=>setShowCart(false)}>Cancelar</IonButton>
                     ]}
             >
@@ -322,7 +322,7 @@ const ProductClientList = () => {
                         <IonLabel slot={"end"}> <div><p align={"right"}><strong>Subtotal: </strong>{total.toFixed(2)}</p></div></IonLabel>
                     </IonItem>
                     <IonText>
-                        <h3>Tipo de entrega</h3>
+                        <h3>Tipo de </h3>
                     </IonText>
 
                         <IonRow>

@@ -63,13 +63,13 @@ const NewRequest = () =>{
                                         :<IonIcon slot="end" icon={closeCircle}>Desconocido</IonIcon>
                         }
                         <IonLabel>
-                            <div><h2><strong>N° de pedido: </strong>{orders.id}</h2></div>
+                            <div><h2><strong>Numero de solicitud </strong>{orders.id}</h2></div>
                             <div><p><strong>Numero de casa: </strong>{orders.usertype.home_number}</p></div>
                             <div><p><strong>Ordenado por: </strong>{orders.user.name}</p></div>
                             <div><p><strong>Total: </strong>{orders.total.toFixed(2)}</p></div>
                             {orders.type==='withdraw'
-                                ? <div><p><strong>Orden para: </strong> Retirar</p></div>
-                                : <div><p><strong>Orden a: </strong>Domicilio</p></div>
+                                ? <div><p><strong>Orden para: </strong> Postulado</p></div>
+                                : <div><p><strong>Orden a: </strong>Rechazado</p></div>
                             }
                         </IonLabel>
                     </IonItem>

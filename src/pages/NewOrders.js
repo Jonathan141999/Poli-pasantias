@@ -19,7 +19,7 @@ const NewOrders = () => {
                     <div slot={"start"} className="menu">
                         <Layouts />
                     </div>
-                    <IonTitle id={"letter"}>Lista de Ordenes Nuevas </IonTitle>
+                    <IonTitle id={"letter"}>Lista de Nuevas Publicaciones </IonTitle>
                 </IonToolbar>
             </IonHeader>
             <NewRequest />

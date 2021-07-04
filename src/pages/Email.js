@@ -9,7 +9,7 @@ import {
   IonImg,
   IonButton,
 } from "@ionic/react";
-import logo from '../images/logo-inner.PNG';
+import logo from '../images/logo.png';
 import {Link} from 'react-router-dom';
 import Routes from '../constants/routes';
 import '../theme/app.css';

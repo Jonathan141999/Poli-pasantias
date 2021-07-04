@@ -33,11 +33,14 @@ const Profile = () => {
           <IonImg  src={user} style={{width:"150px", height:"150px"}}/>
           <IonCardHeader>
             <IonCardTitle>Nombre: {currentUser.name}</IonCardTitle>
-            <IonCardSubtitle>Correo:  {currentUser.email}</IonCardSubtitle>
-            <IonCardSubtitle>Casa:  {currentUser.home_number}</IonCardSubtitle>
-            {currentUser.role==='ROLE_ADMIN'
-            ?<IonCardSubtitle>Propietario de la Tienda Víveres Daniela</IonCardSubtitle>
-            :<IonCardSubtitle>Arrendatario del Conjunto Luluncoto</IonCardSubtitle>
+            <IonCardTitle>Apellido: {currentUser.last_name}</IonCardTitle>
+            <IonCardSubtitle>Telefóno: {currentUser.phone}</IonCardSubtitle>
+            <IonCardSubtitle>Correo: {currentUser.email}</IonCardSubtitle>
+            <IonCardSubtitle>Dirección: {currentUser.direction}</IonCardSubtitle>
+            <IonCardSubtitle>Descripcion:  {currentUser.description}</IonCardSubtitle>
+            {currentUser.role==='ROLE_BUSINESS'
+            ?<IonCardSubtitle>Empresa</IonCardSubtitle>
+            :<IonCardSubtitle>Estudiante de la Escuala Politécnica Nacional</IonCardSubtitle>
             }
           </IonCardHeader>
         </IonCard>

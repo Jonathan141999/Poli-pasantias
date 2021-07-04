@@ -48,9 +48,12 @@ const RegisterProduct = () => {
                 // use form data to be able to send a file to the server
                 const data = new FormData();
                 data.append( 'image', values.image[ 0 ] );
-                data.append( 'name', values.name );
-                data.append( 'stock', values.stock );
-                data.append( 'price', values.price );
+                data.append( 'affair', values.affair);
+                data.append( 'details', values.details );
+                data.append( 'hour', values.hour );
+                data.append( 'location', values.location);
+                data.append( 'phone', values.phone );
+                data.append( 'publication_date', values.publication_date );
                 data.append( 'category_id', values.category_id );
 
                 console.log('nuevos valores', data);
@@ -161,38 +164,80 @@ const RegisterProduct = () => {
                           }}
                           onFinish={onCreate}
                     >
-                        <Form.Item name='name'
+                        <Form.Item name='affair'
                                    rules={[
                                        {
                                            required: true,
-                                           message: 'Ingresa nombre del producto'
+                                           message: 'Ingresa un asunto'
                                        }
                                    ]}
                                    hasFeedback
                         >
                             <Input  placeholder='Nombre del Producto'/>
                         </Form.Item>
-                        <Form.Item name='stock'
+                
+                        <Form.Item name='details'
                                    rules={[
                                        {
                                            required: true,
-                                           message: 'Ingresa el stock o la cantidad del producto'
+                                           message: 'Ingresa el detalle de la práctica preprofesional'
                                        },
                                    ]}
                                    hasFeedback
                         >
-                            <Input  placeholder='Cantidad del producto o Stock'/>
+                            <Input.TextArea  placeholder='Detalle de la práctica preprofesional'/>
                         </Form.Item>
-                        <Form.Item name='price'
+                        <Form.Item name='hour'
                                    rules={[
                                        {
                                            required: true,
-                                           message: 'Ingresa el precio del producto'
+                                           message: 'Horas a ofertar'
                                        }
                                    ]}
                                    hasFeedback
                         >
-                            <Input  placeholder='Precio'/>
+                            <Input  placeholder='Horas'/>
+                        </Form.Item>
+                        
+                        <Form.Item name='location'
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: 'Dirección'
+                                       }
+                                   ]}
+                                   hasFeedback
+                        >
+                            <Input  placeholder='Dirección'/>
+                        </Form.Item>
+                        
+                        <Form.Item name='phone'
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: 'Ingresa tu número telefónico'
+                                       },
+                                       {
+                                            min: 10,
+                                            max: 13,
+                                            message: 'El número telefonico debe tener 10 dígitos'
+                                        }
+                                   ]}
+                                   hasFeedback
+                        >
+                            <Input  placeholder='Número de telefóno'/>
+                        </Form.Item>
+                        
+                        <Form.Item name='publication_date'
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: 'Fecha de Publicación'
+                                       }
+                                   ]}
+                                   hasFeedback
+                        >
+                            <Input  placeholder='Fecha de Publicación'/>
                         </Form.Item>
 
                         <Form.Item name='category_id'
@@ -217,37 +262,9 @@ const RegisterProduct = () => {
                             </Select>
                         </Form.Item>
 
-                        <Form.Item name='image'
-                                   label='Upload'
-                                   valuePropName='fileList'
-                                   getValueFromEvent={ normPhotoFile }
-                                   rules={ [
-                                       {
-                                           required: true,
-                                           message: 'Sube tu foto'
-                                       }
-                                   ] }
-                        >
-                            <Upload name='files'
-                                    accept='image/jpeg,image/png'
-                                    listType='picture-card'
-                                    multiple={ false }
-                                    showUploadList={ false }
-                                    beforeUpload={ () => false }
-                                    fileList={ fileList }
-                            >
-                                { imageUrl
-                                    ? <img src={ imageUrl } alt='Foto' style={ { width: '80px' } } />
-                                    : <div>
-                                        <PlusOutlined />
-                                        <div className='ant-upload-text'>Upload</div>
-                                    </div> }
-                            </Upload>
-                        </Form.Item>
-
                         <Form.Item>
                             <IonButton type='primary' htmlType='submit' className='login-form-button'>
-                                Registrar Producto
+                                Registrar Publicación
                             </IonButton>
                         </Form.Item>
                     </Form>

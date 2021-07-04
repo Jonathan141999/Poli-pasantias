@@ -16,7 +16,7 @@ import {Link} from 'react-router-dom';
 import Cookies from 'js-cookie';
 import {useAuth} from '../providers/Auth';
 import {EyeInvisibleOutlined, EyeTwoTone} from '@ant-design/icons/lib';
-import {IonButton, IonCol, IonHeader, IonIcon, IonImg, IonPage, IonRow, IonTitle, IonToolbar,IonSelectOption} from "@ionic/react";
+import {IonButton, IonCol, IonHeader, IonIcon, IonImg, IonPage, IonRow, IonTitle, IonToolbar,IonSelectOption,IonSelect} from "@ionic/react";
 import NumberOutlined from "@ant-design/icons/lib/icons/NumberOutlined";
 import {arrowBack} from "ionicons/icons";
 import logo from '../images/logo.png';
@@ -27,20 +27,22 @@ import '../theme/register.css';
 const RegisterUser = () => {
 
     const {setAuthenticated, setCurrentUser} = useAuth();
-    const role = 'ROLE_CLIENT';
 
     const onFinish = async (userData) => {
         console.log('Received values of form: ', userData);
-        const {name, email, home_number, password, password_confirmation} = userData;
+        const {name,last_name, email, phone, password, password_confirmation,direction,role,description} = userData;
 
         try {
             const user = await API.post('/register', {
                 name,
+                last_name,
+                phone,
                 email,
-                home_number,
                 password,
                 password_confirmation,
-                role
+                direction,
+                role,
+                description
             });
 
             console.log('User', user);
@@ -183,17 +185,15 @@ const RegisterUser = () => {
                                             iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
                                             placeholder='Confirma tu contraseña'/>
                         </Form.Item>
-            
-                        <Form.Item name='role'
-                                   hasFeedback
+                        
+                        <IonSelect //value={type}
+                                   placeholder={"Escoge el rol"}
+                                   //onIonChange={e => setType(e.detail.value)}
                         >
-                            <Select prefix={<ProfileOutlined/>} placeholder='Escoge el rol'>
-                                <IonSelectOption name='business'>Empresa</IonSelectOption>
-                                <IonSelectOption name='student'>Estudiante</IonSelectOption>
-                            </Select>
-                            
-                        </Form.Item>
-                    
+                            <IonSelectOption value={"business"}>Empresa</IonSelectOption>
+                            <IonSelectOption value={"student"}>Estudiante</IonSelectOption>
+                        </IonSelect>
+
                         <Form.Item name='description'
                                    rules={[
                                        {
@@ -203,8 +203,9 @@ const RegisterUser = () => {
                                    ]}
                                    hasFeedback
                         >
-                            <Input prefix={<BookOutlined/>} placeholder='Descripción'/>
+                            <Input.TextArea prefix={<BookOutlined/>} placeholder='Descripción, Ejemplo: Hobbie, Dedicación, Gustos,'/>
                         </Form.Item>
+                        
                         <Form.Item>
                             <IonButton type='primary' htmlType='submit' className='login-form-button'>
                                 Registrar
@@ -217,4 +218,3 @@ const RegisterUser = () => {
 };
 
 export default withoutAuth(RegisterUser);
-

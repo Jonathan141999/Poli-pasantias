@@ -19,7 +19,7 @@ import "../theme/toolbar.css";
 
 
 
-
+//publicaiones de de la empresa puede publicar y ver en card
 const ProductOwnerList = () => {
 
     const { products, isLoading, isError, mutate } = useProducts();
@@ -31,7 +31,7 @@ const ProductOwnerList = () => {
 
     const {searchProduct}=useSearchProduct(search);
 
-    console.log("productos", products);
+    console.log("publicaciones", products);
 
     console.log("busqueda", searchProduct);
 
@@ -44,10 +44,11 @@ const ProductOwnerList = () => {
         form.validateFields()
             .then( async( values ) => {
                 try {
-                    await API.put( `/products/${idProduct}`, {
-                        name: values.name,
-                        stock: parseInt(product.product.stock) + parseInt(values.stock),
-                        price: values.price,
+                    await API.put( `/publications/${idProduct}`, {
+                        affair: values.affair,
+                        stock: values.details,
+                        location:values.location,
+                        phone: values.phone,
                     } ); // post data to server
                     form.resetFields();
                     await afterCreate();
@@ -68,11 +69,11 @@ const ProductOwnerList = () => {
     };
 
     const afterCreate = async () => {
-        await mutate('/products');
+        await mutate('/publications');
     };
 
     const onSearch = value =>{
-        console.log('producto', value);
+        console.log('publicaciones', value);
         setSearch(value);
     };
 
@@ -119,16 +120,15 @@ const ProductOwnerList = () => {
                 searchProduct ?
                     searchProduct.map((search, i)=>(
                         <IonCol  size="6">
-                            <IonCard key={i} onClick={()=>showDetail(search.id)} >
-                                    <IonImg src={ `http://localhost:8000/storage/${ search.image }` }
-                                         style={{height: "100px"}}/>
+                            <IonCard key={i} onClick={()=>showDetail(search.id)}>
                                          <IonCardHeader>
-                                             <IonCardTitle>{search.name}</IonCardTitle>
+                                             <IonCardTitle>{search.affair}</IonCardTitle>
                                          </IonCardHeader>
 
                                 <IonCardContent>
-                                    <IonCardSubtitle>{search.price.toFixed(2)}</IonCardSubtitle>
-                                    <IonCardSubtitle><strong>Stock: </strong>{search.stock}</IonCardSubtitle>
+                                    <IonCardSubtitle><strong>Detalle: </strong>{product.details}</IonCardSubtitle>
+                                    <IonCardSubtitle><strong>Horas: </strong>{product.hour}</IonCardSubtitle>
+                                    <IonCardSubtitle><strong>Dirección: </strong>{product.location}</IonCardSubtitle>                                
                                 </IonCardContent>
                             </IonCard>
                         </IonCol>
@@ -138,15 +138,17 @@ const ProductOwnerList = () => {
                 products.map((product,i)=>(
                     <IonCol size="6">
                     <IonCard key={i} onClick={()=>showDetails(i)} >
-                                <IonImg style={{ height: "100px"}} src={ `http://localhost:8000/storage/${ product.image }` }
-                                     />
                         <IonCardHeader>
-                            <IonCardTitle>{product.name}</IonCardTitle>
+                            <IonCardTitle>{product.affair}</IonCardTitle>
                         </IonCardHeader>
 
                         <IonCardContent>
-                            <IonCardSubtitle>{product.price.toFixed(2)}</IonCardSubtitle>
-                            <IonCardSubtitle><strong>Stock: </strong>{product.stock}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Detalle: </strong>{product.details}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Horas: </strong>{product.hour}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Dirección: </strong>{product.location}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Telefóno: </strong>{product.phone}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Fecha de Publicación: </strong>{product.publication_date}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Categoria </strong>{product.category_id}</IonCardSubtitle>
                         </IonCardContent>
                     </IonCard>
                     </IonCol>
@@ -161,7 +163,7 @@ const ProductOwnerList = () => {
                     : product.isError
                     ? <ShowError error={product.isError}/>
                     : <>
-                        <Modal  title="Producto" style={{background:"blue"}}
+                        <Modal  title="Publicaciones" style={{background:"blue"}}
                                 visible={showInfo}
                                 closable={false}
                                 footer={[
@@ -171,40 +173,42 @@ const ProductOwnerList = () => {
                                     <IonButton onClick={()=>setShowInfo(false)}>Cancelar</IonButton>
                                 ]}
                         >
-                                <IonRow>
-                                    <IonCol/>
-                                    <IonCol>
-                                        <IonItem>
-                                            <IonThumbnail style={{width: "100px", height:"100px"}}>
-                                                <IonImg src={ `http://localhost:8000/storage/${ product.product.image }` }
-                                                />
-                                            </IonThumbnail>
-                                        </IonItem>
-                                    </IonCol>
-                                    <IonCol/>
-                                </IonRow>
-
-                                <Form
-                                    form={form}
-                                    initialValues={{
-                                        remember: true,
-                                    }}
+                        <Form
+                            form={form}
+                            initialValues={{
+                                 remember: true,
+                                }}
                                     //onFinish={onUpdate}
                                 >
-                                    <Form.Item name='name'
+                                    <Form.Item name='affair'
                                                hasFeedback
                                      >
-                                        <Input  placeholder={product.product.name}/>
+                                        <Input  placeholder={product.product.affair}/>
                                     </Form.Item>
-                                    <Form.Item name='stock'
+                                    <Form.Item name='details'
                                                hasFeedback
                                     >
-                                        <Input  placeholder={product.product.stock}/>
+                                        <Input  placeholder={product.product.details}/>
                                     </Form.Item>
-                                    <Form.Item name='price'
+                                    <Form.Item name='location'
                                                hasFeedback
                                     >
-                                        <Input  placeholder={product.product.price}/>
+                                        <Input  placeholder={product.product.location}/>
+                                    </Form.Item>
+                                    <Form.Item name='phone'
+                                               hasFeedback
+                                    >
+                                        <Input  placeholder={product.product.phone}/>
+                                    </Form.Item>
+                                    <Form.Item name='publication_date'
+                                               hasFeedback
+                                    >
+                                        <Input  placeholder={product.product.publication_date}/>
+                                    </Form.Item>
+                                    <Form.Item name='category_id'
+                                               hasFeedback
+                                    >
+                                        <Input  placeholder={product.product.category_id}/>
                                     </Form.Item>
                                 </Form>
                         </Modal>

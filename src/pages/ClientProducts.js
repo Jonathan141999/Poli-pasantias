@@ -23,7 +23,7 @@ const ClientProductsPage = () => {
                         <div slot={"start"} className="menu">
                             <Layouts />
                         </div>
-                        <IonTitle id={"letter"}>Lista de Productos </IonTitle>
+                        <IonTitle id={"letter"}>Lista de Publicaciones </IonTitle>
                     </IonToolbar>
             </IonHeader>
             <ProductClientList/>
