@@ -36,7 +36,28 @@ const Profile = () => {
           <IonCard>
           <IonImg  src={user} style={{width:"150px", height:"150px"}}/>
           <IonCardHeader>
-            <IonCardTitle>Nombre: {currentUser.name}</IonCardTitle>
+            <IonCardTitle>Datos Personales</IonCardTitle>
+            <IonCardSubtitle>Nombre:Jonathan Efrain</IonCardSubtitle>
+            <IonCardSubtitle>Apellido: Alquinga Cajamarca</IonCardSubtitle>
+            <IonCardSubtitle>Telefóno: 0983868358</IonCardSubtitle>
+            <IonCardSubtitle>Correo: jonathan.alquinga@epn.edu.ec</IonCardSubtitle>
+            <IonCardSubtitle>Dirección: Tumbaco Barrio-Chiviqui</IonCardSubtitle>
+            <IonCardSubtitle>Descripcion: Programador</IonCardSubtitle>
+            <IonCardSubtitle>Estudiante de la Escuela Politécnica Nacional</IonCardSubtitle>
+          </IonCardHeader>
+          <Form.Item>
+          <Link to={ Routes.EDITPROFILE}>
+             <IonButton type='primary' className='login-form-button'>
+                 Actualizar Perfil
+             </IonButton>
+          </Link>
+        </Form.Item>
+        </IonCard>
+        </IonPage>
+    </>
+  );
+  /*
+  <IonCardTitle>Nombre: {currentUser.name}</IonCardTitle>
             <IonCardTitle>Apellido: {currentUser.last_name}</IonCardTitle>
             <IonCardSubtitle>Telefóno: {currentUser.phone}</IonCardSubtitle>
             <IonCardSubtitle>Correo: {currentUser.email}</IonCardSubtitle>
@@ -46,18 +67,7 @@ const Profile = () => {
             ?<IonCardSubtitle>Empresa</IonCardSubtitle>
             :<IonCardSubtitle>Estudiante de la Escuala Politécnica Nacional</IonCardSubtitle>
             }
-          </IonCardHeader>
-        </IonCard>
-        <Form.Item>
-          <Link to={ Routes.EDITPROFILE}>
-             <IonButton type='primary' className='login-form-button'>
-                 Actualizar Perfil
-             </IonButton>
-          </Link>
-        </Form.Item>
-        </IonPage>
-    </>
-  );
+  */
 };
 
 export default Profile;

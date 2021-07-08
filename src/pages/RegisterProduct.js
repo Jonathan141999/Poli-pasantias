@@ -76,7 +76,7 @@ const RegisterProduct = () => {
     };
 
     const afterCreate = async () => {
-        await mutate('//publications', async products => {
+        await mutate('/publications', async products => {
             return {data: [{}, ...products.data]};
         },false);
     };
