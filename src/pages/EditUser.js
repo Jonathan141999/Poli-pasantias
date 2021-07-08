@@ -148,28 +148,6 @@ const RegisterUser = () => {
                           }}
                           onFinish={onFinish}
                     >
-                        <Form.Item name='name'
-                                   rules={[
-                                       {
-                                           required: true,
-                                           message: 'Ingresa tu nombre'
-                                       }
-                                   ]}
-                                   hasFeedback
-                        >
-                            <Input prefix={<UserOutlined/>} placeholder='Nombre Completo'/>
-                        </Form.Item>
-                        <Form.Item name='last_name'
-                                   rules={[
-                                       {
-                                           required: true,
-                                           message: 'Ingresa tu apellido'
-                                       }
-                                   ]}
-                                   hasFeedback
-                        >
-                            <Input prefix={<UserOutlined/>} placeholder='Apellido Completo'/>
-                        </Form.Item>
                         <Form.Item name='phone'
                                    rules={[
                                        {
@@ -196,67 +174,18 @@ const RegisterUser = () => {
                                             type: 'email',
                                             message: 'Ingresa un correo válido'
                                        }
-                                   ]}
+                                    ]}
                                    hasFeedback
                         >
                             <Input prefix={<MailOutlined/>} placeholder='Email'/>
                         </Form.Item>
 
-                        <Form.Item name='password'
-                                   rules={[
-                                        {
-                                            required: true,
-                                            message: 'Ingresa tu contraseña',
-                                        },
-                                        {
-                                            min: 6,
-                                            message: 'La longitud de ser mínimo 6 caracteres',
-                                        }
-                                   ]}
-                                   hasFeedback
-                        >
-                            <Input.Password prefix={<LockOutlined/>}
-                                            iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
-                                            placeholder='Contraseña'/>
-                        </Form.Item>
-
-                        <Form.Item name='password_confirmation'
-                                   dependencies={['password']}
-                                   hasFeedback
-                                   rules={[
-                                       {
-                                           required: true,
-                                           message: 'Confirma tu contraseña',
-                                       },
-                                       ({getFieldValue}) => ({
-                                           validator(rule, value) {
-                                               if (!value || getFieldValue('password') === value) {
-                                                   return Promise.resolve();
-                                               }
-                                               return Promise.reject('Las contraseñas no coinciden');
-                                           },
-                                       }),
-                                   ]}
-                        >
-                            <Input.Password prefix={<LockOutlined/>}
-                                            iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
-                                            placeholder='Confirma tu contraseña'/>
-                        </Form.Item>
-                        
-                        <IonSelect //value={type}
-                                   placeholder={"Escoge el rol"}
-                                   //onIonChange={e => setType(e.detail.value)}
-                        >
-                            <IonSelectOption value={"business"}>Empresa</IonSelectOption>
-                            <IonSelectOption value={"student"}>Estudiante</IonSelectOption>
-                        </IonSelect>
-
                         <Form.Item name='description'
                                    rules={[
-                                       {
-                                           required: true,
-                                           message: 'Ingresa una pequeña descripción'
-                                       }
+                                     {
+                                    required: true,
+                                     message: 'Ingresa una pequeña descripción'
+                                     }
                                    ]}
                                    hasFeedback
                         >
@@ -265,17 +194,9 @@ const RegisterUser = () => {
                         
                         <Form.Item>
                             <IonButton type='primary' htmlType='submit' className='login-form-button'>
-                                Registrar
-                            </IonButton>
-                        </Form.Item>
-                        <Form.Item>
-                            <Link to={ Routes.PROFILE}>
-                                <IonButton type='secundary' className='login-form-button'>
-                                    Cancelar
-                                </IonButton>
-                            </Link>
-                        </Form.Item>
-                        
+                                Actualizar
+                            </IonButton> 
+                        </Form.Item>                     
                     </Form>
            </IonPage>
         </>

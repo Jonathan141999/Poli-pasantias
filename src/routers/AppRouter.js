@@ -51,8 +51,27 @@ const AppRouter = () => (
         <Route exact path="/">
             <Redirect to="/ingreso" />
         </Route>
-
+        
         <PublicRoute path={Routes.LOGIN} component={AsyncLogin}/>
+        <PublicRoute path={Routes.REGISTER} component={AsyncRegister}/>
+        <PublicRoute path={Routes.EMAIL} component={AsyncEmail}/>
+
+        <PublicRoute path={Routes.DAILYORDER} component={AsyncDailyOrder}/>
+        <PublicRoute path={Routes.PROFILE} component={AsyncProfile}/>
+        <PublicRoute path={Routes.CLIENTPRODUCTS} component={AsyncClientProducts}/>
+        <PublicRoute path={Routes.OWNERPRODUCTS} component={AsyncOwnerProducts}/>
+        <PublicRoute path={Routes.REGISTER} component={AsyncRegister}/>
+        <PublicRoute path={Routes.LOGOUT} component={AsyncLogout}/>
+        <PublicRoute path={Routes.REGISTERPRODUCT} component={AsyncRegisterProduct}/>
+        <PublicRoute path={Routes.NEWORDER} component={AsyncNewOrder}/>
+        <PublicRoute path={Routes.REPORTS} component={AsyncReports}/>
+        <PublicRoute path={Routes.EDITPROFILE} component={AsyncEditUser}/>
+
+        <Route component={NotFoundPage}/>
+    </Switch>
+
+    /*
+    <PublicRoute path={Routes.LOGIN} component={AsyncLogin}/>
         <PublicRoute path={Routes.REGISTER} component={AsyncRegister}/>
         <PublicRoute path={Routes.EMAIL} component={AsyncEmail}/>
 
@@ -66,9 +85,7 @@ const AppRouter = () => (
         <PrivateRoute path={Routes.NEWORDER} component={AsyncNewOrder}/>
         <PrivateRoute path={Routes.REPORTS} component={AsyncReports}/>
         <PrivateRoute path={Routes.EDITPROFILE} component={AsyncEditUser}/>
-
-        <Route component={NotFoundPage}/>
-    </Switch>
+        */
 );
 
 export default AppRouter;
