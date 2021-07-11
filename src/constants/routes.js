@@ -5,19 +5,6 @@ const publicRoutes = {
   USERS_ID: `/usuario/:id`,
   //HOME: '/',
   EMAIL: '/activacion',
-  PROFILE: '/profile', //esto va en privadas
-  EDITPROFILE: '/edit-profile', //esto va en privadas
-  LOGOUT: '/logout',
-  PRIVATE: '/privada',
-  CLIENTPRODUCTS: '/student-publications',
-  OWNERPRODUCTS: '/bussines-publications',
-  REGISTERPRODUCT: '/register-publications',
-  DAILYORDER: '/daily-order',
-  NEWORDER: '/neworder',
-  REPORTS: '/reports',
-};
-
-const privateRoutes = {
   //LOGOUT: '/logout',
   //PRIVATE: '/privada',
   //CLIENTPRODUCTS: '/student-publications',
@@ -26,7 +13,19 @@ const privateRoutes = {
   //DAILYORDER: '/daily-order',
   //NEWORDER: '/neworder',
   //REPORTS: '/reports',
-  //EDITPROFILE: '/edit-profile'    
+};
+
+const privateRoutes = {
+  LOGOUT: '/logout',
+  PRIVATE: '/privada',
+  CLIENTPRODUCTS: '/student-publications',
+  OWNERPRODUCTS: '/bussines-publications',
+  REGISTERPRODUCT: '/register-publications',
+  DAILYORDER: '/daily-order',
+  NEWORDER: '/neworder',
+  REPORTS: '/reports',
+  PROFILE: '/profile',
+  EDITPROFILE: '/edit-profile' 
 };
 
 const Routes = {

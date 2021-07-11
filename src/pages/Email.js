@@ -30,16 +30,13 @@ const EmailPage = () => (
             <h2>¡Gracias por Suscribirte!</h2>
             <br/>
             <p>Para Usar la Aplicacion</p>
-            <p>Debes confirmar tu direccion de correo-electronico registrado</p>
+            <p>Debes confirmar tu direccion de correo electronico registrado</p>
             <p>A tu CORREO debió llegar un enlace</p>
             <br/>
             <p>Cuando lo confirmes podrás Iniciar Sesión</p>
             <br/>
             <p>Atentamente,</p>
           </IonLabel>  
-          <br/>
-          <IonImg src={logo} style={{width:"50px", height:"50px", display:"block", margin:"auto"}}/>
-          <br/>
           <Link to={Routes.LOGOUT}><IonButton style={{width:"200px", height:"30px", display:"block", margin:"auto"}}>Regresar al Inicio</IonButton></Link>
           
     </IonPage>

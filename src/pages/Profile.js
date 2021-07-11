@@ -36,22 +36,25 @@ const Profile = () => {
           <IonCard>
           <IonImg  src={user} style={{width:"150px", height:"150px"}}/>
           <IonCardHeader>
-            <IonCardTitle>Datos Personales</IonCardTitle>
-            <IonCardSubtitle>Nombre:Jonathan Efrain</IonCardSubtitle>
-            <IonCardSubtitle>Apellido: Alquinga Cajamarca</IonCardSubtitle>
-            <IonCardSubtitle>Telefóno: 0983868358</IonCardSubtitle>
-            <IonCardSubtitle>Correo: jonathan.alquinga@epn.edu.ec</IonCardSubtitle>
-            <IonCardSubtitle>Dirección: Tumbaco Barrio-Chiviqui</IonCardSubtitle>
-            <IonCardSubtitle>Descripcion: Programador</IonCardSubtitle>
-            <IonCardSubtitle>Estudiante de la Escuela Politécnica Nacional</IonCardSubtitle>
+          <IonCardTitle>Nombre: {currentUser.name}</IonCardTitle>
+            <IonCardTitle>Apellido: {currentUser.last_name}</IonCardTitle>
+            <IonCardSubtitle>Telefóno: {currentUser.phone}</IonCardSubtitle>
+            <IonCardSubtitle>Correo: {currentUser.email}</IonCardSubtitle>
+            <IonCardSubtitle>Dirección: {currentUser.direction}</IonCardSubtitle>
+            <IonCardSubtitle>Descripcion:  {currentUser.description}</IonCardSubtitle>
+        
+            {currentUser.role==='ROLE_BUSINESS' || currentUser.role==='ROLE_ADMIN'
+            ?<IonCardSubtitle>Empresa</IonCardSubtitle>
+            :<IonCardSubtitle>Estudiante de la Escuela Politécnica Nacional</IonCardSubtitle>
+            }
+            <Form.Item>
+              <Link to={ Routes.EDITPROFILE}>
+                <IonButton type='primary' className='login-form-button'>
+                    Actualizar Perfil
+                </IonButton>
+              </Link>
+            </Form.Item>
           </IonCardHeader>
-          <Form.Item>
-          <Link to={ Routes.EDITPROFILE}>
-             <IonButton type='primary' className='login-form-button'>
-                 Actualizar Perfil
-             </IonButton>
-          </Link>
-        </Form.Item>
         </IonCard>
         </IonPage>
     </>

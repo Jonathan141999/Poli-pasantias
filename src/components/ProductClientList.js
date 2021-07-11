@@ -22,7 +22,6 @@ import "../theme/toolbar.css";
 
 
 const ProductClientList = () => {
-/*
     const { products, isLoading, isError} = useProducts();
 
     const { requests,isLoadingRequest,isErrorRequest, mutate} = useRequests();
@@ -373,6 +372,6 @@ const ProductClientList = () => {
             />
         </>
     );
-    */
+
 };
 export default ProductClientList;

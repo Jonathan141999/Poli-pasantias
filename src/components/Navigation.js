@@ -59,7 +59,7 @@ const Navigation = (props) => {
                         <img src={user} />
                     </IonAvatar>
                     <IonLabel>
-                        <h3>{currentUser.name} + " " + {currentUser.last_name}</h3>
+                        <h3>{currentUser.name} {currentUser.last_name}</h3>
                         <p>{currentUser.email}</p>
                     </IonLabel> 
                 </IonItem>
