@@ -33,8 +33,7 @@ export default function withAuthRedirect( {
     }
     if( expectedAuth !== isAuthenticated ) {
       if(!expectedAuth){
-        if (currentUser.active){
-          if (currentUser.role==='ROLE_CLIENT' || currentUser.role==="ROLE_CLIENT"){
+          if (currentUser.role==='ROLE_STUDENT' || currentUser.role==="ROLE_STUDENT"){
             return <Redirect to={ {
               pathname: Routes.CLIENTPRODUCTS,
               state: { from: props.location }
@@ -46,12 +45,6 @@ export default function withAuthRedirect( {
               state: { from: props.location }
           } } />
           }
-        }else{
-          return <Redirect to={ {
-            pathname: Routes.EMAIL,
-            state: { from: props.location }
-          } } />
-        }
       }else{
         return <Redirect to={ {
             pathname: Routes.LOGIN,

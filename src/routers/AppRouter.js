@@ -56,16 +56,16 @@ const AppRouter = () => (
         <PublicRoute path={Routes.REGISTER} component={AsyncRegister}/>
         <PublicRoute path={Routes.EMAIL} component={AsyncEmail}/>
 
-        <PublicRoute path={Routes.DAILYORDER} component={AsyncDailyOrder}/>
-        <PublicRoute path={Routes.PROFILE} component={AsyncProfile}/>
-        <PublicRoute path={Routes.CLIENTPRODUCTS} component={AsyncClientProducts}/>
-        <PublicRoute path={Routes.OWNERPRODUCTS} component={AsyncOwnerProducts}/>
-        <PublicRoute path={Routes.REGISTER} component={AsyncRegister}/>
-        <PublicRoute path={Routes.LOGOUT} component={AsyncLogout}/>
-        <PublicRoute path={Routes.REGISTERPRODUCT} component={AsyncRegisterProduct}/>
-        <PublicRoute path={Routes.NEWORDER} component={AsyncNewOrder}/>
-        <PublicRoute path={Routes.REPORTS} component={AsyncReports}/>
-        <PublicRoute path={Routes.EDITPROFILE} component={AsyncEditUser}/>
+        <PrivateRoute path={Routes.DAILYORDER} component={AsyncDailyOrder}/>
+        <PrivateRoute path={Routes.PROFILE} component={AsyncProfile}/>
+        <PrivateRoute path={Routes.CLIENTPRODUCTS} component={AsyncClientProducts}/>
+        <PrivateRoute path={Routes.OWNERPRODUCTS} component={AsyncOwnerProducts}/>
+        <PrivateRoute path={Routes.REGISTER} component={AsyncRegister}/>
+        <PrivateRoute path={Routes.LOGOUT} component={AsyncLogout}/>
+        <PrivateRoute path={Routes.REGISTERPRODUCT} component={AsyncRegisterProduct}/>
+        <PrivateRoute path={Routes.NEWORDER} component={AsyncNewOrder}/>
+        <PrivateRoute path={Routes.REPORTS} component={AsyncReports}/>
+        <PrivateRoute path={Routes.EDITPROFILE} component={AsyncEditUser}/>
 
         <Route component={NotFoundPage}/>
     </Switch>

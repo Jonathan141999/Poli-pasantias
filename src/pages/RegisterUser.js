@@ -8,6 +8,7 @@ import {
     MailOutlined,
     BookOutlined,
     ProfileOutlined,
+    HomeOutlined,
 } from '@ant-design/icons';
 import ErrorList from '../components/ErrorList';
 import {translateMessage} from '../utils/translateMessage';
@@ -186,13 +187,26 @@ const RegisterUser = () => {
                                             placeholder='Confirma tu contraseña'/>
                         </Form.Item>
                         
-                        <IonSelect //value={type}
-                                   placeholder={"Escoge el rol"}
-                                   //onIonChange={e => setType(e.detail.value)}
+                        <Form.Item name='direction'
+                                   rules={[
+                                       {
+                                            required: true,
+                                            message: 'Ingresa tu dirección'
+                                       }
+                                   ]}
+                                   hasFeedback
                         >
-                            <IonSelectOption value={"business"}>Empresa</IonSelectOption>
-                            <IonSelectOption value={"student"}>Estudiante</IonSelectOption>
-                        </IonSelect>
+                            <Input prefix={<HomeOutlined/>} placeholder='Dirección'/>
+                        </Form.Item>
+
+                        <Form.Item name='role'>
+                            <IonSelect
+                                    placeholder={"Escoge el rol"}
+                            >
+                                <IonSelectOption value="ROLE_BUSINESS">Empresa</IonSelectOption>
+                                <IonSelectOption value="ROLE_STUDENT">Estudiante</IonSelectOption>
+                            </IonSelect>
+                        </Form.Item>
 
                         <Form.Item name='description'
                                    rules={[

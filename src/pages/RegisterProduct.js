@@ -15,7 +15,8 @@ import "../theme/toolbar.css";
 import Layouts from '../components/Layout';
 import '../theme/app.css';
 import '../theme/login.css';
-import viveres from '../images/viveres.jpg'
+import Routes from '../constants/routes';
+import registro from '../images/registro.png'
 
 
 const { Option } = Select;
@@ -28,7 +29,7 @@ function getBase64( file, callback ) {
     reader.readAsDataURL( file );
 }
 
-const RegisterProduct = () => {
+const RegisterPublication = () => {
 
     const [ form ] = Form.useForm();
     const {isLoading, isError, mutate} = useProducts();
@@ -149,12 +150,15 @@ const RegisterProduct = () => {
                             <div slot={"start"} className="menu">
                                 <Layouts />
                             </div>
+                            <Link to={ Routes.OWNERPRODUCTS}>
+                                 <IonIcon id={"icon"} icon={arrowBack} slot="start" style={{width:"23px", height:"23px"}} className="ionicon" />
+                            </Link>
                             Registro de publicaciones
                        </IonTitle>
                     </IonToolbar>
                 </IonHeader>
                 <br/>
-                    <IonImg src={viveres} style={{width:"125px", height:"125px", display:"block", margin:"auto"}}/>
+                    <IonImg src={registro} style={{width:"125px", height:"125px", display:"block", margin:"auto"}}/>
                 <br/>
                     <Form
                         className='login-form'
@@ -168,12 +172,12 @@ const RegisterProduct = () => {
                                    rules={[
                                        {
                                            required: true,
-                                           message: 'Ingresa un asunto'
+                                           message: 'Ingresa el nombre de una empresa'
                                        }
                                    ]}
                                    hasFeedback
                         >
-                            <Input  placeholder='Nombre del Producto'/>
+                            <Input  placeholder='Nombre de la Empresa'/>
                         </Form.Item>
                 
                         <Form.Item name='details'
@@ -273,4 +277,4 @@ const RegisterProduct = () => {
     );
 };
 
-export default RegisterProduct;
+export default RegisterPublication;

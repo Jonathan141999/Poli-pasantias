@@ -119,7 +119,7 @@ const ProductOwnerList = () => {
             {
                 searchProduct ?
                     searchProduct.map((search, i)=>(
-                        <IonCol  size="6">
+                        <IonCol>
                             <IonCard key={i} onClick={()=>showDetail(search.id)}>
                                          <IonCardHeader>
                                              <IonCardTitle>{search.affair}</IonCardTitle>
@@ -204,11 +204,6 @@ const ProductOwnerList = () => {
                                                hasFeedback
                                     >
                                         <Input  placeholder={product.product.publication_date}/>
-                                    </Form.Item>
-                                    <Form.Item name='category_id'
-                                               hasFeedback
-                                    >
-                                        <Input  placeholder={product.product.category_id}/>
                                     </Form.Item>
                                 </Form>
                         </Modal>

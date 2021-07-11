@@ -34,14 +34,8 @@ const RegisterUser = () => {
 
         try {
             const user = await API.put('/users/'+ user.id ,{
-                name,
-                last_name,
                 phone,
                 email,
-                password,
-                password_confirmation,
-                direction,
-                role,
                 description
             });
 
@@ -125,11 +119,6 @@ const RegisterUser = () => {
                     <IonToolbar id={"toolbar"}>
                        <IonTitle className="iontitle" id={"letter"}>
                            <IonRow>
-                               <IonCol size={2}>
-                                   <Link to={ Routes.PROFILE}>
-                                        <IonIcon id={"icon"} icon={arrowBack} slot="start" style={{width:"23px", height:"23px"}} className="ionicon" />
-                                    </Link>
-                               </IonCol>
                                <IonCol size={2}>
                                     Actualizar datos del perfil
                                </IonCol>
