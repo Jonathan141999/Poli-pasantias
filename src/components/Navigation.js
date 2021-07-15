@@ -6,7 +6,7 @@ import {LogoutOutlined, LoadingOutlined, PlusCircleOutlined, FormOutlined, Notif
 import {Link, useLocation} from 'react-router-dom';
 import '../theme/navigation.css';
 import '../theme/app.css';
-import user from '../images/editar.svg';
+import user from '../images/user.png';
 import {
     IonAvatar,
     IonItem,
@@ -47,13 +47,14 @@ const Navigation = (props) => {
                 mode={props.mode}
                 onClick={handleClick}
                 className='menu'
-                theme='light'
+                theme='dark'
+                //theme='light'
                 selectedKeys={[menuState.current]}
                 style={{
                     lineHeight: '64px',
                     width: 'fit-content'
                 }}
-            >
+            > 
                 <IonItem>
                     <IonAvatar slot="end">
                         <img src={user} />
@@ -80,9 +81,7 @@ const Navigation = (props) => {
                     </Menu.Item>
                 }
                 {currentUser.role==='ROLE_ADMIN'
-                ?   <><Menu.Item key={Routes.NEWORDER} icon={<NotificationOutlined/>} >
-                        <Link to={Routes.NEWORDER} style={linkStyle}>Órdenes de nuevas postulaciones</Link>
-                    </Menu.Item>
+                ?   <>
                     <Menu.Item key={Routes.PROFILE} icon = {<UserOutlined/>}>
                         <Link to={Routes.PROFILE} style={linkStyle}>Perfil de Usuario</Link>
                     </Menu.Item></>
@@ -90,15 +89,6 @@ const Navigation = (props) => {
                         <Link to={Routes.PROFILE} style={linkStyle}>Perfil de Usuario</Link>
                     </Menu.Item>
                 }  
-                {currentUser.role==='ROLE_STUDENT'
-                ? <>  <Menu.Item key={Routes.REPORTS} icon={<MonitorOutlined/>} >
-                        <Link to={Routes.REPORTS} style={linkStyle}>Reportes de Publicación</Link>
-                    </Menu.Item></>
-                :   <Menu.Item key={Routes.PROFILE} icon = {<UserOutlined/>}>
-                     <Link to={Routes.PROFILE} style={linkStyle}>Reportes de Publicación</Link>
-                    </Menu.Item>
-                }
-            
                 <Menu.Item key={Routes.LOGIN}>
                     <Link to={Routes.LOGOUT} className='logout-link'>
                     {
@@ -108,6 +98,7 @@ const Navigation = (props) => {
                     }
                     </Link>
                  </Menu.Item>
+                 
             </Menu>
         </>
     );

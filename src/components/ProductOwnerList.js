@@ -113,22 +113,20 @@ const ProductOwnerList = () => {
         <>
             <IonGrid>
                 <IonRow>
-                    <IonToolbar>
-                        <Search placeholder="input search text" onSearch={onSearch} enterButton />
-                    </IonToolbar>
+                    
             {
                 searchProduct ?
                     searchProduct.map((search, i)=>(
-                        <IonCol>
+                        <IonCol width='100%'>
                             <IonCard key={i} onClick={()=>showDetail(search.id)}>
+                            <IonImg src={ `http://localhost:8000/storage/${ search.image }` }
+                                         style={{height: "100px"}}/>
                                          <IonCardHeader>
-                                             <IonCardTitle>{search.affair}</IonCardTitle>
+                                             <IonCardTitle>{search.name}</IonCardTitle>
                                          </IonCardHeader>
-
                                 <IonCardContent>
-                                    <IonCardSubtitle><strong>Detalle: </strong>{product.details}</IonCardSubtitle>
-                                    <IonCardSubtitle><strong>Horas: </strong>{product.hour}</IonCardSubtitle>
-                                    <IonCardSubtitle><strong>Dirección: </strong>{product.location}</IonCardSubtitle>                                
+                                    <IonCardSubtitle><strong>Telefóno: </strong>{search.phone}</IonCardSubtitle>
+                                    <IonCardSubtitle><strong>Horas: </strong>{search.hour}</IonCardSubtitle>                                
                                 </IonCardContent>
                             </IonCard>
                         </IonCol>
@@ -138,8 +136,10 @@ const ProductOwnerList = () => {
                 products.map((product,i)=>(
                     <IonCol size="6">
                     <IonCard key={i} onClick={()=>showDetails(i)} >
+                    <IonImg src={ `http://localhost:8000/storage/${ search.image }` }
+                                         style={{height: "100px"}}/>
                         <IonCardHeader>
-                            <IonCardTitle>{product.affair}</IonCardTitle>
+                            <IonCardTitle>{product.name}</IonCardTitle>
                         </IonCardHeader>
 
                         <IonCardContent>
@@ -148,7 +148,6 @@ const ProductOwnerList = () => {
                             <IonCardSubtitle><strong>Dirección: </strong>{product.location}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Telefóno: </strong>{product.phone}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Fecha de Publicación: </strong>{product.publication_date}</IonCardSubtitle>
-                            <IonCardSubtitle><strong>Categoria </strong>{product.category_id}</IonCardSubtitle>
                         </IonCardContent>
                     </IonCard>
                     </IonCol>
@@ -180,32 +179,104 @@ const ProductOwnerList = () => {
                                 }}
                                     //onFinish={onUpdate}
                                 >
-                                    <Form.Item name='affair'
-                                               hasFeedback
-                                     >
-                                        <Input  placeholder={product.product.affair}/>
-                                    </Form.Item>
-                                    <Form.Item name='details'
-                                               hasFeedback
-                                    >
-                                        <Input  placeholder={product.product.details}/>
-                                    </Form.Item>
-                                    <Form.Item name='location'
-                                               hasFeedback
-                                    >
-                                        <Input  placeholder={product.product.location}/>
-                                    </Form.Item>
+                                    <Form.Item name='name'
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: 'Ingresa el nombre de una empresa'
+                                       }
+                                   ]}
+                                   hasFeedback
+                        >
+                            <label>Nombre de la Empresa</label>
+                            <Input  placeholder={product.product.name}/>
+                        </Form.Item>
+                
+                        <Form.Item name='location'
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: 'Ingresa la dirección'
+                                       },
+                                   ]}
+                                   hasFeedback
+                        >
+                            <label>Dirección</label>
+                            <Input  placeholder={product.product.location}/>
+                        </Form.Item>
                                     <Form.Item name='phone'
-                                               hasFeedback
-                                    >
-                                        <Input  placeholder={product.product.phone}/>
-                                    </Form.Item>
-                                    <Form.Item name='publication_date'
-                                               hasFeedback
-                                    >
-                                        <Input  placeholder={product.product.publication_date}/>
-                                    </Form.Item>
-                                </Form>
+                                        rules={[
+                                        {
+                                            required: true,
+                                            message: 'Ingresa tu número telefónico'
+                                        },
+                                        {
+                                            min: 10,
+                                            max: 13,
+                                            message: 'El número telefonico debe tener 10 dígitos'
+                                        }
+                                    ]}
+                                    hasFeedback
+                                >
+                                    <label>Número telefónico</label>
+                                    <Input  placeholder={product.product.phone}/>
+                                </Form.Item>
+
+                                <Form.Item name='email'
+                                        rules={[
+                                            {
+                                                    required: true,
+                                                    message: 'Email Empresarial'
+                                            },
+                                            {
+                                                    type: 'email',
+                                                    message: 'Ingresa un correo válido'
+                                            }
+                                        ]}
+                                        hasFeedback
+                                >
+                                    <label>Email Empresarial</label>
+                                    <Input placeholder={product.product.email}/>
+                                </Form.Item>
+
+                                <Form.Item name='hour'
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Horas a ofertar'
+                                            }
+                                        ]}
+                                        hasFeedback
+                                >
+                                    <label>Horas a Ofertar</label>
+                                    <Input placeholder={product.product.hour}/>
+                                </Form.Item>
+                                
+                                <Form.Item name='publication_date'
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Fecha de Publicación'
+                                            }
+                                        ]}
+                                        hasFeedback
+                                >
+                                    <label>Día de Publicación</label>
+                                <Input  placeholder={product.product.publication_date}/>
+                        </Form.Item>
+                        <Form.Item name='details'
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: 'Detalles de la práctica preprofesional'
+                                       }
+                                   ]}
+                                   hasFeedback
+                        >
+                            <label>Detalles de la práctica preprofesional</label>
+                            <Input.TextArea placeholder={product.product.details}/>
+                        </Form.Item>
+                        </Form>
                         </Modal>
                     </>
             }
