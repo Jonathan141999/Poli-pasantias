@@ -17,7 +17,7 @@ import { Form, Input, message, Select} from 'antd';
 import '../theme/app.css';
 import "../theme/toolbar.css";
 import Layouts from '../components/Layout';
-import user from '../images/avatar.png';
+import user from '../images/user.png';
 import {useAuth} from '../providers/Auth';
 
 const Profile = () => {

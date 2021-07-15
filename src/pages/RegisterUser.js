@@ -24,7 +24,7 @@ import logo from '../images/logo.png';
 import "../theme/toolbar.css";
 import '../theme/register.css';
 
-
+const { Option } = Select;
 const RegisterUser = () => {
 
     const {setAuthenticated, setCurrentUser} = useAuth();
@@ -199,13 +199,20 @@ const RegisterUser = () => {
                             <Input prefix={<HomeOutlined/>} placeholder='Dirección'/>
                         </Form.Item>
 
-                        <Form.Item name='role'>
-                            <IonSelect
-                                    placeholder={"Escoge el rol"}
-                            >
-                                <IonSelectOption value="ROLE_BUSINESS">Empresa</IonSelectOption>
-                                <IonSelectOption value="ROLE_STUDENT">Estudiante</IonSelectOption>
-                            </IonSelect>
+                        
+                        <Form.Item name='role'
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: 'Escoga el usuario'
+                                       }
+                                   ]}
+                                   hasFeedback
+                        >
+                            <Select placeholder={'Seleccione....'}>
+                                <Option value='ROLE_BUSINESS'>Empresa</Option>
+                                <Option value='ROLE_STUDENT'>Estudiante</Option>
+                            </Select>
                         </Form.Item>
 
                         <Form.Item name='description'

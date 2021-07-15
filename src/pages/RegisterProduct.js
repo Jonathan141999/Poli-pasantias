@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import API from '../data/index';
-import {Select,Card,Skeleton, Col, Form, Input, message, Upload, Row} from 'antd';
+import {Select,Card,Skeleton, Col, Form, Input, message, Upload, Row,Space,DatePicker} from 'antd';
 import ErrorList from '../components/ErrorList';
 import {translateMessage} from '../utils/translateMessage';
 //import '../styles/register.css';
 import {Link} from 'react-router-dom';
-import {IonImg,IonButton, IonCol, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar} from "@ionic/react";
+import {IonImg,IonButton, IonCol, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar, IonSelect,IonSelectOption} from "@ionic/react";
 import {arrowBack} from "ionicons/icons";
 import {useProducts} from "../data/useProducts";
 import ShowError from "../components/ShowError";
@@ -48,16 +48,18 @@ const RegisterPublication = () => {
 
                 // use form data to be able to send a file to the server
                 const data = new FormData();
-                data.append( 'image', values.image[ 0 ] );
-                data.append( 'affair', values.affair);
-                data.append( 'details', values.details );
+                data.append( 'name', values.name);
+                data.append( 'location', values.location );
+                data.append( 'phone', values.phone);
+                data.append( 'email', values.email);
                 data.append( 'hour', values.hour );
-                data.append( 'location', values.location);
-                data.append( 'phone', values.phone );
                 data.append( 'publication_date', values.publication_date );
+                data.append( 'type', values.type);
+                data.append( 'details', values.details);
+                data.append( 'image', values.image[ 0 ] );
                 data.append( 'category_id', values.category_id );
 
-                console.log('nuevos valores', data);
+                console.log('nuevos valores de publicaciones', data);
 
                 try {
                     await API.post( '/publications', data ); // post data to server
@@ -141,6 +143,9 @@ const RegisterPublication = () => {
         return <ShowError error={isError}/>;
     }
 
+    function onChange(date, dateString) {
+        console.log(date, dateString);
+    }
     return (
         <>
             <IonPage>
@@ -168,7 +173,7 @@ const RegisterPublication = () => {
                           }}
                           onFinish={onCreate}
                     >
-                        <Form.Item name='affair'
+                        <Form.Item name='name'
                                    rules={[
                                        {
                                            required: true,
@@ -180,41 +185,18 @@ const RegisterPublication = () => {
                             <Input  placeholder='Nombre de la Empresa'/>
                         </Form.Item>
                 
-                        <Form.Item name='details'
-                                   rules={[
-                                       {
-                                           required: true,
-                                           message: 'Ingresa el detalle de la práctica preprofesional'
-                                       },
-                                   ]}
-                                   hasFeedback
-                        >
-                            <Input.TextArea  placeholder='Detalle de la práctica preprofesional'/>
-                        </Form.Item>
-                        <Form.Item name='hour'
-                                   rules={[
-                                       {
-                                           required: true,
-                                           message: 'Horas a ofertar'
-                                       }
-                                   ]}
-                                   hasFeedback
-                        >
-                            <Input  placeholder='Horas'/>
-                        </Form.Item>
-                        
                         <Form.Item name='location'
                                    rules={[
                                        {
                                            required: true,
-                                           message: 'Dirección'
-                                       }
+                                           message: 'Ingresa la dirección'
+                                       },
                                    ]}
                                    hasFeedback
                         >
-                            <Input  placeholder='Dirección'/>
+                            <Input  placeholder='Dirección de la empresa'/>
                         </Form.Item>
-                        
+
                         <Form.Item name='phone'
                                    rules={[
                                        {
@@ -231,6 +213,34 @@ const RegisterPublication = () => {
                         >
                             <Input  placeholder='Número de telefóno'/>
                         </Form.Item>
+
+                        <Form.Item name='email'
+                                   rules={[
+                                       {
+                                            required: true,
+                                            message: 'Email Empresarial'
+                                       },
+                                       {
+                                            type: 'email',
+                                            message: 'Ingresa un correo válido'
+                                       }
+                                   ]}
+                                   hasFeedback
+                        >
+                            <Input placeholder='Email de la Empresa'/>
+                        </Form.Item>
+
+                        <Form.Item name='hour'
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: 'Horas a ofertar'
+                                       }
+                                   ]}
+                                   hasFeedback
+                        >
+                            <Input  placeholder='Horas'/>
+                        </Form.Item>
                         
                         <Form.Item name='publication_date'
                                    rules={[
@@ -242,6 +252,61 @@ const RegisterPublication = () => {
                                    hasFeedback
                         >
                             <Input  placeholder='Fecha de Publicación'/>
+                        </Form.Item>
+
+                        <Form.Item name='type'
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: 'Tipo de Empresa'
+                                       }
+                                   ]}
+                                   hasFeedback
+                        >
+                            <Select placeholder={'Tipo de Empresa'}>
+                                <Option value='public'>Pública</Option>
+                                <Option value='private'>Privada</Option>
+                            </Select>
+                        </Form.Item>
+
+                        <Form.Item name='details'
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: 'Detalles de la práctica preprofesional'
+                                       }
+                                   ]}
+                                   hasFeedback
+                        >
+                            <Input.TextArea  placeholder='Detalles de la práctica'/>
+                        </Form.Item>
+                        
+                        <Form.Item name='image'
+                                   label='Imagen del logo de la Empresa'
+                                   valuePropName='fileList'
+                                   getValueFromEvent={ normPhotoFile }
+                                   rules={ [
+                                       {
+                                           required: true,
+                                           message: 'Imagen del logo'
+                                       }
+                                   ] }
+                        >
+                            <Upload name='files'
+                                    accept='image/jpeg,image/png'
+                                    listType='picture-card'
+                                    multiple={ false }
+                                    showUploadList={ false }
+                                    beforeUpload={ () => false }
+                                    fileList={ fileList }
+                            >
+                                { imageUrl
+                                    ? <img src={ imageUrl } alt='Foto' style={ { width: '100px' } } />
+                                    : <div>
+                                        <PlusOutlined />
+                                        <div className='ant-upload-text'>Upload</div>
+                                    </div> }
+                            </Upload>
                         </Form.Item>
 
                         <Form.Item name='category_id'
