@@ -49,7 +49,7 @@ const Profile = () => {
             }
             <Form.Item>
               <Link to={ Routes.EDITPROFILE}>
-                <IonButton type='primary' className='login-form-button'>
+                <IonButton type='primary'>
                     Actualizar Perfil
                 </IonButton>
               </Link>
@@ -59,18 +59,6 @@ const Profile = () => {
         </IonPage>
     </>
   );
-  /*
-  <IonCardTitle>Nombre: {currentUser.name}</IonCardTitle>
-            <IonCardTitle>Apellido: {currentUser.last_name}</IonCardTitle>
-            <IonCardSubtitle>Telefóno: {currentUser.phone}</IonCardSubtitle>
-            <IonCardSubtitle>Correo: {currentUser.email}</IonCardSubtitle>
-            <IonCardSubtitle>Dirección: {currentUser.direction}</IonCardSubtitle>
-            <IonCardSubtitle>Descripcion:  {currentUser.description}</IonCardSubtitle>
-            {currentUser.role==='ROLE_BUSINESS'
-            ?<IonCardSubtitle>Empresa</IonCardSubtitle>
-            :<IonCardSubtitle>Estudiante de la Escuala Politécnica Nacional</IonCardSubtitle>
-            }
-  */
 };
-
+                  
 export default Profile;

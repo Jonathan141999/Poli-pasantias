@@ -2,6 +2,8 @@ import {useProducts} from "../data/useProducts";
 import {Row, Col, Skeleton, Form, Input, message, Modal} from "antd";
 import React, {useState} from "react";
 import ShowError from "./ShowError";
+import {Link} from 'react-router-dom';
+import Routes from '../constants/routes';
 import {
     IonButton,
     IonCard, IonCardContent, IonCardHeader,
@@ -45,10 +47,13 @@ const ProductOwnerList = () => {
             .then( async( values ) => {
                 try {
                     await API.put( `/publications/${idProduct}`, {
-                        affair: values.affair,
-                        stock: values.details,
-                        location:values.location,
+                        name: values.name,
+                        location: values.location,
                         phone: values.phone,
+                        email: values.email,
+                        hour: values.hour,
+                        publication_date: values.publication_date,
+                        details: values.details,
                     } ); // post data to server
                     form.resetFields();
                     await afterCreate();
@@ -166,9 +171,9 @@ const ProductOwnerList = () => {
                                 visible={showInfo}
                                 closable={false}
                                 footer={[
-                                    <IonButton type='primary' htmlType='submit' className='login-form-button' onClick={onUpdate}>
-                                        Actualizar
-                                    </IonButton>,
+                                        <IonButton type='primary' htmlType='submit' className='login-form-button' onClick={onUpdate}>
+                                            Actualizar
+                                        </IonButton>,
                                     <IonButton onClick={()=>setShowInfo(false)}>Cancelar</IonButton>
                                 ]}
                         >

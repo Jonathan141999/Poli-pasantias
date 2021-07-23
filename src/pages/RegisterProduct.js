@@ -5,7 +5,7 @@ import ErrorList from '../components/ErrorList';
 import {translateMessage} from '../utils/translateMessage';
 //import '../styles/register.css';
 import {Link} from 'react-router-dom';
-import {IonImg,IonButton, IonCol, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar, IonSelect,IonSelectOption} from "@ionic/react";
+import {IonImg,IonButton, IonCol, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar, IonSelect,IonDatetime} from "@ionic/react";
 import {arrowBack} from "ionicons/icons";
 import {useProducts} from "../data/useProducts";
 import ShowError from "../components/ShowError";
@@ -20,7 +20,6 @@ import registro from '../images/registro.png'
 
 
 const { Option } = Select;
-
 
 function getBase64( file, callback ) {
     console.log( 'file', file );
@@ -148,18 +147,14 @@ const RegisterPublication = () => {
     }
     return (
         <>
+        
             <IonPage>
                 <IonHeader>
                     <IonToolbar id={"toolbar"}>
-                       <IonTitle id={"letter"}>
                             <div slot={"start"} className="menu">
                                 <Layouts />
                             </div>
-                            <Link to={ Routes.OWNERPRODUCTS}>
-                                 <IonIcon id={"icon"} icon={arrowBack} slot="start" style={{width:"23px", height:"23px"}} className="ionicon" />
-                            </Link>
-                            Registro de publicaciones
-                       </IonTitle>
+                            <IonTitle id={"letter"}>Registro de Publicación </IonTitle>
                     </IonToolbar>
                 </IonHeader>
                 <br/>
@@ -251,8 +246,9 @@ const RegisterPublication = () => {
                                    ]}
                                    hasFeedback
                         >
-                            <Input  placeholder='Fecha de Publicación'/>
+                            <IonDatetime displayFormat="DD MMM YYYY" placeholder="Seleccione Fecha"/>
                         </Form.Item>
+                        
 
                         <Form.Item name='type'
                                    rules={[

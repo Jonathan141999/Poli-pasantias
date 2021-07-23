@@ -1,55 +1,83 @@
 import {useProducts} from "../data/useProducts";
-import {Row,Col, Skeleton, Form, InputNumber, Modal} from "antd";
-import Card from "antd-mobile/es/card";
-import React, {useEffect, useState} from "react";
+import {Row, Col, Skeleton, Form, Input, message, Modal} from "antd";
+import React, {useState} from "react";
 import ShowError from "./ShowError";
+import Routes from '../constants/routes';
+import {Link} from 'react-router-dom';
 import {
-    IonCard, IonCardContent,
+    IonButton,
+    IonCard, IonCardContent, IonCardHeader,
     IonCardSubtitle,
-    IonCardTitle, IonCol, IonGrid, IonHeader, IonText,
+    IonCardTitle, IonCol, IonGrid, IonHeader, IonImg,
     IonItem, IonModal, IonPage,
-    IonRow, IonTitle, IonToolbar, IonIcon, IonButton,
-    IonList, IonLabel, IonAvatar, IonSelect, IonSelectOption, IonAlert, IonImg, IonCardHeader
+    IonRow, IonThumbnail, IonTitle, IonToolbar,
 } from "@ionic/react";
+import API from "../data";
+import {useProduct} from "../data/useProduct";
+import {translateMessage} from "../utils/translateMessage";
 import {useSearchProduct} from "../data/useSearchProduct";
 import Search from "antd/es/input/Search";
-import {arrowUpCircleOutline, cartOutline, trashOutline} from "ionicons/icons";
-import moment from 'moment';
-import API from "../data";
-import {useRequests} from "../data/useRequests";
-import {useRequestsByUser} from "../data/useRequestsByUser";
 import "../theme/toolbar.css";
 
 
-const ProductClientList = () => {
-    const { products, isLoading, isError} = useProducts();
 
-    const { requests,isLoadingRequest,isErrorRequest, mutate} = useRequests();
+//publicaiones de de la empresa puede publicar y ver en card
+const ProductOwnerList = () => {
 
-    const {mutateByUser} =useRequestsByUser();
+    const { products, isLoading, isError, mutate } = useProducts();
+    const [idProduct, setIdProduct]=useState('')
+    const [showInfo, setShowInfo] = useState(false);
+    const [ form ] = Form.useForm();
 
     const [search, setSearch]=useState('');
 
     const {searchProduct}=useSearchProduct(search);
 
-    const [cart, setCart]=useState([]);
-    const [showCart, setShowCart]=useState(false);
-    const [type, setType]=useState('');
-    const [total, setTotal] = useState(0);
-    const [showAlert1, setShowAlert1] = useState(false);
-    const [showAlert2, setShowAlert2] = useState(false);
-
-    console.log('search', searchProduct);
-
     console.log("publicaciones", products);
 
-    useEffect(()=>{
-        let total2 = 0;
-        for (let i = 0; i < cart.length; i++) {
-            total2 = total2 + parseFloat(cart[i].cartPrice);
-        }
-        setTotal(total2);
-    },[cart]);
+    console.log("busqueda", searchProduct);
+
+    const product = useProduct(idProduct);
+    console.log('info product', product);
+
+    /*const onUpdate = async values => {
+        console.log( 'Received values of form: ', values );
+
+        form.validateFields()
+            .then( async( values ) => {
+                try {
+                    await API.post( `/publications/${idProduct}`, {
+                        affair: values.affair,
+                        stock: values.details,
+                        location:values.location,
+                        phone: values.phone,
+                    } ); // post data to server
+                    form.resetFields();
+                    await afterCreate();
+                    setShowInfo(false);
+
+                } catch( error ) {
+                    console.error(
+                        'You have an error in your code or there are Network issues.',
+                        error
+                    );
+                    message.error( translateMessage( error.message ) );
+                }
+            } )
+            .catch( info => {
+                console.log( 'Validate Failed:', info );
+            } );
+
+    };
+    */
+    const afterCreate = async () => {
+        await mutate('/publications');
+    };
+
+    const onSearch = value =>{
+        console.log('publicaciones', value);
+        setSearch(value);
+    };
 
     if( isLoading ) {
         return <Row justify='center' gutter={ 30 }>
@@ -58,7 +86,7 @@ const ProductClientList = () => {
                     <Col xs={ 24 } sm={ 12 } md={ 8 } style={ { marginBottom: 30 } } key={ i }>
                         <div style={ { textAlign: 'center' } }>
                             <Skeleton.Image style={ { width: 200 } } />
-                            <Card title='' extra='' cover='' loading />
+                            <IonCard title='' extra='' cover='' loading />
                         </div>
                     </Col>
                 )
@@ -70,308 +98,106 @@ const ProductClientList = () => {
         return <ShowError error={ isError } />;
     }
 
-    const onSearch = value =>{
-        console.log('publicaciones', value);
-        setSearch(value);
-
-    };
-    const addCart = (index) => {
-        let cartId = index.id;
-        let cartName = index.name;
-        let cartImage = index.image;
-        let cartQuantity = 1;
-        let cartPrice = index.price * cartQuantity;
-        let total1 = 0;
-
-        const newCart={
-            cartId,
-            cartName,
-            cartImage,
-            cartQuantity,
-            cartPrice
-        }
-        setCart ((prevState )=>[
-            ...prevState,
-            newCart
-        ]);
-        console.log("total", total1);
-        console.log("carrito",cart);
+    const showDetails = (index)=>{
+        const id=products[index].id;
+        setIdProduct(id);
+        setShowInfo(true);
     }
 
-    const updateCart =(index)=>{
-        let total = 0;
-        let quantity=document.querySelector( `#${index.cartName.split(" ").join("")}` ).value;
-        console.log("nuevaCantidad", quantity);
-        for (let i=0; i < cart.length; i++){
-            if (index.cartId === cart[i].cartId){
-                cart[i].cartPrice = parseFloat(((index.cartPrice/cart[i].cartQuantity) * quantity).toFixed(2));
-                cart[i].cartQuantity = quantity;
-            }
-            total = total + parseFloat(cart[i].cartPrice);
-        }
-        setTotal(total);
-        console.log ("nuevoCarrito", cart);
+    const showDetail = (index)=>{
+        const id=index;
+        setIdProduct(id);
+        setShowInfo(true);
     }
 
-    const deleteCart =(index)=>{
-        setCart ((prevState)=>{
-            return prevState.filter((cart, i)=> i!== index);
-        })
-
-
-    }
-
-    const onCreate = async () => {
-        let cart2=[];
-        if (cart.length > 0){
-            for (let i=0; i<cart.length; i++) {
-                for (let j = 0; j < products.length; j++) {
-                    if (products[j].id === cart[i].cartId && products[j].stock > cart[i].cartQuantity) {
-                        cart2.push(cart[i]);
-                    }}}
-                    if (cart2.length === cart.length){
-                        let subtotal=0;
-                        console.log("tipo entrega", type);
-                        for (let i=0; i < cart.length; i++){
-                            subtotal=subtotal + parseFloat(cart[i].cartPrice);
-                        }
-                        if (type==="deliver"){
-                            try {
-                                const surcharge=subtotal*0.1;
-                                const total=subtotal+surcharge;
-                                await API.post( '/requests', {
-                                    date :moment().format('YYYY-MM-D'),
-                                    subtotal: subtotal,
-                                    type: type,
-                                    surcharge: surcharge,
-                                    total: total,
-                                    status: "pending",
-                                }); // post data to server
-                                await afterCreate();
-                            } catch( error ) {
-                                console.error(
-                                    'You have an error in your code or there are Network issues.',
-                                    error
-                                );
-                            }
-                        }
-                        else{
-                            try {
-                                const surcharge=0;
-                                const total=subtotal;
-                                await API.post( '/requests', {
-                                    date :moment().format('YYYY-MM-D'),
-                                    subtotal: subtotal,
-                                    type: type,
-                                    surcharge: surcharge,
-                                    total: total,
-                                }); // post data to server
-                                await afterCreate();
-                            } catch( error ) {
-                                console.error(
-                                    'You have an error in your code or there are Network issues.',
-                                    error
-                                );
-                            }
-                        }
-                        if (isLoadingRequest){
-                            return <div>Cargando...</div>
-                        }else{
-                            if(isErrorRequest){
-                                return <ShowError error={ isErrorRequest } />;
-                            }else{
-                                console.log("pedidos", requests)
-                                const idR = requests[requests.length-1].id;
-                                console.log("ultimo", idR);
-                                for (let i=0; i < cart.length; i++){
-                                    await API.post(`/requests/${idR+1}/details`,{
-                                        product_id: cart[i].cartId,
-                                        quantity: cart[i].cartQuantity,
-                                        final_price: parseFloat(cart[i].cartPrice),
-                                    })
-                                    for (let j=0; j < products.length; j++){
-                                        if (products[j].id === cart[i].cartId){
-                                            let stock = products[j].stock - cart[i].cartQuantity;
-                                            await API.put(`/products/${cart[i].cartId}` ,{
-                                                stock: stock,
-                                            })
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        setShowCart(false);
-                        setCart([]);
-                    }
-                    else{
-                        setShowAlert2(true);
-                    }
-        }else{
-            setShowAlert1(true);
-        }
-    }
-
-    const afterCreate = async () => {
-        await mutate('/requests', async requests => {
-            return {data: [{}, ...requests.data]};
-        },false);
-
-        await  mutateByUser('/request/user');
-    };
-
-    const handleShowCart = () =>{
-        let total1 = 0;
-        for (let i=0; i < cart.length; i++){
-            total1 = total1 + parseFloat(cart[i].cartPrice);
-        }
-        setTotal(total1);
-        setShowCart(true);
-    }
 
     return (
         <>
             <IonGrid>
                 <IonRow>
-                    <IonToolbar>
-                        <Search placeholder="input search text" onSearch={onSearch} enterButton />
-                        <IonIcon icon={cartOutline} slot={"end"} style={{width: "35px",height: "35px" }} onClick={handleShowCart}/>
-                    </IonToolbar>
-
+                <IonToolbar>
+                        <Search placeholder="Buscador" onSearch={onSearch} enterButton />
+                </IonToolbar>
+                    
             {
                 searchProduct ?
-                        searchProduct.filter(i => i.stock  > 0).map((search, i)=>(
-                            <IonCol  size="6">
-                                <IonCard key={i} onClick={()=>addCart(search)} >
-                                    <IonImg src={ `http://localhost:8000/storage/${ search.image }` }
-                                            style={{height: "100px"}}/>
-                                    <IonCardHeader>
-                                        <IonCardTitle>{search.name}</IonCardTitle>
-                                    </IonCardHeader>
-
-                                    <IonCardContent>
-                                        <IonCardSubtitle>{search.price.toFixed(2)}</IonCardSubtitle>
-                                    </IonCardContent>
-                                </IonCard>
-                            </IonCol>
-                        ))
+                    searchProduct.map((search, i)=>(
+                        <IonCol width='100%'>
+                            <IonCard key={i} onClick={()=>showDetail(search.id)}>
+                            <IonImg src={ `http://localhost:8000/storage/${ search.image }` }
+                                         style={{height: "100px"}}/>
+                                         <IonCardHeader>
+                                             <IonCardTitle>{search.name}</IonCardTitle>
+                                         </IonCardHeader>
+                                <IonCardContent>
+                                    <IonCardSubtitle><strong>Telefóno: </strong>{search.phone}</IonCardSubtitle>
+                                    <IonCardSubtitle><strong>Horas: </strong>{search.hour}</IonCardSubtitle>                                
+                                </IonCardContent>
+                            </IonCard>
+                        </IonCol>
+                    ))
                     :
-
-                    products.filter(i => i.stock  > 0).map((product,i)=>(
+                    products ?
+                products.map((product,i)=>(
                     <IonCol size="6">
-                    <IonCard key={i} onClick={()=>addCart(product)} >
-                        <IonImg style={{ height: "100px"}} src={ `http://localhost:8000/storage/${ product.image }` }
-                        />
+                    <IonCard key={i} onClick={()=>showDetails(i)} >
+                    <IonImg src={ `http://localhost:8000/storage/${ search.image }` }
+                                         style={{height: "100px"}}/>
                         <IonCardHeader>
                             <IonCardTitle>{product.name}</IonCardTitle>
                         </IonCardHeader>
+
                         <IonCardContent>
-                            <IonCardSubtitle>{product.price.toFixed(2)}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Detalle: </strong>{product.details}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Horas: </strong>{product.hour}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Dirección: </strong>{product.location}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Telefóno: </strong>{product.phone}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Fecha de Publicación: </strong>{product.publication_date}</IonCardSubtitle>
                         </IonCardContent>
                     </IonCard>
                     </IonCol>
                 ))
+                : "Cargando..."
             }
                 </IonRow>
             </IonGrid>
-
-            <Modal  title="Publicacion a Postulaciones"
-                    visible={showCart}
-                    closable={false}
-                    footer={[
-                        <IonButton htmlType='submit' onClick={onCreate}>Realizar una postulación</IonButton>,
-                        <IonButton onClick={()=>setShowCart(false)}>Cancelar</IonButton>
-                    ]}
-            >
-                    <IonList>
-                        {
-                         cart.map((car,i)=>(
-                            <IonItem key={i}>
-                                <IonAvatar slot={"start"}>
-                                    <img src={`http://localhost:8000/storage/${ car.cartImage }`} />
-                                </IonAvatar>
-                                <IonLabel>
-                                    <IonRow>
-                                    <IonCol>{car.cartName}</IonCol>
-                                    <IonCol><InputNumber
-                                        id={car.cartName.split(" ").join("")}
-                                        defaultValue={car.cartQuantity}
-                                        min={1}
-                                        max={10}
-                                        style={{width:"50px"}}/></IonCol>
-                                    <IonCol>{car.cartPrice.toFixed(2)}</IonCol>
-                                    </IonRow>
-                                </IonLabel>
-                                <IonIcon
-                                    icon={arrowUpCircleOutline}
-                                    style={{width:"25px", height:"25px"}}
-                                    slot={"end"}
-                                    onClick={()=>updateCart(car)}
-                                />
-                                <IonIcon
-                                    icon={trashOutline}
-                                    style={{width:"25px", height:"25px"}}
-                                    slot={"end"}
-                                    onClick={()=>deleteCart(i)}
-                                />
-                            </IonItem>
-                            ))
-                        }
-                    </IonList>
-                    <IonItem>
-        
-                    </IonItem>
-                    <IonText>
-                        <h3>Tipo de </h3>
-                    </IonText>
-
-                        <IonRow>
-                            <IonCol>
-                        <IonSelect value={type}
-                                   placeholder={"Tipo de entrega"}
-                                   onIonChange={e => setType(e.detail.value)}
+            {
+                product.isLoading
+                    ? <div>Cargando...</div>
+                    : product.isError
+                    ? <ShowError error={product.isError}/>
+                    : <>
+                        <Modal  title="Detalle de la empresa" style={{background:"blue"}}
+                                visible={showInfo}
+                                closable={false}
+                                footer={[
+                                    <Link to={ Routes.EDITPROFILE}>
+                                    <IonButton type='primary' className='login-form-button'>
+                                        Postular
+                                    </IonButton>
+                                    </Link>,
+                                    <IonButton onClick={()=>setShowInfo(false)}>Cancelar</IonButton>
+                                ]}
                         >
-                            <IonSelectOption value={"deliver"}>A domicilio</IonSelectOption>
-                            <IonSelectOption value={"withdraw"}>En la tienda</IonSelectOption>
-                        </IonSelect>
-                            </IonCol>
-                            <IonCol>
-                                <IonItem>
-                                <IonLabel>
-                                    {
-                                        type === "deliver"
-                                            ? <><p align={"right"}>{(total * .1).toFixed(2)}</p></>
-                                            : <><p align={"right"}>0.00</p></>
-                                    }</IonLabel>
-                                </IonItem>
-                            </IonCol>
-                        </IonRow>
+                    
+                        <IonImg src={ `http://localhost:8000/storage/${ product.product.image }` }
+                                         style={{height: "100px"}}/>
+                        <IonCardHeader>
+                            <IonCardTitle>{product.product.name}</IonCardTitle>
+                        </IonCardHeader>
 
-                    <IonItem>
-                        <IonLabel slot={"end"}><div><p align={"right"}><strong>Total: </strong>{
-                                type === "deliver"
-                                    ? (total * 1.1).toFixed(2)
-                                    : total.toFixed(2)
-                        }</p></div></IonLabel>
-                    </IonItem>
-            </Modal>
-            <IonAlert
-                isOpen={showAlert1}
-                onDidDismiss={()=>setShowAlert1(false)}
-                cssClass={'my-custom-class'}
-                header={'Postualación'}
-                message={'No puede postular a la misma postulacion dos veces'}
-                buttons={['OK']}
-            />
-            <IonAlert
-                isOpen={showAlert2}
-                onDidDismiss={()=>setShowAlert2(false)}
-                cssClass={'my-custom-class'}
-                header={'Sin stock'}
-                message={'No puede realizar la postuacion porque ya no existe'}
-                buttons={['OK']}
-            />
+                        <IonCardContent>
+                            <IonCardSubtitle><strong>Detalle: </strong>{product.product.details}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Horas: </strong>{product.product.hour}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Dirección: </strong>{product.product.location}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Telefóno: </strong>{product.product.phone}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Fecha de Publicación: </strong>{product.product.publication_date}</IonCardSubtitle>
+                        </IonCardContent>
+                        </Modal>
+                    </>
+            }
         </>
     );
-
 };
-export default ProductClientList;
+
+export default ProductOwnerList;
