@@ -2,6 +2,7 @@ import React from 'react';
 import Routes from '../constants/routes';
 import API from '../data/index';
 import { Form, Input, message, Select} from 'antd';
+import Layouts from '../components/Layout';
 import {
     LockOutlined,
     UserOutlined,
@@ -116,14 +117,11 @@ const RegisterUser = () => {
         <>
             <IonPage>
                 <IonHeader>
-                    <IonToolbar id={"toolbar"}>
-                       <IonTitle className="iontitle" id={"letter"}>
-                           <IonRow>
-                               <IonCol size={2}>
-                                    Actualizar datos del perfil
-                               </IonCol>
-                           </IonRow>
-                       </IonTitle>
+                        <IonToolbar id={"toolbar"}>
+                        <div slot={"start"} className="menu">
+                            <Layouts />
+                        </div>
+                        <IonTitle id={"letter"}>Actualizar datos del Perfil </IonTitle>
                     </IonToolbar>
                 </IonHeader>
                 <br></br>

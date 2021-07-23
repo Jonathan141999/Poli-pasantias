@@ -64,7 +64,7 @@ const Navigation = (props) => {
                         <p>{currentUser.email}</p>
                     </IonLabel> 
                 </IonItem>
-                {currentUser.role==='ROLE_ADMIN'
+                {currentUser.role==='ROLE_ADMIN' || currentUser.role==='ROLE_BUSINESS'
                 ?   <Menu.Item key={Routes.OWNERPRODUCTS} icon={<FormOutlined/>} >
                         <Link to={Routes.OWNERPRODUCTS} style={linkStyle}>Publicaciones</Link>
                     </Menu.Item>
@@ -72,15 +72,15 @@ const Navigation = (props) => {
                         <Link to={Routes.CLIENTPRODUCTS} style={linkStyle}>Publicaciones</Link>
                     </Menu.Item>
                 }
-                {currentUser.role==='ROLE_ADMIN'
+                {currentUser.role==='ROLE_ADMIN' || currentUser.role==='ROLE_BUSINESS'
                 ?   <Menu.Item key={Routes.REGISTERPRODUCT} icon={<PlusCircleOutlined/>} >
                         <Link to={Routes.REGISTERPRODUCT} style={linkStyle}>Registrar Publicación</Link>
                     </Menu.Item>
                 :   <Menu.Item key={Routes.DAILYORDER} icon={<PlusCircleOutlined/>} >
-                        <Link to={Routes.DAILYORDER} style={linkStyle}>Estado de Postulación</Link>
+                        <Link to={Routes.DAILYORDER} style={linkStyle}>Postulación</Link>
                     </Menu.Item>
                 }
-                {currentUser.role==='ROLE_ADMIN'
+                {currentUser.role==='ROLE_ADMIN' || currentUser.role==='ROLE_BUSINESS'
                 ?   <>
                     <Menu.Item key={Routes.PROFILE} icon = {<UserOutlined/>}>
                         <Link to={Routes.PROFILE} style={linkStyle}>Perfil de Usuario</Link>
@@ -88,7 +88,7 @@ const Navigation = (props) => {
                 :   <Menu.Item key={Routes.PROFILE} icon = {<UserOutlined/>}>
                         <Link to={Routes.PROFILE} style={linkStyle}>Perfil de Usuario</Link>
                     </Menu.Item>
-                }  
+                }
                 <Menu.Item key={Routes.LOGIN}>
                     <Link to={Routes.LOGOUT} className='logout-link'>
                     {

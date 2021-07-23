@@ -13,6 +13,8 @@ const publicRoutes = {
   //DAILYORDER: '/daily-order',
   //NEWORDER: '/neworder',
   //REPORTS: '/reports',
+  EDITPROFILE: '/edit-profile',
+  POSTULATION: '/postulation'
 };
 
 const privateRoutes = {
