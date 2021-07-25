@@ -61,7 +61,8 @@ Seeder Postulations
 
 <h3> Rutas del proyecto </h3>
 En la carpeta routers se muestran las rutas necesarias.
-![image](https://user-images.githubusercontent.com/66144899/126915479-d1da0822-e4a9-47fe-bf98-c4fe55cb855e.png)
+![image](https://user-images.githubusercontent.com/66144899/126915634-bc2cfc15-59a7-4974-8e1c-ee76004c02f4.png)
+
 
 Resultado de la Base de Datos que se creo
 ![image](https://user-images.githubusercontent.com/66144899/126915578-a0e4c7f7-7dac-48cb-9da3-8ae16197b39b.png)
