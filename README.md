@@ -4,12 +4,12 @@
 
 <p>El proyecto presenta los siguientes Módulos</p>
 
-## 1.- Configuración del ambiente de desarrollo
-## 2.- Módulo de publicación para Empresa
-## 3.- Módulo de publicación para Estudiante
-## 4.- Módulo de Postulacion para Estudiante
-## 5.- Módulo de Postulación para Empresa (Pendiente)
-## 6.- Módulo de Pruebas (Pendiente)
+<p> 1.- Configuración del ambiente de desarrollo </p>
+<p> 2.- Módulo de publicación para Empresa </p>
+<p> 3.- Módulo de publicación para Estudiante </p>
+<p> 4.- Módulo de Postulacion para Estudiante </p>
+<p> 5.- Módulo de Postulación para Empresa (Pendiente)
+<p> 6.- Módulo de Pruebas (Pendiente)
 <p> Para el Módulo de Pruebas se las implementara más adelante</p>
 <p> El proyecto tiene 20 Historias de usuarios y con el avance del proyecto se realizaron 14 Historias de usuario</p>
 
@@ -84,7 +84,7 @@
 ## Formulario para postular 
 ![image](https://user-images.githubusercontent.com/66144899/126917043-7225111b-bfb8-4fce-9204-59ceeb1f01e9.png)
 
-## Módelo de Postulación para Empresas
+## Módelo de Postulación para Empresas (Pendiente)
 ## Módulo de Pruebas
 (Pendiente)
 
