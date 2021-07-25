@@ -1,6 +1,6 @@
 # Poli-pasantias
 
-En la Carpeta app se muestran los modelos que se utilizo en la base de datos
+<h3>En la Carpeta app se muestran los modelos que se utilizo en la base de datos </h3>
 
 El modelo User
 ![image](https://user-images.githubusercontent.com/66144899/126915225-23f2248d-584e-4fd7-b45c-fa36c8914f72.png)
@@ -15,7 +15,7 @@ El modelo Categorias
 ![image](https://user-images.githubusercontent.com/66144899/126915254-24b2fd57-e072-4e9c-b961-ac60fe5816b5.png)
 
 
-<h4>En la Carpeta Database se encuentran las tablas de la Base de datos en MySQL</h4>
+<h3>En la Carpeta Database se encuentran las tablas de la Base de datos en MySQL </h3>
 
 Modelo usuario
 En la tabla user se muestra los atributos correspondientes.
@@ -41,5 +41,31 @@ Modelo Postulación
 En la tabla postulations se muestra para poder subir la un documento pdf, el cual nos servira para que el estudinate pueda postular a una empresa.
 
 ![image](https://user-images.githubusercontent.com/66144899/126915199-ba2d6fba-a37c-450e-abb6-70111ed33c65.png)
+
+<h3>Carpeta Database y Seeders</h3>
+
+En esta sección se muestra los datos ficticios que se utilizara para realizar las pruebas de la aplicación.
+
+Seeder Users
+![image](https://user-images.githubusercontent.com/66144899/126915367-0f3980ed-579f-4305-8ba0-4c4c4c4e1845.png)
+
+Seeder Publications
+![image](https://user-images.githubusercontent.com/66144899/126915399-f39f3dda-cbb5-4691-a56c-d80f6008f74a.png)
+
+Seeder Categories
+![image](https://user-images.githubusercontent.com/66144899/126915415-4d4f103a-352e-4dae-b82c-c58b5c4d9522.png)
+
+Seeder Postulations
+![image](https://user-images.githubusercontent.com/66144899/126915433-103e7efe-6116-4cf9-b2ec-01ebe7cb4c5d.png)
+
+
+<h3> Rutas del proyecto </h3>
+En la carpeta routers se muestran las rutas necesarias.
+![image](https://user-images.githubusercontent.com/66144899/126915479-d1da0822-e4a9-47fe-bf98-c4fe55cb855e.png)
+
+Resultado de la Base de Datos que se creo
+![image](https://user-images.githubusercontent.com/66144899/126915578-a0e4c7f7-7dac-48cb-9da3-8ae16197b39b.png)
+
+
 
 
