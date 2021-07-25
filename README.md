@@ -3,35 +3,36 @@
 <h3>En la Carpeta app se muestran los modelos que se utilizo en la base de datos </h3>
 
 El modelo User
-</br>
+
 ![image](https://user-images.githubusercontent.com/66144899/126915225-23f2248d-584e-4fd7-b45c-fa36c8914f72.png)
 </br>
 El modelo Publications
-</br>
+
 ![image](https://user-images.githubusercontent.com/66144899/126915238-5700d934-c3a3-4f96-a68d-bc0d5cb13800.png)
 </br>
 El modelo Postulation
-</br>
+
 ![image](https://user-images.githubusercontent.com/66144899/126915247-fd589f7f-06fc-46cc-be85-763edab35828.png)
 </br>
 El modelo Categorias
-</br>
+
 ![image](https://user-images.githubusercontent.com/66144899/126915254-24b2fd57-e072-4e9c-b961-ac60fe5816b5.png)
 </br>
 
 <h3>En la Carpeta Database se encuentran las tablas de la Base de datos en MySQL </h3>
-
+</br>
 Modelo usuario
 </br>
 En la tabla user se muestra los atributos correspondientes.
 </br>
 ![image](https://user-images.githubusercontent.com/66144899/126915045-8e86f1e9-6f07-430b-8e3b-9da6c6b1fe0e.png)
-
+</br>
 Modelo Publicación
 </br>
 En la tabla publications se muestra los atributos correspondientes.
 </br>
 ![image](https://user-images.githubusercontent.com/66144899/126915086-62a12e7b-d1dc-4f59-8331-9648a4bb9f48.png)
+
 
 Modelo Categorias
 En la tabla categories se muestra un solo atributo el cual contendra las carreras de la EPN
@@ -74,6 +75,8 @@ En la carpeta routers se muestran las rutas necesarias.
 Resultado de la Base de Datos que se creo
 </br>
 ![image](https://user-images.githubusercontent.com/66144899/126915578-a0e4c7f7-7dac-48cb-9da3-8ae16197b39b.png)
+</br>
+</br>
 
 
 
