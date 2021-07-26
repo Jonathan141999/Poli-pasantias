@@ -89,8 +89,10 @@
 (Pendiente)
 
 
+## Burn Down Chart
 
-
+<p>El Burn Down Chart del avance del proyecto va desde el 14 de Junio hasta el dia de hoy 25 de Julio del 2021 </p>
+![image](https://user-images.githubusercontent.com/66144899/126924225-623bd8f1-4bbc-49b8-bc8b-ae9c73a00930.png)
 
 
 
