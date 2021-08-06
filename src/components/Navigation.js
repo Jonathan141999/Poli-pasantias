@@ -69,7 +69,7 @@ const Navigation = (props) => {
                         <Link to={Routes.OWNERPRODUCTS} style={linkStyle}>Publicaciones</Link>
                     </Menu.Item>
                 :   <Menu.Item key={Routes.CLIENTPRODUCTS} icon={<FormOutlined/>} >
-                        <Link to={Routes.CLIENTPRODUCTS} style={linkStyle}>Publicaciones</Link>
+                        <Link to={Routes.CLIENTPRODUCTS} style={linkStyle}>Inicio</Link>
                     </Menu.Item>
                 }
                 {currentUser.role==='ROLE_ADMIN' || currentUser.role==='ROLE_BUSINESS'
