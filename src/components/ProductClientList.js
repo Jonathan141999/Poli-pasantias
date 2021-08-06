@@ -130,8 +130,11 @@ const ProductOwnerList = () => {
                                              <IonCardTitle>{search.name}</IonCardTitle>
                                          </IonCardHeader>
                                 <IonCardContent>
+                                    <IonCardSubtitle><strong>Dirección: </strong>{search.location}</IonCardSubtitle>
                                     <IonCardSubtitle><strong>Telefóno: </strong>{search.phone}</IonCardSubtitle>
-                                    <IonCardSubtitle><strong>Horas: </strong>{search.hour}</IonCardSubtitle>                                
+                                    <IonCardSubtitle><strong>Horas: </strong>{search.hour}</IonCardSubtitle>
+                                    <IonCardSubtitle><strong>Carrera: </strong>{search.category_name}</IonCardSubtitle>                                
+                                    <IonCardSubtitle><strong>Fecha de Publicación: </strong>{search.publication_date}</IonCardSubtitle>
                                 </IonCardContent>
                             </IonCard>
                         </IonCol>
@@ -148,11 +151,12 @@ const ProductOwnerList = () => {
                         </IonCardHeader>
 
                         <IonCardContent>
-                            <IonCardSubtitle><strong>Detalle: </strong>{product.details}</IonCardSubtitle>
-                            <IonCardSubtitle><strong>Horas: </strong>{product.hour}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Dirección: </strong>{product.location}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Telefóno: </strong>{product.phone}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Horas: </strong>{product.hour}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Carrera: </strong>{product.category_name}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Fecha de Publicación: </strong>{product.publication_date}</IonCardSubtitle>
+                            
                         </IonCardContent>
                     </IonCard>
                     </IonCol>
@@ -171,10 +175,10 @@ const ProductOwnerList = () => {
                                 visible={showInfo}
                                 closable={false}
                                 footer={[
-                                    <Link to={ Routes.EDITPROFILE}>
-                                    <IonButton type='primary' className='login-form-button'>
-                                        Postular
-                                    </IonButton>
+                                    <Link to={ Routes.POSTULATION}>
+                                        <IonButton type='primary' className='login-form-button'>
+                                            Postular
+                                        </IonButton>
                                     </Link>,
                                     <IonButton onClick={()=>setShowInfo(false)}>Cancelar</IonButton>
                                 ]}
@@ -187,11 +191,14 @@ const ProductOwnerList = () => {
                         </IonCardHeader>
 
                         <IonCardContent>
-                            <IonCardSubtitle><strong>Detalle: </strong>{product.product.details}</IonCardSubtitle>
-                            <IonCardSubtitle><strong>Horas: </strong>{product.product.hour}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Dirección: </strong>{product.product.location}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Telefóno: </strong>{product.product.phone}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Correo de Contacto: </strong>{product.product.email}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Empresa: </strong>{product.product.type}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Horas: </strong>{product.product.hour}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Carrera: </strong>{product.product.category_name}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Fecha de Publicación: </strong>{product.product.publication_date}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Detalle: </strong>{product.product.details}</IonCardSubtitle>
                         </IonCardContent>
                         </Modal>
                     </>
