@@ -173,9 +173,11 @@ const EditUserPage = () => {
                         </Form.Item>
                         
                         <Form.Item>
+                        <Link to={ Routes.PROFILE}>
                             <IonButton type='primary' htmlType='submit' className='login-form-button'>
                                 Actualizar
-                            </IonButton> 
+                            </IonButton>
+                        </Link>
                         </Form.Item>                     
                     </Form>
            </IonPage>
