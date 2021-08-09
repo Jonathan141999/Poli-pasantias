@@ -48,7 +48,7 @@ const Profile = () => {
             :<IonCardSubtitle>Estudiante de la Escuela Politécnica Nacional</IonCardSubtitle>
             }
             <Form.Item>
-              <Link to={ Routes.EDITPROFILE}>
+              <Link to={ Routes.EDITUSER}>
                 <IonButton type='primary'>
                     Actualizar Perfil
                 </IonButton>

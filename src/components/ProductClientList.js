@@ -123,8 +123,8 @@ const ProductOwnerList = () => {
                 searchProduct ?
                     searchProduct.map((search, i)=>(
                         <IonCol width='100%'>
-                            <IonCard key={i} onClick={()=>showDetail(search.id)}>
-                            <IonImg src={ `http://localhost:8000/storage/${ search.image }` }
+                            <IonCard key={i} onClick={()=>showDetail(search.id)} style={{margin:'auto', display:'block' }}>
+                            <IonImg src={ search.image}
                                          style={{height: "100px"}}/>
                                          <IonCardHeader>
                                              <IonCardTitle>{search.name}</IonCardTitle>
@@ -133,7 +133,7 @@ const ProductOwnerList = () => {
                                     <IonCardSubtitle><strong>Dirección: </strong>{search.location}</IonCardSubtitle>
                                     <IonCardSubtitle><strong>Telefóno: </strong>{search.phone}</IonCardSubtitle>
                                     <IonCardSubtitle><strong>Horas: </strong>{search.hour}</IonCardSubtitle>
-                                    <IonCardSubtitle><strong>Carrera: </strong>{search.category_name}</IonCardSubtitle>                                
+                                    <IonCardSubtitle><strong>Carrera: </strong>{search.category}</IonCardSubtitle>                                
                                     <IonCardSubtitle><strong>Fecha de Publicación: </strong>{search.publication_date}</IonCardSubtitle>
                                 </IonCardContent>
                             </IonCard>
@@ -143,8 +143,8 @@ const ProductOwnerList = () => {
                     products ?
                 products.map((product,i)=>(
                     <IonCol size="6">
-                    <IonCard key={i} onClick={()=>showDetails(i)} >
-                    <IonImg src={ `http://localhost:8000/storage/${ search.image }` }
+                    <IonCard key={i} onClick={()=>showDetails(i)} style={{margin:'auto', display:'block' }} >
+                    <IonImg src={ search.image }
                                          style={{height: "100px"}}/>
                         <IonCardHeader>
                             <IonCardTitle>{product.name}</IonCardTitle>
@@ -154,7 +154,7 @@ const ProductOwnerList = () => {
                             <IonCardSubtitle><strong>Dirección: </strong>{product.location}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Telefóno: </strong>{product.phone}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Horas: </strong>{product.hour}</IonCardSubtitle>
-                            <IonCardSubtitle><strong>Carrera: </strong>{product.category_name}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Carrera: </strong>{product.category}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Fecha de Publicación: </strong>{product.publication_date}</IonCardSubtitle>
                             
                         </IonCardContent>
@@ -171,7 +171,7 @@ const ProductOwnerList = () => {
                     : product.isError
                     ? <ShowError error={product.isError}/>
                     : <>
-                        <Modal  title="Detalle de la empresa" style={{background:"blue"}}
+                        <Modal  title="Detalle de la empresa" style={{background:"blue",margin:'auto', display:'block' }}
                                 visible={showInfo}
                                 closable={false}
                                 footer={[
@@ -184,7 +184,7 @@ const ProductOwnerList = () => {
                                 ]}
                         >
                     
-                        <IonImg src={ `http://localhost:8000/storage/${ product.product.image }` }
+                        <IonImg src={ product.product.image  }
                                          style={{height: "100px"}}/>
                         <IonCardHeader>
                             <IonCardTitle>{product.product.name}</IonCardTitle>
@@ -198,7 +198,7 @@ const ProductOwnerList = () => {
                             <IonCardSubtitle><strong>Horas: </strong>{product.product.hour}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Carrera: </strong>{product.product.category_name}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Fecha de Publicación: </strong>{product.product.publication_date}</IonCardSubtitle>
-                            <IonCardSubtitle><strong>Detalle: </strong>{product.product.details}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Detalle:</strong>{product.product.details}</IonCardSubtitle>
                         </IonCardContent>
                         </Modal>
                     </>
