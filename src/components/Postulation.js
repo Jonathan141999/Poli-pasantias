@@ -28,7 +28,7 @@ function getBase64( file, callback ) {
     reader.readAsDataURL( file );
 }
 
-const RegisterPublication = () => {
+const Postulation = () => {
 
     const [ form ] = Form.useForm();
     const {isLoading, isError, mutate} = useProducts();
@@ -140,14 +140,6 @@ const RegisterPublication = () => {
         <>
         
             <IonPage>
-                <IonHeader>
-                    <IonToolbar id={"toolbar"}>
-                            <div slot={"start"} className="menu">
-                                <Layouts />
-                            </div>
-                            <IonTitle id={"letter"}>Postulación </IonTitle>
-                    </IonToolbar>
-                </IonHeader>
                 <br/>
                     <IonImg src={registro} style={{width:"125px", height:"125px", display:"block", margin:"auto"}}/>
                 <br/>
@@ -198,4 +190,4 @@ const RegisterPublication = () => {
     );
 };
 
-export default RegisterPublication;
+export default Postulation;
