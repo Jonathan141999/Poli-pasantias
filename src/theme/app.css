@@ -103,7 +103,7 @@ body {
     overflow: initial;
     padding: 50px 0;
     background: transparent;
-    min-height: 300px;
+    min-height: 400px;
     display: flex;
 }
 
@@ -168,7 +168,7 @@ code {
     size: 200px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 800px) {
 
     .main-buttons {
         display: block;

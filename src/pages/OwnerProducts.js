@@ -21,7 +21,7 @@ const OwnerProductsPage = () => {
                         <div slot={"start"} className="menu">
                             <Layouts />
                         </div>
-                        <IonTitle id={"letter"}>Lista de Publicaciones </IonTitle>
+                        <IonTitle id={"letter"}>Publicaciones </IonTitle>
                     </IonToolbar>
                 </IonHeader>
                 <ProductOwnerList/>

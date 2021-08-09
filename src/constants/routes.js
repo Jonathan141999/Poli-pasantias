@@ -13,7 +13,7 @@ const publicRoutes = {
   //DAILYORDER: '/daily-order',
   //NEWORDER: '/neworder',
   //REPORTS: '/reports',
-  EDITPROFILE: '/edit-profile',
+  EDITUSER: '/edit-profile',
   POSTULATION: '/postulation'
 };
 
@@ -27,7 +27,7 @@ const privateRoutes = {
   NEWORDER: '/neworder',
   REPORTS: '/reports',
   PROFILE: '/profile',
-  EDITPROFILE: '/edit-profile' 
+  EDITUSER: '/edit-profile' 
 };
 
 const Routes = {

@@ -1,5 +1,5 @@
 import {useProducts} from "../data/useProducts";
-import {Row, Col, Skeleton, Form, Input, message, Modal} from "antd";
+import {Row, Col, Skeleton, Form, Input, message, Modal, Pagination} from "antd";
 import React, {useState} from "react";
 import ShowError from "./ShowError";
 import {Link} from 'react-router-dom';
@@ -123,15 +123,18 @@ const ProductOwnerList = () => {
                 searchProduct ?
                     searchProduct.map((search, i)=>(
                         <IonCol width='100%'>
-                            <IonCard key={i} onClick={()=>showDetail(search.id)}>
-                            <IonImg src={ `http://localhost:8000/storage/${ search.image }` }
+                            <IonCard key={i} onClick={()=>showDetail(search.id)} style={{margin:'auto', display:'block' }}>
+                            <IonImg src={search.image}
                                          style={{height: "100px"}}/>
                                          <IonCardHeader>
                                              <IonCardTitle>{search.name}</IonCardTitle>
                                          </IonCardHeader>
                                 <IonCardContent>
+                                <IonCardSubtitle><strong>Dirección: </strong>{search.location}</IonCardSubtitle>
                                     <IonCardSubtitle><strong>Telefóno: </strong>{search.phone}</IonCardSubtitle>
-                                    <IonCardSubtitle><strong>Horas: </strong>{search.hour}</IonCardSubtitle>                                
+                                    <IonCardSubtitle><strong>Horas: </strong>{search.hour}</IonCardSubtitle>
+                                    <IonCardSubtitle><strong>Carrera: </strong>{search.category}</IonCardSubtitle>                                
+                                    <IonCardSubtitle><strong>Fecha de Publicación: </strong>{search.publication_date}</IonCardSubtitle>                                
                                 </IonCardContent>
                             </IonCard>
                         </IonCol>
@@ -140,18 +143,18 @@ const ProductOwnerList = () => {
                     products ?
                 products.map((product,i)=>(
                     <IonCol size="6">
-                    <IonCard key={i} onClick={()=>showDetails(i)} >
-                    <IonImg src={ `http://localhost:8000/storage/${ search.image }` }
+                    <IonCard key={i} onClick={()=>showDetails(i)} style={{margin:'auto', display:'block' }}>
+                    <IonImg src={product.image}
                                          style={{height: "100px"}}/>
                         <IonCardHeader>
                             <IonCardTitle>{product.name}</IonCardTitle>
                         </IonCardHeader>
 
                         <IonCardContent>
-                            <IonCardSubtitle><strong>Detalle: </strong>{product.details}</IonCardSubtitle>
-                            <IonCardSubtitle><strong>Horas: </strong>{product.hour}</IonCardSubtitle>
-                            <IonCardSubtitle><strong>Dirección: </strong>{product.location}</IonCardSubtitle>
+                        <IonCardSubtitle><strong>Dirección: </strong>{product.location}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Telefóno: </strong>{product.phone}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Horas: </strong>{product.hour}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Carrera: </strong>{product.category}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Fecha de Publicación: </strong>{product.publication_date}</IonCardSubtitle>
                         </IonCardContent>
                     </IonCard>
