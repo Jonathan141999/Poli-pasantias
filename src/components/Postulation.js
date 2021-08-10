@@ -180,9 +180,11 @@ const Postulation = () => {
                         </Form.Item>
 
                         <Form.Item>
+                        <Link to={ Routes.CLIENTPRODUCTS}>
                             <IonButton type='primary' htmlType='submit' className='login-form-button'>
                                 Enviar
                             </IonButton>
+                        </Link>
                         </Form.Item>
                     </Form>
            </IonPage>
