@@ -1,5 +1,5 @@
 import {useProducts} from "../data/useProducts";
-import {Row, Col, Skeleton, Form, Input, message, Modal} from "antd";
+import {Row, Col, Skeleton, Form, Input, message, Modal,Pagination} from "antd";
 import React, {useState} from "react";
 import ShowError from "./ShowError";
 import Routes from '../constants/routes';
@@ -70,6 +70,12 @@ const ProductOwnerList = () => {
 
     };
     */
+
+    const [page ,setPage]=useState(0)
+    const handleChangePages = (event, newPage) => {
+        setPage(newPage);
+    };
+    
     const afterCreate = async () => {
         await mutate('/publications');
     };
@@ -114,7 +120,7 @@ const ProductOwnerList = () => {
     return (
         <>
             <IonGrid>
-                <IonRow>
+                <IonRow style={{display:"block"}}>
                 <IonToolbar>
                         <Search placeholder="Buscador" onSearch={onSearch} enterButton />
                 </IonToolbar>
@@ -124,9 +130,10 @@ const ProductOwnerList = () => {
                     searchProduct.map((search, i)=>(
                         <IonCol width='100%'>
                             <IonCard key={i} onClick={()=>showDetail(search.id)} style={{margin:'auto', display:'block' }}>
+                            <IonCardHeader>
                             <IonImg src={ search.image}
                                          style={{height: "100px"}}/>
-                                         <IonCardHeader>
+                                         
                                              <IonCardTitle>{search.name}</IonCardTitle>
                                          </IonCardHeader>
                                 <IonCardContent>
@@ -144,9 +151,10 @@ const ProductOwnerList = () => {
                 products.map((product,i)=>(
                     <IonCol size="6">
                     <IonCard key={i} onClick={()=>showDetails(i)} style={{margin:'auto', display:'block' }} >
+                    <IonCardHeader>
                     <IonImg src={ search.image }
                                          style={{height: "100px"}}/>
-                        <IonCardHeader>
+                        
                             <IonCardTitle>{product.name}</IonCardTitle>
                         </IonCardHeader>
 
@@ -184,9 +192,10 @@ const ProductOwnerList = () => {
                                 ]}
                         >
                     
+                        <IonCardHeader>
                         <IonImg src={ product.product.image  }
                                          style={{height: "100px"}}/>
-                        <IonCardHeader>
+                        
                             <IonCardTitle>{product.product.name}</IonCardTitle>
                         </IonCardHeader>
 
@@ -203,6 +212,11 @@ const ProductOwnerList = () => {
                         </Modal>
                     </>
             }
+            <Pagination style={{padding:"10px", textAlign:"center"}}
+            defaultCurrent={1} total={3}
+            page={page}
+            onChangePage={handleChangePages}
+            />
         </>
     );
 };

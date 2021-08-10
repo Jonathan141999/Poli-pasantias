@@ -18,6 +18,7 @@ import '../theme/app.css';
 import "../theme/toolbar.css";
 import Layouts from '../components/Layout';
 import user from '../images/user.png';
+import user1 from '../images/user1.png';
 import {useAuth} from '../providers/Auth';
 
 const Profile = () => {
@@ -34,7 +35,10 @@ const Profile = () => {
                 </IonToolbar>
             </IonHeader>
           <IonCard>
-          <IonImg  src={user} style={{width:"150px", height:"150px"}}/>
+            {currentUser.role==='ROLEBUSINESS' || currentUser.role==='ROLE_ADMIN'
+            ?<IonImg  src={user1} style={{width:"150px", height:"150px"}}/>
+            :<IonImg  src={user} style={{width:"150px", height:"150px"}}/>
+            }
           <IonCardHeader>
           <IonCardTitle>Nombre: {currentUser.name}</IonCardTitle>
             <IonCardTitle>Apellido: {currentUser.last_name}</IonCardTitle>

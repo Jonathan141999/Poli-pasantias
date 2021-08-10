@@ -7,6 +7,7 @@ import {Link, useLocation} from 'react-router-dom';
 import '../theme/navigation.css';
 import '../theme/app.css';
 import user from '../images/user.png';
+import user1 from '../images/user1.png';
 import {
     IonAvatar,
     IonItem,
@@ -56,9 +57,14 @@ const Navigation = (props) => {
                 }}
             > 
                 <IonItem>
-                    <IonAvatar slot="end">
-                        <img src={user} />
+                    {currentUser.role==='ROLE_ADMIN' || currentUser.role==='ROLE_BUSINESS'
+                    ?<IonAvatar slot="end" style={{marginTop:"-18px"}}>
+                        <img src={user1} />
                     </IonAvatar>
+                    :<IonAvatar slot="end" style={{marginTop:"-18px"}}>
+                    <img src={user} />
+                    </IonAvatar>
+                    }
                     <IonLabel>
                         <h3>{currentUser.name} {currentUser.last_name}</h3>
                         <p>{currentUser.email}</p>

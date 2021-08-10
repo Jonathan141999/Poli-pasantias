@@ -10,6 +10,7 @@ import {
     IonCardSubtitle,
     IonCardTitle, IonCol, IonGrid, IonHeader, IonImg,
     IonItem, IonModal, IonPage,
+    IonDatetime,
     IonRow, IonThumbnail, IonTitle, IonToolbar,
 } from "@ionic/react";
 import API from "../data";
@@ -36,6 +37,11 @@ const ProductOwnerList = () => {
     console.log("publicaciones", products);
 
     console.log("busqueda", searchProduct);
+    const [page ,setPage]=useState(0)
+    const handleChangePages = (event, newPage) => {
+        setPage(newPage);
+    };
+    
 
     const product = useProduct(idProduct);
     console.log('info product', product);
@@ -117,20 +123,20 @@ const ProductOwnerList = () => {
     return (
         <>
             <IonGrid>
-                <IonRow>
+                <IonRow style={{display:"block"}}>
                     
             {
                 searchProduct ?
                     searchProduct.map((search, i)=>(
                         <IonCol width='100%'>
                             <IonCard key={i} onClick={()=>showDetail(search.id)} style={{margin:'auto', display:'block' }}>
-                            <IonImg src={search.image}
-                                         style={{height: "100px"}}/>
-                                         <IonCardHeader>
-                                             <IonCardTitle>{search.name}</IonCardTitle>
-                                         </IonCardHeader>
+                                <IonCardHeader>
+                                     <IonImg src={search.image}
+                                     style={{height: "100px"}}/>
+                                     <IonCardTitle>{search.name}</IonCardTitle>
+                                </IonCardHeader>
                                 <IonCardContent>
-                                <IonCardSubtitle><strong>Dirección: </strong>{search.location}</IonCardSubtitle>
+                                     <IonCardSubtitle><strong>Dirección: </strong>{search.location}</IonCardSubtitle>
                                     <IonCardSubtitle><strong>Telefóno: </strong>{search.phone}</IonCardSubtitle>
                                     <IonCardSubtitle><strong>Horas: </strong>{search.hour}</IonCardSubtitle>
                                     <IonCardSubtitle><strong>Carrera: </strong>{search.category}</IonCardSubtitle>                                
@@ -144,9 +150,10 @@ const ProductOwnerList = () => {
                 products.map((product,i)=>(
                     <IonCol size="6">
                     <IonCard key={i} onClick={()=>showDetails(i)} style={{margin:'auto', display:'block' }}>
-                    <IonImg src={product.image}
+                    <IonCardHeader>
+                         <IonImg src={product.image}
                                          style={{height: "100px"}}/>
-                        <IonCardHeader>
+                        
                             <IonCardTitle>{product.name}</IonCardTitle>
                         </IonCardHeader>
 
@@ -164,6 +171,7 @@ const ProductOwnerList = () => {
             }
                 </IonRow>
             </IonGrid>
+
             {
                 product.isLoading
                     ? <div>Cargando...</div>
@@ -230,23 +238,6 @@ const ProductOwnerList = () => {
                                     <Input  placeholder={product.product.phone}/>
                                 </Form.Item>
 
-                                <Form.Item name='email'
-                                        rules={[
-                                            {
-                                                    required: true,
-                                                    message: 'Email Empresarial'
-                                            },
-                                            {
-                                                    type: 'email',
-                                                    message: 'Ingresa un correo válido'
-                                            }
-                                        ]}
-                                        hasFeedback
-                                >
-                                    <label>Email Empresarial</label>
-                                    <Input placeholder={product.product.email}/>
-                                </Form.Item>
-
                                 <Form.Item name='hour'
                                         rules={[
                                             {
@@ -270,7 +261,7 @@ const ProductOwnerList = () => {
                                         hasFeedback
                                 >
                                     <label>Día de Publicación</label>
-                                <Input  placeholder={product.product.publication_date}/>
+                                <IonDatetime displayFormat="DD MMM YYYY" placeholder={product.product.publication_date}/>
                         </Form.Item>
                         <Form.Item name='details'
                                    rules={[
@@ -288,6 +279,11 @@ const ProductOwnerList = () => {
                         </Modal>
                     </>
             }
+            <Pagination style={{padding:"10px", textAlign:"center"}}
+            defaultCurrent={1} total={3}
+            page={page}
+            onChangePage={handleChangePages}
+            />
         </>
     );
 };
