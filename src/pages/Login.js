@@ -9,7 +9,7 @@ import { translateMessage } from '../utils/translateMessage';
 import ErrorList from '../components/ErrorList';
 import '../theme/variables.css';
 //import '../styles/login.css';
-import {IonHeader, IonImg, IonPage, IonTitle, IonToolbar,IonButton} from '@ionic/react';
+import {IonHeader, IonImg, IonPage, IonTitle, IonToolbar,IonButton,IonGrid,IonRow,IonCol} from '@ionic/react';
 import '../theme/toolbar.css';
 import {Link} from "react-router-dom";
 import Routes from "../constants/routes";
@@ -83,7 +83,7 @@ const Login = () => {
             >
 
                 <Input prefix={ <MailOutlined className='site-form-item-icon' /> }
-                        placeholder='Email'
+                        placeholder='Correo'
                         autoComplete='email'/>
             </Form.Item>
 
@@ -103,7 +103,7 @@ const Login = () => {
                 />
             </Form.Item>
 
-              <div>¿Aun no tienes cuenta con nosotros?, <Link to={ Routes.REGISTER }>Registrate</Link></div>
+            <div>¿Aun no tienes cuenta con nosotros?, <Link to={ Routes.REGISTER }>Registrate</Link></div>
 
             <Form.Item>
                 <IonButton type='primary' htmlType='submit' className='login-form-button'>

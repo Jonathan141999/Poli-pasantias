@@ -87,7 +87,9 @@ const Navigation = (props) => {
                     </Menu.Item>
                 }
                 {currentUser.role==='ROLE_ADMIN' || currentUser.role==='ROLE_BUSINESS'
-                ?   <>
+                ?   <><Menu.Item key={Routes.NEWORDER} icon={<NotificationOutlined/>} >
+                        <Link to={Routes.NEWORDER} style={linkStyle}>Nuevas Postulaciones</Link>
+                    </Menu.Item>
                     <Menu.Item key={Routes.PROFILE} icon = {<UserOutlined/>}>
                         <Link to={Routes.PROFILE} style={linkStyle}>Perfil de Usuario</Link>
                     </Menu.Item></>

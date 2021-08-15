@@ -56,9 +56,7 @@ const ProductOwnerList = () => {
                         name: values.name,
                         location: values.location,
                         phone: values.phone,
-                        email: values.email,
                         hour: values.hour,
-                        publication_date: values.publication_date,
                         details: values.details,
                     } ); // post data to server
                     form.resetFields();
@@ -140,7 +138,7 @@ const ProductOwnerList = () => {
                                     <IonCardSubtitle><strong>Telefóno: </strong>{search.phone}</IonCardSubtitle>
                                     <IonCardSubtitle><strong>Horas: </strong>{search.hour}</IonCardSubtitle>
                                     <IonCardSubtitle><strong>Carrera: </strong>{search.category}</IonCardSubtitle>                                
-                                    <IonCardSubtitle><strong>Fecha de Publicación: </strong>{search.publication_date}</IonCardSubtitle>                                
+                                    <IonCardSubtitle><strong>Fecha de Publicación: </strong>{search.created_at}</IonCardSubtitle>                                
                                 </IonCardContent>
                             </IonCard>
                         </IonCol>
@@ -162,7 +160,7 @@ const ProductOwnerList = () => {
                             <IonCardSubtitle><strong>Telefóno: </strong>{product.phone}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Horas: </strong>{product.hour}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Carrera: </strong>{product.category}</IonCardSubtitle>
-                            <IonCardSubtitle><strong>Fecha de Publicación: </strong>{product.publication_date}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Fecha de Publicación: </strong>{product.created_at}</IonCardSubtitle>
                         </IonCardContent>
                     </IonCard>
                     </IonCol>
@@ -250,19 +248,7 @@ const ProductOwnerList = () => {
                                     <label>Horas a Ofertar</label>
                                     <Input placeholder={product.product.hour}/>
                                 </Form.Item>
-                                
-                                <Form.Item name='publication_date'
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message: 'Fecha de Publicación'
-                                            }
-                                        ]}
-                                        hasFeedback
-                                >
-                                    <label>Día de Publicación</label>
-                                <IonDatetime displayFormat="DD MMM YYYY" placeholder={product.product.publication_date}/>
-                        </Form.Item>
+                            
                         <Form.Item name='details'
                                    rules={[
                                        {

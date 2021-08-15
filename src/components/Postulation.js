@@ -7,7 +7,7 @@ import {translateMessage} from '../utils/translateMessage';
 import {Link} from 'react-router-dom';
 import {IonImg,IonButton, IonCol, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar, IonSelect,IonDatetime} from "@ionic/react";
 import {arrowBack} from "ionicons/icons";
-import {useProducts} from "../data/useProducts";
+import {useRequests} from "../data/useRequests";
 import ShowError from "../components/ShowError";
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 import {useCategories} from "../data/useCategories";
@@ -31,7 +31,7 @@ function getBase64( file, callback ) {
 const Postulation = () => {
 
     const [ form ] = Form.useForm();
-    const {isLoading, isError, mutate} = useProducts();
+    const {isLoading, isError, mutate} = useRequests();
     const [ imageUrl, setImageUrl ] = useState( null );
     const [ fileList, setFileList ] = useState( [] );
     const categories = useCategories();
@@ -47,12 +47,16 @@ const Postulation = () => {
 
                 // use form data to be able to send a file to the server
                 const data = new FormData();
-                data.append( 'curriculum', values.curriculum[ 0 ] );
-
+                data.append( 'languages', values.languages);
+                data.append( 'type', values.type );
+                data.append( 'work_experience', values.work_experience);
+                data.append( 'career', values.career);
+                data.append( 'status', values.status );
+                data.append( 'category_id', values.category_id );
                 console.log('nuevos valores de postulaciones', data);
 
                 try {
-                    await API.post( '/publications', data ); // post data to server
+                    await API.post( '/postulations', data ); // post data to server
                     form.resetFields();
                     await afterCreate();
                     setFileList( [] );
@@ -69,50 +73,11 @@ const Postulation = () => {
     };
 
     const afterCreate = async () => {
-        await mutate('/publications', async products => {
+        await mutate('/postulations', async products => {
             return {data: [{}, ...products.data]};
         },false);
     };
 
-
-
-
-    const normPhotoFile = e => {
-        console.log( 'Upload event:', e );
-        const file = e.file;
-        const isJpgOrPng = file.type === 'document/pdf';
-        if( !isJpgOrPng ) {
-            message.error( 'El docuemnto debe ser PDF' );
-            setFileList( [] );
-            setImageUrl( null );
-            return null;
-        }
-        const isLt2M = file.size / 1024 / 1024 < 2;
-        if( !isLt2M ) {
-            message.error( 'El documento debe ser menor a 2MB' );
-            setFileList( [] );
-            setImageUrl( null );
-            return null;
-        }
-
-        if( file.status === 'removed' ) {
-            setFileList( [] );
-            setImageUrl( null );
-            return null;
-        }
-
-        getBase64( e.file, imageUrl => setImageUrl( imageUrl ) );
-
-        if( Array.isArray( e ) ) {
-            return e;
-        }
-
-        console.log( 'e.file', e.file );
-        console.log( 'e.fileList', e.fileList );
-        setFileList( [ file ] );
-
-        return e && [ e.file ];
-    };
 
     if (isLoading) {
         return <Row>
@@ -151,33 +116,78 @@ const Postulation = () => {
                           }}
                           onFinish={onCreate}
                     >   
-                        <Form.Item name='curriculum'
-                                   label='Curriculum del Estudiante'
-                                   valuePropName='fileList'
-                                   getValueFromEvent={ normPhotoFile }
-                                   rules={ [
+                        <Form.Item name='languages'
+                                   rules={[
                                        {
                                            required: true,
-                                           message: 'Curriculum'
+                                           message: 'Escriba los lenguajes que domina'
                                        }
-                                   ] }
+                                   ]}
+                                   hasFeedback
                         >
-                            <Upload name='files'
-                                    accept='document/pdf'
-                                    listType='picture-card'
-                                    multiple={ false }
-                                    showUploadList={ false }
-                                    beforeUpload={ () => false }
-                                    fileList={ fileList }
-                            >
-                                { imageUrl
-                                    ? <document src={ imageUrl } alt='Documento' style={ { width: '100px' } } />
-                                    : <div>
-                                        <PlusOutlined />
-                                        <div className='ant-upload-text'>Subir documento PDF</div>
-                                    </div> }
-                            </Upload>
+                            <Input  placeholder='Lenguajes'/>
                         </Form.Item>
+                        
+                        <Form.Item name='type'
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: 'Tipo de Entrevista'
+                                       }
+                                   ]}
+                                   hasFeedback
+                        >
+                            <Select placeholder={'Tipo de Entrevista'}>
+                                <Option value='online'>En Linea</Option>
+                                <Option value='face'>Presencial</Option>
+                            </Select>
+                        </Form.Item>
+
+                        <Form.Item name='work_experience'
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: 'Detalles de Experiencia'
+                                       }
+                                   ]}
+                                   hasFeedback
+                        >
+                            <Input.TextArea  placeholder='Experiencia'/>
+                        </Form.Item>
+                        
+                        <Form.Item name='career'
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: 'Escriba en que semestre esta'
+                                       }
+                                   ]}
+                                   hasFeedback
+                        >
+                            <Input  placeholder='Semestre'/>
+                        </Form.Item>
+                        <Form.Item name='category_id'
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: 'Ingresa una categoría'
+                                       }
+                                   ]}
+                                   hasFeedback
+                        >
+                            <Select placeholder={'Categorías'}>
+                                {
+                                    categories.isLoading
+                                    ? <div>Cargando...</div>
+                                    : categories.isError
+                                    ? <ShowError error={categories.isError} />
+                                    : categories.categories.map((category, i)=>
+                                    <Option value={category.id} key={i}>{category.name}</Option>
+                                    )
+                                }
+                            </Select>
+                        </Form.Item>
+
 
                         <Form.Item>
                         <Link to={ Routes.CLIENTPRODUCTS}>

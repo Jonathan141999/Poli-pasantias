@@ -5,7 +5,7 @@ import ErrorList from '../components/ErrorList';
 import {translateMessage} from '../utils/translateMessage';
 //import '../styles/register.css';
 import {Link} from 'react-router-dom';
-import {IonImg,IonButton, IonCol, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar, IonSelect,IonDatetime} from "@ionic/react";
+import {IonImg,IonLoading, IonButton, IonCol, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar, IonSelect,IonDatetime} from "@ionic/react";
 import {arrowBack} from "ionicons/icons";
 import {useProducts} from "../data/useProducts";
 import ShowError from "../components/ShowError";
@@ -34,6 +34,7 @@ const RegisterPublication = () => {
     const {isLoading, isError, mutate} = useProducts();
     const [ imageUrl, setImageUrl ] = useState( null );
     const [ fileList, setFileList ] = useState( [] );
+    const [showLoading, setShowLoading] = useState(false);
     const categories = useCategories();
 
     const onCreate = async values => {
@@ -52,7 +53,6 @@ const RegisterPublication = () => {
                 data.append( 'phone', values.phone);
                 data.append( 'email', values.email);
                 data.append( 'hour', values.hour );
-                data.append( 'publication_date', values.publication_date );
                 data.append( 'type', values.type);
                 data.append( 'details', values.details);
                 data.append( 'image', values.image[ 0 ] );
@@ -66,6 +66,7 @@ const RegisterPublication = () => {
                     await afterCreate();
                     setFileList( [] );
                     setImageUrl( null );
+                    setShowLoading(false);
                 } catch( e ) {
                     const errorList = e.error && <ErrorList errors={ e.error } />;
                     message.error( <>{ translateMessage( e.message ) }{ errorList }</> );
@@ -82,9 +83,6 @@ const RegisterPublication = () => {
             return {data: [{}, ...products.data]};
         },false);
     };
-
-
-
 
     const normPhotoFile = e => {
         console.log( 'Upload event:', e );
@@ -142,9 +140,6 @@ const RegisterPublication = () => {
         return <ShowError error={isError}/>;
     }
 
-    function onChange(date, dateString) {
-        console.log(date, dateString);
-    }
     return (
         <>
         
@@ -237,19 +232,6 @@ const RegisterPublication = () => {
                             <Input  placeholder='Horas'/>
                         </Form.Item>
                         
-                        <Form.Item name='publication_date'
-                                   rules={[
-                                       {
-                                           required: true,
-                                           message: 'Fecha de Publicación'
-                                       }
-                                   ]}
-                                   hasFeedback
-                        >
-                            <IonDatetime displayFormat="DD MMM YYYY" placeholder="Seleccione Fecha"/>
-                        </Form.Item>
-                        
-
                         <Form.Item name='type'
                                    rules={[
                                        {
@@ -300,7 +282,7 @@ const RegisterPublication = () => {
                                     ? <img src={ imageUrl } alt='Foto' style={ { width: '100px' } } />
                                     : <div>
                                         <PlusOutlined />
-                                        <div className='ant-upload-text'>Upload</div>
+                                        <div className='ant-upload-text'>Subir logo</div>
                                     </div> }
                             </Upload>
                         </Form.Item>
@@ -334,6 +316,11 @@ const RegisterPublication = () => {
                         </Form.Item>
                     </Form>
            </IonPage>
+           <IonLoading
+                isOpen={showLoading}
+                onDidDismiss={()=>setShowLoading(false)}
+                message={'Por favor espere...'}
+            />
         </>
     );
 };
