@@ -5,7 +5,7 @@ import ErrorList from '../components/ErrorList';
 import {translateMessage} from '../utils/translateMessage';
 //import '../styles/register.css';
 import {Link} from 'react-router-dom';
-import {IonImg,IonLoading, IonButton, IonCol, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar, IonSelect,IonDatetime} from "@ionic/react";
+import {IonImg,IonLoading, IonButton, IonCol, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar, IonAlert,IonDatetime} from "@ionic/react";
 import {arrowBack} from "ionicons/icons";
 import {useProducts} from "../data/useProducts";
 import ShowError from "../components/ShowError";
@@ -34,6 +34,7 @@ const RegisterPublication = () => {
     const {isLoading, isError, mutate} = useProducts();
     const [ imageUrl, setImageUrl ] = useState( null );
     const [ fileList, setFileList ] = useState( [] );
+    const [showAlert1, setShowAlert1] = useState(false);
     const [showLoading, setShowLoading] = useState(false);
     const categories = useCategories();
 
@@ -317,11 +318,20 @@ const RegisterPublication = () => {
                     </Form>
            </IonPage>
            <IonLoading
-                isOpen={showLoading}
-                onDidDismiss={()=>setShowLoading(false)}
-                message={'Por favor espere...'}
-            />
+                    isOpen={showLoading}
+                    onDidDismiss={()=>setShowLoading(false)}
+                    message={'Por favor espere...'}
+                    />
+                    <IonAlert
+                    isOpen={showAlert1}
+                    onDidDismiss={()=>setShowAlert1(false)}
+                    cssClass={'my-custom-class'}
+                    header={'Registro Exitoso'}
+                    message={'Se Registro correctamente'}
+                    buttons={['Aceptar']}
+                    />
         </>
+        
     );
 };
 
