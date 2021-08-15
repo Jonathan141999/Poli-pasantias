@@ -23,18 +23,18 @@ import {arrowBack} from "ionicons/icons";
 import logo from '../images/update.jpg';
 import "../theme/toolbar.css";
 import '../theme/register.css';
-
-
-const EditUserPage = () => {
+import withAuth from '../hocs/withAuth';
+//import Loading from './Loading';
+const EditUserPage = (props) => {
     
-    const {setAuthenticated, setCurrentUser} = useAuth();
+    const{user}= useAuth();
+
 
     const onFinish = async (userData) => {
-        console.log('Received values of form: ', userData);
-        const {name,last_name, email, phone, password, password_confirmation,direction,role,description} = userData;
-
+        console.log('Los Datos del formulario son: ', userData);
+        const {email, phone,description} = userData;
         try {
-            const user = await API.put('/users/'+ user.id ,{
+            const user = await API.put('/users/'+ user.id , userData,{
                 phone,
                 email,
                 description
@@ -42,77 +42,13 @@ const EditUserPage = () => {
 
             console.log('User', user);
 
-            localStorage.setItem('login', JSON.stringify(true)); // this is to sync auth state in local storage
-            Cookies.set('token', user.data.token, {expires: 1});
-            API.headers['Authorization'] = 'Bearer ' + user.data.token; // start sending authorization header
-            delete user.data.token;
-            setCurrentUser(user.data);
-            setAuthenticated(true);
         } catch (e) {
-            console.error('No se pudo registrar el usuario', e);
-            setAuthenticated(false);
+            console.error('No se pudo actualizar los campos', e);
             const errorList = e.error && <ErrorList errors={e.error}/>;
             message.error(<>{translateMessage(e.message)}{errorList}</>);
         }
     };
-/*  
-    const { user } = useAuth();
-    const classes = useStyles();
-    const { data, error } = useSWR(`/users/` + user.id, fetcher);
-        console.log("data", data);
-    const { register, handleSubmit, control, errors } = useForm();
 
-    const [state, setState] = useState("");
-
-    if (error)
-        return <div>No se pueden cargar los datos del usuario a modificar</div>;
-    if (!data) return <Loading />;
-
-    const handleChange = (event) => {
-        setState(event.target.value);
-    };
-
-    const onSubmit = async (data) => {
-        console.log("data", data);
-        try {
-        const response = await api.put("/users/" + user.id, data);
-        console.log("user", response);
-        swal({
-            title: "Perfil actualizado!",
-            icon: "success",
-            button: "Aceptar",
-            timer: "3000",
-        });
-        return response;
-        } catch (error) {
-        if (error.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
-            swal({
-            title: translateMessage(error.response.data.error),
-            text: "No se pudo editar su perfil",
-            icon: "error",
-            button: "Aceptar",
-            timer: "2000",
-            });
-            console.log(error.response.data);
-            return Promise.reject(error.response);
-            // return error.response;
-        } else if (error.request) {
-            // The request was made but no response was received
-            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-            // http.ClientRequest in node.js
-            console.log(error.request);
-        } else {
-            // Something happened in setting up the request that triggered an Error
-            console.log("Error", error.message);
-        }
-        console.log(error.config);
-        }
-    };
-
-    console.log("Id del usuario", user.id);
-*/
     return (
         <>
             <IonPage>
@@ -121,11 +57,6 @@ const EditUserPage = () => {
                 </div>
                 <br></br>
                     <Form name='register-form'
-                          className='register-form'
-                          initialValues={{
-                              email: '',
-                              password: ''
-                          }}
                           onFinish={onFinish}
                     >
                         <Form.Item name='phone'

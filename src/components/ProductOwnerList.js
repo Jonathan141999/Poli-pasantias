@@ -1,17 +1,12 @@
 import {useProducts} from "../data/useProducts";
-import {Row, Col, Skeleton, Form, Input, message, Modal, Pagination} from "antd";
+import {Row, Col, Skeleton, Form, Input, message, Modal, Card} from "antd";
 import React, {useState} from "react";
-import ShowError from "./ShowError";
-import {Link} from 'react-router-dom';
-import Routes from '../constants/routes';
 import {
     IonButton,
-    IonCard, IonCardContent, IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle, IonCol, IonGrid, IonHeader, IonImg,
-    IonItem, IonModal, IonPage,
-    IonDatetime,
-    IonRow, IonThumbnail, IonTitle, IonToolbar,
+    IonCard, IonCardContent,
+    IonCardSubtitle, IonImg,
+    IonCardTitle, IonCol,
+    IonRow, IonToolbar, IonLoading,
 } from "@ionic/react";
 import API from "../data";
 import {useProduct} from "../data/useProduct";
@@ -22,12 +17,13 @@ import "../theme/toolbar.css";
 
 
 
-//publicaiones de de la empresa puede publicar y ver en card
+
 const ProductOwnerList = () => {
 
     const { products, isLoading, isError, mutate } = useProducts();
     const [idProduct, setIdProduct]=useState('')
     const [showInfo, setShowInfo] = useState(false);
+    const [showLoading, setShowLoading] = useState(false)
     const [ form ] = Form.useForm();
 
     const [search, setSearch]=useState('');
@@ -37,20 +33,16 @@ const ProductOwnerList = () => {
     console.log("publicaciones", products);
 
     console.log("busqueda", searchProduct);
-    const [page ,setPage]=useState(0)
-    const handleChangePages = (event, newPage) => {
-        setPage(newPage);
-    };
-    
 
     const product = useProduct(idProduct);
-    console.log('info product', product);
+    console.log('info publicacion', product);
 
     const onUpdate = async values => {
         console.log( 'Received values of form: ', values );
 
         form.validateFields()
             .then( async( values ) => {
+                setShowLoading(true);
                 try {
                     await API.put( `/publications/${idProduct}`, {
                         name: values.name,
@@ -61,6 +53,7 @@ const ProductOwnerList = () => {
                     } ); // post data to server
                     form.resetFields();
                     await afterCreate();
+                    setShowLoading(false);
                     setShowInfo(false);
 
                 } catch( error ) {
@@ -68,21 +61,23 @@ const ProductOwnerList = () => {
                         'You have an error in your code or there are Network issues.',
                         error
                     );
+                    setShowLoading(false);
                     message.error( translateMessage( error.message ) );
                 }
             } )
             .catch( info => {
                 console.log( 'Validate Failed:', info );
-            } );
+        } );
 
     };
+
 
     const afterCreate = async () => {
         await mutate('/publications');
     };
 
     const onSearch = value =>{
-        console.log('publicaciones', value);
+        console.log('publicacions', value);
         setSearch(value);
     };
 
@@ -92,8 +87,9 @@ const ProductOwnerList = () => {
                 [ ...new Array( 9 ) ].map( ( _, i ) =>
                     <Col xs={ 24 } sm={ 12 } md={ 8 } style={ { marginBottom: 30 } } key={ i }>
                         <div style={ { textAlign: 'center' } }>
+                            <br/>
                             <Skeleton.Image style={ { width: 200 } } />
-                            <IonCard title='' extra='' cover='' loading />
+                            <Card title='' extra='' cover='' loading />
                         </div>
                     </Col>
                 )
@@ -102,7 +98,7 @@ const ProductOwnerList = () => {
     }
 
     if( isError ) {
-        return <ShowError error={ isError } />;
+        return "";
     }
 
     const showDetails = (index)=>{
@@ -120,25 +116,22 @@ const ProductOwnerList = () => {
 
     return (
         <>
-            <IonGrid>
-                <IonRow style={{display:"block"}}>
-                    
+                    <IonToolbar>
+                        <Search placeholder="Ingrese nombre del la publicación" onSearch={onSearch} enterButton />
+                    </IonToolbar>
+                    <IonRow style={{display:"block"}}>
             {
                 searchProduct ?
                     searchProduct.map((search, i)=>(
-                        <IonCol width='100%'>
-                            <IonCard key={i} onClick={()=>showDetail(search.id)} style={{margin:'auto', display:'block' }}>
-                                <IonCardHeader>
-                                     <IonImg src={search.image}
-                                     style={{height: "100px"}}/>
-                                     <IonCardTitle>{search.name}</IonCardTitle>
-                                </IonCardHeader>
+                        <IonCol  size="6">
+                            <IonCard key={i} onClick={()=>showDetail(search.id)} >
+                            <IonImg style={{ height: "100px"}} src={ `http://localhost:8000/storage/${ search.image }` }
+                                                />
                                 <IonCardContent>
-                                     <IonCardSubtitle><strong>Dirección: </strong>{search.location}</IonCardSubtitle>
-                                    <IonCardSubtitle><strong>Telefóno: </strong>{search.phone}</IonCardSubtitle>
+                                    <IonCardTitle><p>{search.name}</p></IonCardTitle>
+                                    <IonCardSubtitle><strong>Dirección: </strong>{search.location}</IonCardSubtitle>
                                     <IonCardSubtitle><strong>Horas: </strong>{search.hour}</IonCardSubtitle>
                                     <IonCardSubtitle><strong>Carrera: </strong>{search.category}</IonCardSubtitle>                                
-                                    <IonCardSubtitle><strong>Fecha de Publicación: </strong>{search.created_at}</IonCardSubtitle>                                
                                 </IonCardContent>
                             </IonCard>
                         </IonCol>
@@ -147,20 +140,14 @@ const ProductOwnerList = () => {
                     products ?
                 products.map((product,i)=>(
                     <IonCol size="6">
-                    <IonCard key={i} onClick={()=>showDetails(i)} style={{margin:'auto', display:'block' }}>
-                    <IonCardHeader>
-                         <IonImg src={product.image}
-                                         style={{height: "100px"}}/>
-                        
-                            <IonCardTitle>{product.name}</IonCardTitle>
-                        </IonCardHeader>
-
+                    <IonCard key={i} onClick={()=>showDetails(i)} >
+                        <IonImg style={{ height: "100px"}} src={ `http://localhost:8000/storage/${ product.image }` }
+                                                />
                         <IonCardContent>
-                        <IonCardSubtitle><strong>Dirección: </strong>{product.location}</IonCardSubtitle>
-                            <IonCardSubtitle><strong>Telefóno: </strong>{product.phone}</IonCardSubtitle>
+                            <IonCardTitle><p>{product.name}</p></IonCardTitle>
+                            <IonCardSubtitle><strong>Dirección: </strong>{product.location}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Horas: </strong>{product.hour}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Carrera: </strong>{product.category}</IonCardSubtitle>
-                            <IonCardSubtitle><strong>Fecha de Publicación: </strong>{product.created_at}</IonCardSubtitle>
                         </IonCardContent>
                     </IonCard>
                     </IonCol>
@@ -168,107 +155,52 @@ const ProductOwnerList = () => {
                 : "Cargando..."
             }
                 </IonRow>
-            </IonGrid>
-
             {
                 product.isLoading
                     ? <div>Cargando...</div>
                     : product.isError
-                    ? <ShowError error={product.isError}/>
+                    ? " "
                     : <>
                         <Modal  title="Publicaciones" style={{background:"blue"}}
                                 visible={showInfo}
                                 closable={false}
                                 footer={[
-                                        <IonButton type='primary' htmlType='submit' className='login-form-button' onClick={onUpdate}>
-                                            Actualizar
-                                        </IonButton>,
+                                    <IonButton type='primary' htmlType='submit' className='login-form-button' onClick={onUpdate}>Actualizar</IonButton>,
                                     <IonButton onClick={()=>setShowInfo(false)}>Cancelar</IonButton>
                                 ]}
                         >
-                        <Form
-                            form={form}
-                            initialValues={{
-                                 remember: true,
-                                }}
-                                    //onFinish={onUpdate}
-                                >
-                                    <Form.Item name='name'
-                                   rules={[
-                                       {
-                                           required: true,
-                                           message: 'Ingresa el nombre de una empresa'
-                                       }
-                                   ]}
-                                   hasFeedback
-                        >
-                            <label>Nombre de la Empresa</label>
-                            <Input  placeholder={product.product.name}/>
-                        </Form.Item>
-                
-                        <Form.Item name='location'
-                                   rules={[
-                                       {
-                                           required: true,
-                                           message: 'Ingresa la dirección'
-                                       },
-                                   ]}
-                                   hasFeedback
-                        >
-                            <label>Dirección</label>
-                            <Input  placeholder={product.product.location}/>
-                        </Form.Item>
-                                    <Form.Item name='phone'
-                                        rules={[
-                                        {
-                                            required: true,
-                                            message: 'Ingresa tu número telefónico'
-                                        },
-                                        {
-                                            min: 10,
-                                            max: 13,
-                                            message: 'El número telefonico debe tener 10 dígitos'
-                                        }
-                                    ]}
-                                    hasFeedback
-                                >
-                                    <label>Número telefónico</label>
-                                    <Input  placeholder={product.product.phone}/>
-                                </Form.Item>
 
-                                <Form.Item name='hour'
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message: 'Horas a ofertar'
-                                            }
-                                        ]}
-                                        hasFeedback
+                                <Form
+                                    className="register-form"
+                                    layout="vertical"
+                                    form={form}
+                                    initialValues={{
+                                        remember: true,
+                                    }}
                                 >
-                                    <label>Horas a Ofertar</label>
-                                    <Input placeholder={product.product.hour}/>
-                                </Form.Item>
-                            
-                        <Form.Item name='details'
-                                   rules={[
-                                       {
-                                           required: true,
-                                           message: 'Detalles de la práctica preprofesional'
-                                       }
-                                   ]}
-                                   hasFeedback
-                        >
-                            <label>Detalles de la práctica preprofesional</label>
-                            <Input.TextArea placeholder={product.product.details}/>
-                        </Form.Item>
-                        </Form>
+                                    <Form.Item label="Nombre de Empresa" name='name' hasFeedback>
+                                        <Input  placeholder={product.product.name}/>
+                                    </Form.Item>
+                                    <Form.Item label="Dirección" name='location'>
+                                        <Input placeholder={product.product.location}/>
+                                    </Form.Item>
+                                    <Form.Item label="Telefono" name='phone'>
+                                        <Input type="number" min="7" max="13" placeholder={product.product.phone}/>
+                                    </Form.Item>
+                                    <Form.Item label="Horas a Ofertar" name='hour'>
+                                        <Input placeholder={product.product.hour}/>
+                                    </Form.Item>
+                                    <Form.Item label="Descripcion de la práctica preprofesional" name='details'>
+                                        <Input.TextArea placeholder={product.product.details}/>
+                                    </Form.Item>
+                                </Form>
                         </Modal>
                     </>
             }
-            <Pagination style={{padding:"10px", textAlign:"center"}}
-            defaultCurrent={1} total={3}
-            page={page}
-            onChangePage={handleChangePages}
+            <IonLoading
+                isOpen={showLoading}
+                onDidDismiss={()=>setShowLoading(false)}
+                message={'Por favor espere...'}
             />
         </>
     );
