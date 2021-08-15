@@ -28,7 +28,7 @@ const RequestsByUser = () => {
     const request = useRequest(idRequest);
     const detailRequest = useDetailRequest(idRequest);
 
-    console.log("pedidos1", requestsByUser);
+    console.log("postulacion por usuario", requestsByUser);
 
     if( isLoadingRequests ) {
         return <>
@@ -64,7 +64,7 @@ const RequestsByUser = () => {
         setIdRequest(id);
         setShowDetail(true);
     }
-    console.log("detalle_pedido", request.request);
+    console.log("detalle de la postulación", request.request);
 
 
     return (
@@ -75,24 +75,23 @@ const RequestsByUser = () => {
                   <IonItem key={i} onClick={()=>handleShowDetail(i)}>
                        <IonLabel>
                           <div><p><strong>N° de pedidos: </strong>{requests.id}</p></div>
-                          <div><p><strong>Total: </strong>{requests.total.toFixed(2)}</p></div>
-                          <div><p><strong>Estado: </strong>{requests.status === "pending"
-                              ? "Pendiente"
-                              : requests.status=== "accomplished"
-                                  ? "Realizado"
-                                  : requests.status === "retired"
-                                      ? "En camino"
-                                      : requests.status === "delivered"
-                                          ? "Entregado"
+                          <div><p><strong>Estado: </strong>{requests.status === "new"
+                              ? "Nueva"
+                              : requests.status=== "pending"
+                                  ? "Pendiente"
+                                  : requests.status === "accepted"
+                                      ? "Aceptado"
+                                      : requests.status === "rejected"
+                                          ? "Rechazado"
                                           : ""}</p></div>
                           <IonProgressBar style={{height: "15px"}} value={
-                              requests.status === "pending"
+                              requests.status === "new"
                                   ? 0.25
-                                  : requests.status=== "accomplished"
+                                  : requests.status=== "pending"
                                   ? 0.5
-                                  : requests.status === "retired"
+                                  : requests.status === "accepted"
                                       ? 0.75
-                                      : requests.status === "delivered"
+                                      : requests.status === "rejected"
                                           ? 1
                                           : 0
                           }
@@ -131,7 +130,7 @@ const RequestsByUser = () => {
                   : request.isError
                   ? ""
                   : <>
-                      <Modal  title="Detalle del pedido" id={"modal"}
+                      <Modal  title="Detalle de Postulación" id={"modal"}
                               visible={showDetail}
                               closable={false}
                               footer={[
@@ -140,7 +139,7 @@ const RequestsByUser = () => {
                       >
                               <IonGrid>
                                   <IonRow>
-                                      <IonCol><strong>N° de Pedido: </strong><h2 align={"center"}>{request.request.id}</h2></IonCol>
+                                      <IonCol><strong>Número de Solicitud: </strong><h2 align={"center"}>{request.request.id}</h2></IonCol>
                                       <IonCol><strong>Fecha: </strong> {request.request.date}</IonCol>
                                   </IonRow>
                               </IonGrid>
@@ -176,75 +175,13 @@ const RequestsByUser = () => {
                                               <IonLabel>
                                                   <IonRow>
                                                       <IonCol>
-                                                          <p align={"center"}><strong>Producto</strong></p>
-                                                      </IonCol>
-                                                      <IonCol>
-                                                          <p align={"center"}><strong>Cantidad</strong></p>
-                                                      </IonCol>
-                                                      <IonCol>
-                                                          <p align={"center"}><strong>Precio</strong></p>
+                                                          <p align={"center"}><strong>Postulación</strong></p>
                                                       </IonCol>
                                                   </IonRow>
                                               </IonLabel>
                                           </IonItem>
                                           {
-                                              detailRequest.detailRequest.map((detail, i)=>(
-                                                  <IonItem key={i}>
-                                                      <IonLabel >
-                                                          <IonRow>
-                                                          <IonCol>
-                                                          <p align={"center"}>{detail.product.name}</p>
-                                                          </IonCol>
-                                                          <IonCol>
-                                                          <p align={"center"}>{detail.quantity}</p>
-                                                          </IonCol>
-                                                          <IonCol>
-                                                          <p align={"center"}>{detail.finalprice.toFixed(2)}</p>
-                                                          </IonCol>
-                                                          </IonRow>
-                                                      </IonLabel>
-                                                  </IonItem>
-                                              ))
-                                          }
-                                          <IonItem>
-                                              <IonLabel>
-                                                  <IonRow>
-                                                      <IonCol/>
-                                                      <IonCol>
-                                                          <p align={"right"}><strong>Subtotal:</strong></p>
-                                                      </IonCol>
-                                                      <IonCol>
-                                                          <p align={"center"}>{request.request.subtotal.toFixed(2)}</p>
-                                                      </IonCol>
-                                                  </IonRow>
-                                              </IonLabel>
-                                          </IonItem>
-                                          <IonItem>
-                                              <IonLabel>
-                                                  <IonRow>
-                                                      <IonCol/>
-                                                      <IonCol>
-                                                          <p align={"right"}><strong>Recargo:</strong></p>
-                                                      </IonCol>
-                                                      <IonCol>
-                                                          <p align={"center"}>{request.request.surcharge.toFixed(2)}</p>
-                                                      </IonCol>
-                                                  </IonRow>
-                                              </IonLabel>
-                                          </IonItem>
-                                          <IonItem>
-                                              <IonLabel>
-                                                  <IonRow>
-                                                      <IonCol/>
-                                                      <IonCol>
-                                                          <p align={"right"}><strong>Total:</strong></p>
-                                                      </IonCol>
-                                                      <IonCol>
-                                                          <p align={"center"}>{request.request.total.toFixed(2)}</p>
-                                                      </IonCol>
-                                                  </IonRow>
-                                              </IonLabel>
-                                          </IonItem>
+                                         }
                                       </IonList>
                                       </>
                               }

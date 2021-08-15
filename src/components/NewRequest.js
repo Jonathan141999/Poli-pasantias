@@ -1,26 +1,28 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import API from '../data/index';
 import {useRequests} from '../data/useRequests';
 import ShowError from "./ShowError";
+import {translateMessage} from "../utils/translateMessage";
 import {
     IonList,
     IonItem,
-    IonLabel, IonFooter,
-    IonModal, IonButton,
-    IonPage, IonHeader, IonToolbar, IonTitle,
+    IonLabel, IonButton,
     IonGrid, IonRow, IonCol, IonIcon
 } from "@ionic/react";
 import {useRequest} from "../data/useRequest";
 import {useDetailRequest} from "../data/useDetailRequest";
 import "../theme/toolbar.css";
-import {bagCheck, bagHandle, checkmarkCircle, alertCircle, closeCircle,arrowBack} from "ionicons/icons";
+import {bagCheck, bagHandle, checkmarkCircle, alertCircle, cart} from "ionicons/icons";
+import {CloseOutlined} from '@ant-design/icons';
 import Skeleton from './Skeleton';
+import {Modal, message} from 'antd';
 
 const NewRequest = () =>{
-    const {requests, isLoadingRequest, isErrorRequest} = useRequests();
+    const {requests, isLoadingRequest, isErrorRequest,mutate} = useRequests();
 
     const [idRequest, setIdRequest] = useState('');
     const [showDetail, setShowDetail] = useState(false);
+    const [statusRequest, setStatusRequest] = useState('');
     //const [list, setList] = useState(requests);
 
     const request = useRequest(idRequest);
@@ -29,9 +31,7 @@ const NewRequest = () =>{
     
 
     if( isLoadingRequest ) {
-        return <>
-            <Skeleton />            
-        </>
+        return <Skeleton />;       
     }
 
     if( isErrorRequest ) {
@@ -46,30 +46,59 @@ const NewRequest = () =>{
 
     console.log("detalle_pedido", request.request);
 
+    const onUpdate = async() => {
+        let status='';
+        if (request.request.status==='new'){
+            status='pending';
+            setStatusRequest(status);
+        }
+        if (request.request.status==='pending'){
+            status='accepted';
+            setStatusRequest(status);
+        }
+        if (request.request.status==='accepted'){
+            status='rejected';
+            setStatusRequest(status);
+        }
+    
+        console.log("status", status);
+        console.log('id', idRequest);
+        try {
+            await API.put( `/postulations/status/${idRequest}`, {
+                status: status,
+            } );
+            
+
+        } catch( error ) {
+            console.error('You have an error in your code or there are Network issues.',error);
+            message.error( translateMessage( error.message ) );
+        }
+
+    };
+
+    
+
     return (
         <>
         <IonList>
             {
                 requests.map( ( orders, i ) => (
                     <IonItem key={i} onClick={()=>handleShowDetail(i)}>
-                        {orders.status==='pending'
-                        ?<IonIcon slot="end" icon={alertCircle}>Pendiente</IonIcon>
-                            :orders.status=== 'accomplished'
-                            ?<IonIcon slot="end" icon={checkmarkCircle}>Realizado</IonIcon>
-                                :orders.status==='retired'
-                                ?<IonIcon slot="end" icon={bagHandle}>Retirado</IonIcon>
-                                    :orders.status==='delivered'
-                                    ?<IonIcon slot="end" icon={bagCheck}>Entregado</IonIcon>
-                                        :<IonIcon slot="end" icon={closeCircle}>Desconocido</IonIcon>
+                        {orders.status==='new'
+                        ?<IonIcon slot="end" icon={alertCircle} style={{width:"40px", height:"40px", color:"red"}}/>
+                            :orders.status=== 'pending'
+                            ?<IonIcon slot="end" icon={cart} style={{width:"40px", height:"40px", color:"orange"}}/>
+                                :orders.status==='accepted'
+                                ?<IonIcon slot="end" icon={bagHandle} style={{width:"40px", height:"40px", color:"blue"}}/>
+                                    :orders.status==='rejected'
+                                    ?<IonIcon slot="end" icon={bagCheck} style={{width:"40px", height:"40px", color:"green"}}/>
+                                        :<IonIcon slot="end" icon={checkmarkCircle} style={{width:"40px", height:"40px", color:"green"}}/>
                         }
                         <IonLabel>
-                            <div><h2><strong>Numero de solicitud </strong>{orders.id}</h2></div>
-                            <div><p><strong>Numero de casa: </strong>{orders.usertype.home_number}</p></div>
-                            <div><p><strong>Ordenado por: </strong>{orders.user.name}</p></div>
-                            <div><p><strong>Total: </strong>{orders.total.toFixed(2)}</p></div>
-                            {orders.type==='withdraw'
-                                ? <div><p><strong>Orden para: </strong> Postulado</p></div>
-                                : <div><p><strong>Orden a: </strong>Rechazado</p></div>
+                            
+                            {orders.type==='face'
+                                ? <div><p><strong>Entrevista Personal</strong></p></div>
+                                : <div><p><strong>Entrevista Online</strong></p></div>
                             }
                         </IonLabel>
                     </IonItem>
@@ -83,40 +112,50 @@ const NewRequest = () =>{
                 : request.isError
                 ? <ShowError error={request.isError}/>
                 : <>
-                <IonModal isOpen={showDetail} cssClass='my-custom-class'>
-                    <IonPage>
-                        <IonHeader>
-                            <IonToolbar id={"toolbar"}>
-                                <IonIcon
-                                    id={"icon"}
-                                    icon={arrowBack}
-                                    slot="start"
-                                    style={{margin:'5px', width:"25px", height:"25px"}}
-                                    onClick={()=>setShowDetail(false)}/>
-                                <IonTitle id={"letter"}>
-                                    Detalle del pedido
-                                </IonTitle>
-                            </IonToolbar>
-                        </IonHeader>
+                <Modal  title="Detalle de la postulación" className={"report"}
+                        visible={showDetail}
+                        closeIcon={<CloseOutlined onClick={()=>setShowDetail(false)}/>}
+                        closable={true}
+                        footer={request.request.status==='new'
+                                ?<IonButton style={{margin:'auto', display:'block' }}  htmlType='submit' onClick={onUpdate}>
+                                    Nueva Postulación
+                                </IonButton>
+                                :request.request.status==='pending'
+                                ?<IonButton style={{margin:'auto', display:'block' }}  htmlType='submit' onClick={onUpdate}>
+                                    Postulación Pendiente
+                                </IonButton>
+                                :request.request.status==='accepted'
+                                ?<IonButton style={{margin:'auto', display:'block' }}  htmlType='submit' onClick={onUpdate}>
+                                    Postulación Aceptada
+                                </IonButton>
+                                :request.request.status==='rejected'
+                                ?<IonButton style={{margin:'auto', display:'block' }}  htmlType='submit' onClick={onUpdate}>
+                                    Postulacion Rechazada
+                                </IonButton>
+                                :<IonButton style={{margin:'auto', display:'block' }}  htmlType='submit' onClick={onUpdate}>
+                                    Finalizado
+                                </IonButton>
+                            }
+                    >
                         <IonGrid>
                             <IonRow>
-                                <IonCol align={"center"}><strong>N° de Pedido: </strong><h4 >{request.request.id}</h4></IonCol>
-                                <IonCol align={"center"}><strong>Fecha: </strong> {request.request.date}</IonCol>
+                                <IonCol><strong>Número de Postulación: </strong><h4>{request.request.id}</h4></IonCol>
+                                <IonCol><strong>Fecha: </strong> {request.request.date}</IonCol>
                             </IonRow>
                             <IonRow>
-                                {request.request.type==='withdraw'
-                                    ?<IonCol align={"center"}><strong>Tipo: </strong><h4>Retirar</h4></IonCol>
-                                    :<IonCol align={"center"}><strong>Tipo: </strong><h4>Domicilio</h4></IonCol>
+                                {request.request.type==='face'
+                                    ?<IonCol><strong>Tipo: </strong><h4>Presencial</h4></IonCol>
+                                    :<IonCol><strong>Tipo: </strong><h4>Online</h4></IonCol>
                                 }
-                                {request.request.status==='pending'
+                                {request.request.status==='new'
+                                    ?<IonCol><strong>Estado: </strong> Nueva</IonCol>
+                                    :request.request.status==='pending'
                                     ?<IonCol><strong>Estado: </strong> Pendiente</IonCol>
-                                    :request.request.status==='accomplished'
-                                    ?<IonCol><strong>Estado: </strong> Realizado</IonCol>
-                                    :request.request.status==='retired'
-                                    ?<IonCol><strong>Estado: </strong> Retirado</IonCol>
-                                    :request.request.status==='delivered'
-                                    ?<IonCol><strong>Estado: </strong> Entregado</IonCol>
-                                    :''
+                                    :request.request.status==='accepted'
+                                    ?<IonCol><strong>Estado: </strong> Aceptada</IonCol>
+                                    :request.request.status==='rejected'
+                                    ?<IonCol><strong>Estado: </strong> Rechazado</IonCol>
+                                    :<IonCol><strong>Estado: </strong> Finalizado</IonCol>
                                 }  
                             </IonRow>
                         </IonGrid>
@@ -130,15 +169,9 @@ const NewRequest = () =>{
                                     <IonLabel>
                                         <IonRow>
                                             <IonCol>
-                                                <p align={"center"}><strong>Producto</strong></p>
+                                                <p align={"center"}><strong>Nombre de la Publicación</strong></p>
                                             </IonCol>
-                                            <IonCol>
-                                                <p align={"center"}><strong>Cantidad</strong></p>
-                                            </IonCol>
-                                            <IonCol>
-                                                <p align={"center"}><strong>Precio</strong></p>
-                                            </IonCol>
-                                        </IonRow>
+                                       </IonRow>
                                     </IonLabel>
                                 </IonItem>
                                 {
@@ -149,82 +182,15 @@ const NewRequest = () =>{
                                                     <IonCol>
                                                         <p align={"center"}>{detail.product.name}</p>
                                                     </IonCol>
-                                                    <IonCol>
-                                                        <p align={"center"}>{detail.quantity}</p>
-                                                    </IonCol>
-                                                    <IonCol>
-                                                        <p align={"center"}>{detail.finalprice.toFixed(2)}</p>
-                                                    </IonCol>
                                                 </IonRow>
                                             </IonLabel>
                                         </IonItem>))
                                 }
-                                <IonItem>
-                                    <IonLabel>
-                                        <IonRow>
-                                            <IonCol/>
-                                                <IonCol>
-                                                    <p align={"right"}><strong>Subtotal:</strong></p>
-                                                </IonCol>
-                                                <IonCol>
-                                                    <p align={"center"}>{request.request.subtotal.toFixed(2)}</p>
-                                                </IonCol>
-                                        </IonRow>
-                                    </IonLabel>
-                                </IonItem>
-                                <IonItem>
-                                    <IonLabel>
-                                        <IonRow>
-                                            <IonCol/>
-                                            <IonCol>
-                                                <p align={"right"}><strong>Recargo:</strong></p>
-                                            </IonCol>
-                                            <IonCol>
-                                                <p align={"center"}>{request.request.surcharge.toFixed(2)}</p>
-                                            </IonCol>
-                                        </IonRow>
-                                    </IonLabel>
-                                </IonItem>
-                                <IonItem>
-                                    <IonLabel>
-                                        <IonRow>
-                                            <IonCol/>
-                                                <IonCol>
-                                                    <p align={"right"}><strong>Total:</strong></p>
-                                                </IonCol>
-                                                <IonCol>
-                                                    <p align={"center"}>{request.request.total.toFixed(2)}</p>
-                                                </IonCol>
-                                        </IonRow>
-                                    </IonLabel>
-                                </IonItem>
                             </IonList>
-                            <div>
-                            {request.request.status==='pending'
-                                ?<IonButton style={{margin:'auto', display:'block' }}>
-                                    Poner en Realizado
-                                </IonButton>
-                                :request.request.status==='accomplished'
-                                ?<IonButton style={{margin:'auto', display:'block' }}>
-                                    Pedido por Retirar
-                                </IonButton>
-                                :request.request.status==='retired'
-                                ?<IonButton style={{margin:'auto', display:'block' }}>
-                                Pedido para Entregar
-                                </IonButton>
-                                :request.request.status==='delivered'
-                                ?<IonButton style={{margin:'auto', display:'block' }}>
-                                Pedido Entregado
-                                </IonButton>
-                                :<IonButton style={{margin:'auto', display:'block' }}>
-                                Pedido Finalizado
-                                </IonButton>
-                            }
-                            </div>
                         </>
                     }
-                </IonPage>
-            </IonModal></>
+            </Modal>
+            </>
         }
         </>
     );

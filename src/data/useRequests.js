@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import API from './index';
 export  const useRequests = () => {
-    const {data, error, mutate}= useSWR ('/requests', API.fetcher);
+    const {data, error, mutate}= useSWR ('/postulations', API.fetcher);
 
     return {
         requests: data && data.data,
