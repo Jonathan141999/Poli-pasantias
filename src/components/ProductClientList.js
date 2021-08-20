@@ -287,7 +287,7 @@ const ProductClientList = () => {
     return (
         <>
                             <IonToolbar>
-                        <Search placeholder="Ingrese nombre del la publicación" onSearch={onSearch} enterButton />
+                        <Search placeholder="Búsqueda" onSearch={onSearch} enterButton />
                     </IonToolbar>
                     <IonRow style={{display:"block"}}>
             {
@@ -300,6 +300,7 @@ const ProductClientList = () => {
                                 <IonCardContent>
                                     <IonCardTitle><p>{search.name}</p></IonCardTitle>
                                     <IonCardSubtitle><strong>Dirección: </strong>{search.location}</IonCardSubtitle>
+                                    <IonCardSubtitle><strong>Teléfono: </strong>{search.phone}</IonCardSubtitle>
                                     <IonCardSubtitle><strong>Horas: </strong>{search.hour}</IonCardSubtitle>
                                     <IonCardSubtitle><strong>Carrera: </strong>{search.category}</IonCardSubtitle>                                
                                 </IonCardContent>
@@ -316,6 +317,7 @@ const ProductClientList = () => {
                         <IonCardContent>
                             <IonCardTitle><p>{product.name}</p></IonCardTitle>
                             <IonCardSubtitle><strong>Dirección: </strong>{product.location}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Teléfono: </strong>{product.phone}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Horas: </strong>{product.hour}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Carrera: </strong>{product.category}</IonCardSubtitle>
                         </IonCardContent>
@@ -348,8 +350,8 @@ const ProductClientList = () => {
                             <IonCardSubtitle><strong>Correo de Contacto: </strong>{product.product.email}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Empresa: </strong>{product.product.type}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Horas: </strong>{product.product.hour}</IonCardSubtitle>
-                            <IonCardSubtitle><strong>Carrera: </strong>{product.product.category_name}</IonCardSubtitle>
-                            <IonCardSubtitle><strong>Fecha de Publicación: </strong>{product.product.publication_date}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Carrera: </strong>{product.product.category}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Fecha de Publicación: </strong>{product.product.created_at}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Detalle:</strong>{product.product.details}</IonCardSubtitle>
                         </IonCardContent>
                     </IonCard>

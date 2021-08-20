@@ -117,7 +117,7 @@ const ProductOwnerList = () => {
     return (
         <>
                     <IonToolbar>
-                        <Search placeholder="Ingrese nombre del la publicación" onSearch={onSearch} enterButton />
+                        <Search placeholder="Búsqueda" onSearch={onSearch} enterButton />
                     </IonToolbar>
                     <IonRow style={{display:"block"}}>
             {
@@ -130,6 +130,7 @@ const ProductOwnerList = () => {
                                 <IonCardContent>
                                     <IonCardTitle><p>{search.name}</p></IonCardTitle>
                                     <IonCardSubtitle><strong>Dirección: </strong>{search.location}</IonCardSubtitle>
+                                    <IonCardSubtitle><strong>Teléfono: </strong>{search.phone}</IonCardSubtitle>
                                     <IonCardSubtitle><strong>Horas: </strong>{search.hour}</IonCardSubtitle>
                                     <IonCardSubtitle><strong>Carrera: </strong>{search.category}</IonCardSubtitle>                                
                                 </IonCardContent>
@@ -146,6 +147,7 @@ const ProductOwnerList = () => {
                         <IonCardContent>
                             <IonCardTitle><p>{product.name}</p></IonCardTitle>
                             <IonCardSubtitle><strong>Dirección: </strong>{product.location}</IonCardSubtitle>
+                            <IonCardSubtitle><strong>Teléfono: </strong>{product.phone}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Horas: </strong>{product.hour}</IonCardSubtitle>
                             <IonCardSubtitle><strong>Carrera: </strong>{product.category}</IonCardSubtitle>
                         </IonCardContent>
