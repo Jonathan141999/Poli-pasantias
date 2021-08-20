@@ -261,7 +261,7 @@ const ProductClientList = () => {
             return {data: [{}, ...requests.data]};
         },false);
 
-        await  mutateByUser('/postulation/user');
+        await  mutateByUser('/postulations/user');
     };
 
     const handleShowCart = () =>{
@@ -286,9 +286,11 @@ const ProductClientList = () => {
     }
     return (
         <>
-                            <IonToolbar>
-                        <Search placeholder="Búsqueda" onSearch={onSearch} enterButton />
+                <IonRow style={{padding:"10px"}}>
+                    <IonToolbar>
+                        <Search placeholder="Búsqueda por carrera" onSearch={onSearch} allowClear enterButton="Buscar" />
                     </IonToolbar>
+                </IonRow>
                     <IonRow style={{display:"block"}}>
             {
                 searchProduct ?
@@ -302,7 +304,7 @@ const ProductClientList = () => {
                                     <IonCardSubtitle><strong>Dirección: </strong>{search.location}</IonCardSubtitle>
                                     <IonCardSubtitle><strong>Teléfono: </strong>{search.phone}</IonCardSubtitle>
                                     <IonCardSubtitle><strong>Horas: </strong>{search.hour}</IonCardSubtitle>
-                                    <IonCardSubtitle><strong>Carrera: </strong>{search.category}</IonCardSubtitle>                                
+                                    <IonCardSubtitle><strong>Carrera: </strong>{search.category_name}</IonCardSubtitle>                                
                                 </IonCardContent>
                             </IonCard>
                         </IonCol>

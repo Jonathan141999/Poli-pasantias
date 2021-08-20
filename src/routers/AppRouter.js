@@ -23,7 +23,7 @@ const loadableOptions = {fallback: <Loading/>};
 
 //const AsyncHome = loadable(() => import( '../pages/Index' ), loadableOptions);
 const AsyncLogin = loadable(() => import( '../pages/Login' ), loadableOptions);
-const AsyncClientProducts = loadable(() => import( '../pages/ClientProducts' ), loadableOptions);
+const AsyncStudentPublications = loadable(() => import( '../pages/StudentPublication' ), loadableOptions);
 const AsyncOwnerProducts = loadable(() => import( '../pages/OwnerProducts' ), loadableOptions);
 const AsyncRegister = loadable(() => import ('../pages/RegisterUser'),loadableOptions);
 const AsyncRegisterProduct = loadable(() => import ('../pages/RegisterProduct'),loadableOptions);
@@ -59,7 +59,7 @@ const AppRouter = () => (
 
         <PrivateRoute path={Routes.DAILYORDER} component={AsyncDailyOrder}/>
         <PrivateRoute path={Routes.PROFILE} component={AsyncProfile}/>
-        <PrivateRoute path={Routes.CLIENTPRODUCTS} component={AsyncClientProducts}/>
+        <PrivateRoute path={Routes.CLIENTPRODUCTS} component={AsyncStudentPublications}/>
         <PrivateRoute path={Routes.OWNERPRODUCTS} component={AsyncOwnerProducts}/>
         <PrivateRoute path={Routes.REGISTER} component={AsyncRegister}/>
         <PrivateRoute path={Routes.LOGOUT} component={AsyncLogout}/>

@@ -102,7 +102,7 @@ const Navigation = (props) => {
                     {
                         isCheckingAuth
                         ? <LoadingOutlined/>
-                        : <><LogoutOutlined/> Salir</>
+                        : <><LogoutOutlined/> Cerrar Sesión</>
                     }
                     </Link>
                  </Menu.Item>

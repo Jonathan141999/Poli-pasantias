@@ -17,7 +17,6 @@ import "../theme/toolbar.css";
 
 
 
-
 const ProductOwnerList = () => {
 
     const { products, isLoading, isError, mutate } = useProducts();
@@ -77,7 +76,7 @@ const ProductOwnerList = () => {
     };
 
     const onSearch = value =>{
-        console.log('publicacions', value);
+        console.log('publication', value);
         setSearch(value);
     };
 
@@ -116,9 +115,11 @@ const ProductOwnerList = () => {
 
     return (
         <>
+              <IonRow style={{padding:"10px"}}>
                     <IonToolbar>
-                        <Search placeholder="Búsqueda" onSearch={onSearch} enterButton />
+                        <Search placeholder="Búsqueda por carrera" onSearch={onSearch} allowClear enterButton="Buscar"/> 
                     </IonToolbar>
+                </IonRow>
                     <IonRow style={{display:"block"}}>
             {
                 searchProduct ?

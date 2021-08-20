@@ -292,12 +292,12 @@ const RegisterPublication = () => {
                                    rules={[
                                        {
                                            required: true,
-                                           message: 'Ingresa una categoría'
+                                           message: 'Escoge una carrera'
                                        }
                                    ]}
                                    hasFeedback
                         >
-                            <Select placeholder={'Categorías'}>
+                            <Select placeholder={'Escoge una carrera'}>
                                 {
                                     categories.isLoading
                                     ? <div>Cargando...</div>
