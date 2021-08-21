@@ -182,7 +182,7 @@ code {
         display: block;
         width: 20px;
         height: 2px;
-        background: #1890ff;
+        background: #00e5ff;
         position: relative;
     }
     .bars:after,.bars:before{
@@ -192,7 +192,7 @@ code {
         top: -6px;
         left: 0;
         height: 2px;
-        background: #1890ff;
+        background: #00e5ff;
     }
     .bars:after{
         top: auto;
