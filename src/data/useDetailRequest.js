@@ -2,7 +2,7 @@ import useSWR from 'swr';
 import API from './index';
 
 export const useDetailRequest = ( id, options= {} ) => {
-    const { data, error, mutate } = useSWR( `/postulations/${ id }/details`, API.fetcher, options );
+    const { data, error, mutate } = useSWR( `/postulations/detail/${ id }`, API.fetcher, options );
 
     return {
         detailRequest: data && data.data,

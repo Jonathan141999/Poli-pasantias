@@ -27,21 +27,19 @@ import withAuth from '../hocs/withAuth';
 //import Loading from './Loading';
 const EditUserPage = (props) => {
     
-    const{user}= useAuth();
-
+    const {currentUser}= useAuth();
 
     const onFinish = async (userData) => {
         console.log('Los Datos del formulario son: ', userData);
+        console.log(currentUser);
         const {email, phone,description} = userData;
         try {
-            const user = await API.put('/users/'+ user.id , userData,{
+            await API.put('/users/'+ currentUser.id , {
                 phone,
                 email,
                 description
             });
-
-            console.log('User', user);
-
+            message.success("Usuario Acutalizado Correctamente");
         } catch (e) {
             console.error('No se pudo actualizar los campos', e);
             const errorList = e.error && <ErrorList errors={e.error}/>;
