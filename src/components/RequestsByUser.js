@@ -84,18 +84,6 @@ const RequestsByUser = () => {
                                       : requests.status === "rejected"
                                           ? "Rechazado"
                                           : ""}</p></div>
-                          <IonProgressBar style={{height: "15px"}} value={
-                              requests.status === "new"
-                                  ? 0.25
-                                  : requests.status=== "pending"
-                                  ? 0.5
-                                  : requests.status === "accepted"
-                                      ? 0.75
-                                      : requests.status === "rejected"
-                                          ? 1
-                                          : 0
-                          }
-                          />
                       </IonLabel>
                   </IonItem>
               ))
