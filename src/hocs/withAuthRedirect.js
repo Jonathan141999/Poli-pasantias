@@ -39,7 +39,7 @@ export default function withAuthRedirect( {
               state: { from: props.location }
           } } />
           }
-          if (currentUser.role==="ROLE_ADMIN" || currentUser.role==='ROLE_ADMIN'){
+          if (currentUser.role==="ROLE_BUSINESS" || currentUser.role==='ROLE_ADMIN'){
             return <Redirect to={ {
               pathname: Routes.OWNERPRODUCTS,
               state: { from: props.location }

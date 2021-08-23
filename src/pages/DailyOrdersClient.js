@@ -19,7 +19,7 @@ const DailyOrdersClient = () => {
               <div slot={"start"} className="menu">
                 <Layouts />
               </div>
-              <IonTitle id={"letter"} slot={"primary"}> Lista de Publiaciones Nuevas</IonTitle>
+              <IonTitle id={"letter"}> Lista de Postulaciones</IonTitle>
             </IonToolbar>
           </IonHeader>
         </IonPage>

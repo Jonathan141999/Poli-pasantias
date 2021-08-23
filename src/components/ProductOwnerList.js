@@ -15,6 +15,7 @@ import { useSearchProduct } from "../data/useSearchProduct";
 import { useCategories } from "../data/useCategories";
 import Search from "antd/es/input/Search";
 import "../theme/toolbar.css";
+import nodata from '../images/nodata.png';
 const { Option } = Select;
 
 const ProductOwnerList = () => {
@@ -150,7 +151,7 @@ const ProductOwnerList = () => {
                                     </IonCard>
                                 </IonCol>
                             ))
-                            : <img src={`url(../images/nodata.png)`} />
+                            :  <IonImg src={nodata} style={{width:"100px", height:"100px", display:"block", margin:"auto"}}/>
                         :
                         products ?
                             products.map((product, i) => (

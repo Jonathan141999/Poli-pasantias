@@ -19,6 +19,7 @@ import { useRequests } from "../data/useRequests";
 import { useRequestsByUser } from "../data/useRequestsByUser";
 import "../theme/toolbar.css";
 import { useCategories } from "../data/useCategories";
+import nodata from '../images/nodata.png';
 
 const { Option } = Select;
 
@@ -116,11 +117,11 @@ const ProductClientList = () => {
                         'publication_id': parseInt(idProduct),
                     }
                     );
-                        await afterCreate();
-                        form.resetFields();
-                        //Enviar una Alerta de que se registro con exito
-                        setShowInfo(false);
-                    } catch (e) {
+                    await afterCreate();
+                    form.resetFields();
+                    //Enviar una Alerta de que se registro con exito
+                    setShowInfo(false);
+                } catch (e) {
                     console.log(e);
                     //Enviar una Alerta de que existe un error
                 }
@@ -150,21 +151,23 @@ const ProductClientList = () => {
             <IonRow style={{ display: "block" }}>
                 {
                     searchProduct ?
-                        searchProduct.map((search, i) => (
-                            <IonCol size="6">
-                                <IonCard key={i} onClick={() => showDetail(search.id)} >
-                                    <IonImg style={{ height: "100px" }} src={`http://localhost:8000/storage/${search.image}`}
-                                    />
-                                    <IonCardContent>
-                                        <IonCardTitle><p>{search.name}</p></IonCardTitle>
-                                        <IonCardSubtitle><strong>Dirección: </strong>{search.location}</IonCardSubtitle>
-                                        <IonCardSubtitle><strong>Teléfono: </strong>{search.phone}</IonCardSubtitle>
-                                        <IonCardSubtitle><strong>Horas: </strong>{search.hour}</IonCardSubtitle>
-                                        <IonCardSubtitle><strong>Carrera: </strong>{search.category_name}</IonCardSubtitle>
-                                    </IonCardContent>
-                                </IonCard>
-                            </IonCol>
-                        ))
+                        searchProduct.length > 0 ?
+                            searchProduct.map((search, i) => (
+                                <IonCol size="6">
+                                    <IonCard key={i} onClick={() => showDetail(search.id)} >
+                                        <IonImg style={{ height: "100px" }} src={`http://localhost:8000/storage/${search.image}`}
+                                        />
+                                        <IonCardContent>
+                                            <IonCardTitle><p>{search.name}</p></IonCardTitle>
+                                            <IonCardSubtitle><strong>Dirección: </strong>{search.location}</IonCardSubtitle>
+                                            <IonCardSubtitle><strong>Teléfono: </strong>{search.phone}</IonCardSubtitle>
+                                            <IonCardSubtitle><strong>Horas: </strong>{search.hour}</IonCardSubtitle>
+                                            <IonCardSubtitle><strong>Carrera: </strong>{search.category_name}</IonCardSubtitle>
+                                        </IonCardContent>
+                                    </IonCard>
+                                </IonCol>
+                            ))
+                            : <IonImg src={nodata} style={{ width: "100px", height: "100px", display: "block", margin: "auto" }} />
                         :
                         products ?
                             products.map((product, i) => (
@@ -279,14 +282,14 @@ const ProductClientList = () => {
                                         </Select>
                                     </Form.Item>
                                 </Form>
-                        </Modal>
+                            </Modal>
                         </>
             }
-<IonLoading
-    isOpen={showLoading}
-    onDidDismiss={() => setShowLoading(false)}
-    message={'Por favor espere...'}
-/>
+            <IonLoading
+                isOpen={showLoading}
+                onDidDismiss={() => setShowLoading(false)}
+                message={'Por favor espere...'}
+            />
         </>
     );
 };
