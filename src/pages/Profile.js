@@ -35,7 +35,7 @@ const Profile = () => {
                 </IonToolbar>
             </IonHeader>
           <IonCard>
-            {currentUser.role==='ROLEBUSINESS' || currentUser.role==='ROLE_ADMIN'
+            {currentUser.role==='ROLE_BUSINESS' || currentUser.role==='ROLE_ADMIN'
             ?<IonImg  src={user1} style={{width:"150px", height:"150px", margin: "auto"}}/>
             :<IonImg  src={user} style={{width:"150px", height:"150px", margin: "auto"}}/>
             }

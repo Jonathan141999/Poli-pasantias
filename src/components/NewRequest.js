@@ -26,7 +26,7 @@ const NewRequest = () => {
     //const [list, setList] = useState(requests);
 
     const request = useDetailRequest(idRequest);
-    console.log("pedidos", request);
+    console.log("postulaciones", request);
 
     if (isLoadingRequest) {
         return <Skeleton />;
@@ -95,13 +95,18 @@ const NewRequest = () => {
                 {
                     requests.map((orders, i) => (
                         <IonItem key={i} onClick={() => handleShowDetail(i)}>
-                            <IonLabel>
+                            <IonList>
+                                <IonCol>
+                                    <IonLabel><p><strong>Nombre: </strong>{orders.name} {orders.last_name}</p></IonLabel>
+                                    <IonLabel><p><strong>Publicación: </strong>{orders.publication_name} {orders.last_name}</p></IonLabel>
+                                    <IonLabel><p><strong>Horas a ofertar: </strong>{orders.hour} {orders.last_name}</p></IonLabel>
+                                    {orders.type === 'face'
+                                        ? <IonLabel><p><strong>Entrevista Personal</strong></p></IonLabel>
+                                        : <IonLabel><p><strong>Entrevista En Línea</strong></p></IonLabel>
+                                    }
 
-                                {orders.type === 'face'
-                                    ? <div><p><strong>Entrevista Personal</strong></p></div>
-                                    : <div><p><strong>Entrevista Online</strong></p></div>
-                                }
-                            </IonLabel>
+                                </IonCol>
+                            </IonList>
                         </IonItem>
                     ))
                 }
@@ -110,7 +115,7 @@ const NewRequest = () => {
                 request.isLoading
                     ? <><Skeleton /></>
                     : request.isError
-                        ? <ShowError error={request.isError} />
+                        ? ""
                         : <>
                             <Modal title="Detalle de la postulación" className={"report"}
                                 visible={showDetail}
@@ -118,53 +123,52 @@ const NewRequest = () => {
                                 closable={true}
                                 footer={
                                     <>
-                                        <IonButton variant="success" style={{ margin: 'auto', display: 'block', background: 'green' }} htmlType='submit' onClick={() => onAccept()}>
-                                            Acceptar
-                                        </IonButton>
-                                        <IonButton style={{ margin: 'auto', display: 'block' }} htmlType='submit' onClick={() => onPending()}>
-                                            Revisando
-                                        </IonButton>
-                                        <IonButton style={{ margin: 'auto', display: 'block' }} htmlType='submit' onClick={() => onReject()}>
-                                            Rechazado
-                                        </IonButton></>
+
+                                        <div>
+                                            <IonButton variant="success" style={{ margin: 'auto', display: 'block', background: 'green' }} htmlType='submit' onClick={() => onAccept()}>
+                                                Acceptar
+                                            </IonButton>
+                                        </div>
+                                        <br></br>
+                                        <div>
+                                            <IonButton style={{ margin: 'auto', display: 'block' }} htmlType='submit' onClick={() => onReject()}>
+                                                Rechazar
+                                            </IonButton>
+                                        </div></>
                                 }
                             >
                                 <IonGrid>
                                     <IonRow>
                                         <IonLabel>
                                             <IonText>
-                                                <h4 align="center" ><strong>Número de Postulacion:</strong>{request.detailRequest.postulation_id}</h4>
+                                                <h3><strong>Datos del Estudiante:</strong></h3>
                                             </IonText>
+                                            <IonList>
+                                                <IonCol>
+                                                        <IonCardSubtitle><strong>Nombre: </strong>{request.detailRequest.name}</IonCardSubtitle>
+                                                        <IonCardSubtitle><strong>Apellido: </strong>{request.detailRequest.last_name}</IonCardSubtitle>
+                                                        <IonCardSubtitle><strong>Teléfono: </strong>{request.detailRequest.phone}</IonCardSubtitle>
+                                                        <IonCardSubtitle><strong>Correo: </strong>{request.detailRequest.email}</IonCardSubtitle>
+                                                        <IonCardSubtitle><strong>Dirección: </strong>{request.detailRequest.direction}</IonCardSubtitle>
+                                                        <IonCardSubtitle><strong>Leguajes: </strong>{request.detailRequest.languages}</IonCardSubtitle>
+                                                        <IonCardSubtitle><strong>Semestre: </strong>{request.detailRequest.career}</IonCardSubtitle>
+                                                        <IonCardSubtitle><strong>Experiencia Laboral: </strong>{request.detailRequest.work_experience}</IonCardSubtitle>
+                                                  
+                                                </IonCol>
+                                            </IonList>
                                         </IonLabel>
-                                        <IonLabel>
-                                            <IonText>
-                                                <h4 align="center" ><strong>Datos del Estudiante:</strong></h4>
-                                            </IonText>
-                                        </IonLabel>
-                                        <IonCol>
-                                            <IonCardContent>
-                                                <IonCardSubtitle><strong>Nombre: </strong>{request.detailRequest.name}</IonCardSubtitle>
-                                                <IonCardSubtitle><strong>Apellido: </strong>{request.detailRequest.last_name}</IonCardSubtitle>
-                                                <IonCardSubtitle><strong>Teléfono: </strong>{request.detailRequest.phone}</IonCardSubtitle>
-                                                <IonCardSubtitle><strong>Correo: </strong>{request.detailRequest.email}</IonCardSubtitle>
-                                                <IonCardSubtitle><strong>Dirección: </strong>{request.detailRequest.direction}</IonCardSubtitle>
-                                                <IonCardSubtitle><strong>Leguajes: </strong>{request.detailRequest.languages}</IonCardSubtitle>
-                                                <IonCardSubtitle><strong>Semestre: </strong>{request.detailRequest.career}</IonCardSubtitle>
-                                                <IonCardSubtitle><strong>Experiencia Laboral: </strong>{request.detailRequest.work_experience}</IonCardSubtitle>
-                                            </IonCardContent>
+                                        <IonList>
                                             <IonLabel>
                                                 <IonText>
-                                                    <h4 align="center" ><strong>Datos de la Empresa:</strong></h4>
+                                                    <h3><strong>Datos de la Empresa:</strong></h3>
                                                 </IonText>
+                                                <IonCol>
+                                                        <IonCardSubtitle><strong>Nombre de la Empresa: </strong>{request.detailRequest.publication_name}</IonCardSubtitle>
+                                                        <IonCardSubtitle><strong>Horas a ofertar: </strong>{request.detailRequest.hour}</IonCardSubtitle>
+                                                        <IonCardSubtitle><strong>Detalles: </strong>{request.detailRequest.details}</IonCardSubtitle>
+                                                </IonCol>
                                             </IonLabel>
-                                            <IonCol>
-                                                <IonCardContent>
-                                                    <IonCardSubtitle><strong>Nombre de la Empresa: </strong>{request.detailRequest.publication_name}</IonCardSubtitle>
-                                                    <IonCardSubtitle><strong>Horas a ofertar: </strong>{request.detailRequest.hour}</IonCardSubtitle>
-                                                    <IonCardSubtitle><strong>Detalles: </strong>{request.detailRequest.details}</IonCardSubtitle>
-                                                </IonCardContent>
-                                            </IonCol>
-                                        </IonCol>
+                                        </IonList>
                                     </IonRow>
                                     <IonRow>
                                         {request.detailRequest.type === 'face'

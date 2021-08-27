@@ -54,11 +54,13 @@ const RegisterUser = () => {
             delete user.data.token;
             setCurrentUser(user.data);
             setAuthenticated(true);
+            message.success('Registro exitoso');
         } catch (e) {
             console.error('No se pudo registrar el usuario', e);
             setAuthenticated(false);
             const errorList = e.error && <ErrorList errors={e.error}/>;
             message.error(<>{translateMessage(e.message)}{errorList}</>);
+            message.success('Error en el Servidor');
         }
     };
 

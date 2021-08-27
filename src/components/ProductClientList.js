@@ -136,7 +136,7 @@ const ProductClientList = () => {
             <IonRow style={{ padding: "10px" }}>
                 <IonToolbar>
                     {categories ?
-                        <><Select style={{ display: 'inline-block', minWidth: '300', maxWidth: '300px' }} defaultValue={0} placeholder="Búsqueda por categoria" onChange={onChange}>
+                        <><Select style={{ display: 'inline-block', minWidth: '300', maxWidth: '300px' }} placeholder="Búsqueda por categoria" onChange={onChange}>
                             {categories.map((category, index) => (
                                 <Option style={{ minWidth: '300', maxWidth: '300px' }} value={category.id}>{category.name}</Option>
                             ))}

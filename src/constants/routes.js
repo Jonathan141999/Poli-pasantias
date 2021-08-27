@@ -23,8 +23,8 @@ const privateRoutes = {
   CLIENTPRODUCTS: '/student-publications',
   OWNERPRODUCTS: '/bussines-publications',
   REGISTERPRODUCT: '/register-publications',
-  DAILYORDER: '/daily-order',
-  NEWORDER: '/neworder',
+  DAILYORDER: '/view-postulations',
+  NEWORDER: '/new-postulations',
   REPORTS: '/reports',
   PROFILE: '/profile',
   EDITUSER: '/edit-profile' 

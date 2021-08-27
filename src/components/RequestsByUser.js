@@ -74,7 +74,7 @@ const RequestsByUser = () => {
                     requestsByUser.map((requests, i) => (
                         <IonItem key={i} onClick={() => handleShowDetail(i)}>
                             <IonLabel>
-                                <div><p><strong>Número de Postulación: </strong>{requests.id}</p></div>
+                                <div><p><strong>Nueva Postulación </strong></p></div>
                                 <div><p><strong>Estado: </strong>{requests.status === "new"
                                     ? "Nueva"
                                     : requests.status === "pending"
@@ -84,7 +84,14 @@ const RequestsByUser = () => {
                                             : requests.status === "rejected"
                                                 ? "Rechazado"
                                                 : ""}</p></div>
+                                <div><p><strong>Semestre: </strong>{requests.career}</p></div>
+                                <div><p><strong>Tipo de entrevista: </strong>{requests.type
+                                    ? "Presencial"
+                                    : "En Línea"
+                                }
+                                </p></div>
                             </IonLabel>
+
                         </IonItem>
                     ))
                     : ""
@@ -125,11 +132,6 @@ const RequestsByUser = () => {
                                     <IonButton onClick={() => setShowDetail(false)}>Cerrar</IonButton>
                                 ]}
                             >
-                                <IonGrid>
-                                    <IonRow>
-                                        <IonCol><strong>Número de Solicitud: </strong><h2 align={"center"}>{request.request.id}</h2></IonCol>
-                                    </IonRow>
-                                </IonGrid>
                                 {
                                     detailRequest.isLoading
                                         ? <>
@@ -158,25 +160,24 @@ const RequestsByUser = () => {
                                             ? " "
                                             : <>
                                                 <IonList>
-                                                    <IonItem>
-                                                        <IonLabel>
-                                                            <IonRow>
-                                                                <IonCol>
-                                                                    <IonCardContent>
-                                                                        <IonCardSubtitle><strong>Nombre de la Empresa: </strong>{detailRequest.detailRequest.publication_name}</IonCardSubtitle>
-                                                                        <IonCardSubtitle><strong>Horas: </strong>{detailRequest.detailRequest.hour}</IonCardSubtitle>
-                                                                        <IonCardSubtitle><strong>Nombre: </strong>{detailRequest.detailRequest.name}</IonCardSubtitle>
-                                                                        <IonCardSubtitle><strong>Apellido: </strong>{detailRequest.detailRequest.last_name}</IonCardSubtitle>
-                                                                        <IonCardSubtitle><strong>Telefóno: </strong>{detailRequest.detailRequest.phone}</IonCardSubtitle>
-                                                                        <IonCardSubtitle><strong>Correo: </strong>{detailRequest.detailRequest.email}</IonCardSubtitle>
-                                                                        <IonCardSubtitle><strong>Experiencia Laboral: </strong>{detailRequest.detailRequest.work_experience}</IonCardSubtitle>
-                                                                    </IonCardContent>
-                                                                </IonCol>
-                                                            </IonRow>
-                                                        </IonLabel>
-                                                    </IonItem>
-                                                    {
-                                                    }
+                                                    <IonCol>
+                                                        <IonCardContent>
+                                                            <IonCardSubtitle><strong>Nombre de la Empresa: </strong>{detailRequest.detailRequest.publication_name}</IonCardSubtitle>
+                                                            <IonCardSubtitle><strong>Horas: </strong>{detailRequest.detailRequest.hour}</IonCardSubtitle>
+                                                            <IonCardSubtitle><strong>Nombre: </strong>{detailRequest.detailRequest.name}</IonCardSubtitle>
+                                                            <IonCardSubtitle><strong>Apellido: </strong>{detailRequest.detailRequest.last_name}</IonCardSubtitle>
+                                                            <IonCardSubtitle><strong>Telefóno: </strong>{detailRequest.detailRequest.phone}</IonCardSubtitle>
+                                                            <IonCardSubtitle><strong>Correo: </strong>{detailRequest.detailRequest.email}</IonCardSubtitle>
+                                                            <IonCardSubtitle><strong>Lenguajes que domina: </strong>{detailRequest.detailRequest.languages}</IonCardSubtitle>
+                                                            <IonCardSubtitle><strong>Semestre: </strong>{detailRequest.detailRequest.career}</IonCardSubtitle>
+                                                            <IonCardSubtitle><strong>Tipo de entrevista: </strong>
+                                                                {detailRequest.detailRequest.type
+                                                                    ? "Presencial"
+                                                                    : "En Linea"
+                                                                }</IonCardSubtitle>
+                                                            <IonCardSubtitle><strong>Experiencia Laboral: </strong>{detailRequest.detailRequest.work_experience}</IonCardSubtitle>
+                                                        </IonCardContent>
+                                                    </IonCol>
                                                 </IonList>
                                             </>
                                 }
