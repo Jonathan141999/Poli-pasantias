@@ -57,7 +57,7 @@ const Navigation = (props) => {
                 }}
             > 
                 <IonItem>
-                    {currentUser.role==='ROLE_BUSINESS'
+                    {currentUser.role==='ROLE_BUSINESS' || currentUser.role==='ROLE_ADMIN'
                     ?<IonAvatar slot="end" style={{marginTop:"-18px"}}>
                         <img src={user1} />
                     </IonAvatar>

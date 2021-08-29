@@ -1,6 +1,3 @@
-/**
- * Created by chalosalvador on 2/5/20
- */
 import React, { useEffect } from 'react';
 import API from '../data';
 import Cookies from 'js-cookie';
