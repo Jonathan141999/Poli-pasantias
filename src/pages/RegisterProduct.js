@@ -68,7 +68,7 @@ const RegisterPublication = () => {
                     setFileList( [] );
                     setImageUrl( null );
                     setShowLoading(false);
-                    message.success('Publicación registrada con Exito');
+                    message.success('Publicación registrada con éxito');
                 } catch( e ) {
                     
                     const errorList = e.error && <ErrorList errors={ e.error } />;

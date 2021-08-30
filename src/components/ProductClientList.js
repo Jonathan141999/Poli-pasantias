@@ -290,19 +290,19 @@ const ProductClientList = () => {
                             </Modal>
                         </>
             }
-            <IonLoading
-                    isOpen={showLoading}
-                    onDidDismiss={()=>setShowLoading(false)}
-                    message={'Por favor espere...'}
-                    />
-                    <IonAlert
-                    isOpen={showAlert1}
-                    onDidDismiss={()=>setShowAlert1(false)}
-                    cssClass={'my-custom-class'}
-                    header={'Registro Exitoso'}
-                    message={'Se Registro correctamente'}
-                    buttons={['Aceptar']}
-                    />
+             <IonLoading
+                         isOpen={showLoading}
+                         onDidDismiss={() => setShowLoading(false)}
+                         message={'Por favor espere...'}
+                     />
+                     <IonAlert
+                         isOpen={showAlert1}
+                         onDidDismiss={() => setShowAlert1(false)}
+                         cssClass={'my-custom-class'}
+                         header={'Registro Exitoso'}
+                         message={'Se Registro correctamente'}
+                         buttons={['Aceptar']}
+                     />
         </>
     );
 };
