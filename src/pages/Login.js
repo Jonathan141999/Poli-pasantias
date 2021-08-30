@@ -40,7 +40,7 @@ const Login = () => {
       console.error( 'No se pudo iniciar sesión', e.message );
       setAuthenticated( false );
       const errorList = e.error && <ErrorList errors={ e.error } />;
-      message.error( <>{ translateMessage( e.message ) }{ errorList }</> );
+      message.error( <>No se pudo iniciar sesión </> );
     }
   };
 
