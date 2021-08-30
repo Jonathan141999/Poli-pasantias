@@ -85,7 +85,7 @@ const RequestsByUser = () => {
                                                 ? "Rechazado"
                                                 : ""}</p></div>
                                 <div><p><strong>Semestre: </strong>{requests.career}</p></div>
-                                <div><p><strong>Tipo de entrevista: </strong>{requests.type
+                                <div><p><strong>Tipo de entrevista: </strong>{requests.type ==='face'
                                     ? "Presencial"
                                     : "En Línea"
                                 }
@@ -171,7 +171,7 @@ const RequestsByUser = () => {
                                                             <IonCardSubtitle><strong>Lenguajes que domina: </strong>{detailRequest.detailRequest.languages}</IonCardSubtitle>
                                                             <IonCardSubtitle><strong>Semestre: </strong>{detailRequest.detailRequest.career}</IonCardSubtitle>
                                                             <IonCardSubtitle><strong>Tipo de entrevista: </strong>
-                                                                {detailRequest.detailRequest.type
+                                                                {detailRequest.detailRequest.type === 'face'
                                                                     ? "Presencial"
                                                                     : "En Linea"
                                                                 }</IonCardSubtitle>

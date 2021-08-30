@@ -73,7 +73,7 @@ const RegisterPublication = () => {
                     
                     const errorList = e.error && <ErrorList errors={ e.error } />;
                     message.error( <>{ translateMessage( e.message ) }{ errorList }</> );
-                    message.success('Error en el Servidor');
+                    message.error('Nose pudo registrar la publicación');
                 }
             } )
             .catch( info => {
@@ -319,8 +319,7 @@ const RegisterPublication = () => {
                             </IonButton>
                         </Form.Item>
                     </Form>
-           </IonPage>
-           <IonLoading
+                    <IonLoading
                     isOpen={showLoading}
                     onDidDismiss={()=>setShowLoading(false)}
                     message={'Por favor espere...'}
@@ -333,6 +332,7 @@ const RegisterPublication = () => {
                     message={'Se Registro correctamente'}
                     buttons={['Aceptar']}
                     />
+           </IonPage>
         </>
         
     );

@@ -59,8 +59,8 @@ const RegisterUser = () => {
             console.error('No se pudo registrar el usuario', e);
             setAuthenticated(false);
             const errorList = e.error && <ErrorList errors={e.error}/>;
-            message.error(<>{translateMessage(e.message)}{errorList}</>);
-            message.success('Error en el Servidor');
+            message.error(<>{translateMessage(e.message)}{errorList} No se pudo registar el usuario</>);
+            //message.failure('Error en el Servidor');
         }
     };
 
