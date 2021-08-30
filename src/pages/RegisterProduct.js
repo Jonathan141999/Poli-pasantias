@@ -70,6 +70,7 @@ const RegisterPublication = () => {
                     setShowLoading(false);
                     message.success('Publicación registrada con Exito');
                 } catch( e ) {
+                    
                     const errorList = e.error && <ErrorList errors={ e.error } />;
                     message.error( <>{ translateMessage( e.message ) }{ errorList }</> );
                     message.success('Error en el Servidor');

@@ -47,6 +47,7 @@ const ProductClientList = () => {
     const [showCart, setShowCart] = useState(false);
     const [type, setType] = useState('');
     const [showAlert3, setShowAlert3] = useState(false);
+    const [showAlert1, setShowAlert1] = useState(false);
     const [showLoading, setShowLoading] = useState(false);
     const [form] = Form.useForm();
 
@@ -119,10 +120,14 @@ const ProductClientList = () => {
                     );
                     await afterCreate();
                     form.resetFields();
+                    message.success('Postulación Exitosa');
                     //Enviar una Alerta de que se registro con exito
                     setShowInfo(false);
+                    setShowLoading(false);
                 } catch (e) {
                     console.log(e);
+                    form.resetFields();
+                    message.success('Postulación Exitosa');
                     //Enviar una Alerta de que existe un error
                 }
             })
@@ -286,10 +291,18 @@ const ProductClientList = () => {
                         </>
             }
             <IonLoading
-                isOpen={showLoading}
-                onDidDismiss={() => setShowLoading(false)}
-                message={'Por favor espere...'}
-            />
+                    isOpen={showLoading}
+                    onDidDismiss={()=>setShowLoading(false)}
+                    message={'Por favor espere...'}
+                    />
+                    <IonAlert
+                    isOpen={showAlert1}
+                    onDidDismiss={()=>setShowAlert1(false)}
+                    cssClass={'my-custom-class'}
+                    header={'Registro Exitoso'}
+                    message={'Se Registro correctamente'}
+                    buttons={['Aceptar']}
+                    />
         </>
     );
 };

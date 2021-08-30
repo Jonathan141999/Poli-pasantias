@@ -97,9 +97,9 @@ const NewRequest = () => {
                         <IonItem key={i} onClick={() => handleShowDetail(i)}>
                             <IonList>
                                 <IonCol>
-                                    <IonLabel><p><strong>Nombre: </strong>{orders.name} {orders.last_name}</p></IonLabel>
-                                    <IonLabel><p><strong>Publicación: </strong>{orders.publication_name} {orders.last_name}</p></IonLabel>
-                                    <IonLabel><p><strong>Horas a ofertar: </strong>{orders.hour} {orders.last_name}</p></IonLabel>
+                                    <IonCardSubtitle><p><strong>Nombre: </strong>{orders.name} {orders.last_name}</p></IonCardSubtitle>
+                                    <IonCardSubtitle><p><strong>Publicación: </strong>{orders.publication_name}</p></IonCardSubtitle>
+                                    <IonCardSubtitle><p><strong>Horas a ofertar: </strong>{orders.hour}</p></IonCardSubtitle>
                                     {orders.type === 'face'
                                         ? <IonLabel><p><strong>Entrevista Personal</strong></p></IonLabel>
                                         : <IonLabel><p><strong>Entrevista En Línea</strong></p></IonLabel>
@@ -153,7 +153,7 @@ const NewRequest = () => {
                                                         <IonCardSubtitle><strong>Leguajes: </strong>{request.detailRequest.languages}</IonCardSubtitle>
                                                         <IonCardSubtitle><strong>Semestre: </strong>{request.detailRequest.career}</IonCardSubtitle>
                                                         <IonCardSubtitle><strong>Experiencia Laboral: </strong>{request.detailRequest.work_experience}</IonCardSubtitle>
-                                                  
+                                
                                                 </IonCol>
                                             </IonList>
                                         </IonLabel>
