@@ -198,16 +198,16 @@ const ProductOwnerList = () => {
                                     <Form.Item label="Nombre de Empresa" name='name' hasFeedback>
                                         <Input placeholder={product.product.name} />
                                     </Form.Item>
-                                    <Form.Item label="Dirección" name='location'>
+                                    <Form.Item label="Dirección" name='location' hasFeedback>
                                         <Input placeholder={product.product.location} />
                                     </Form.Item>
-                                    <Form.Item label="Telefono" name='phone'>
+                                    <Form.Item label="Telefono" name='phone' hasFeedback>
                                         <Input type="number" min="7" max="13" placeholder={product.product.phone} />
                                     </Form.Item>
-                                    <Form.Item label="Horas a Ofertar" name='hour'>
+                                    <Form.Item label="Horas a Ofertar" name='hour' hasFeedback>
                                         <Input placeholder={product.product.hour} />
                                     </Form.Item>
-                                    <Form.Item label="Descripcion de la práctica preprofesional" name='details'>
+                                    <Form.Item label="Descripcion de la práctica preprofesional" name='details' hasFeedback>
                                         <Input.TextArea placeholder={product.product.details} />
                                     </Form.Item>
                                 </Form>

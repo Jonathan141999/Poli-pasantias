@@ -226,7 +226,7 @@ const RegisterUser = () => {
                                    ]}
                                    hasFeedback
                         >
-                            <Input.TextArea prefix={<BookOutlined/>} placeholder='Descripción, Ejemplo: Hobbie, Dedicación, Gustos,'/>
+                            <Input.TextArea prefix={<BookOutlined/>} placeholder='Descripción, Ejemplo: Hobbie, Gustos o Pasatiempos'/>
                         </Form.Item>
                         
                         <Form.Item>

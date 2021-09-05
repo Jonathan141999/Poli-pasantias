@@ -22,7 +22,7 @@ const ShowError = ( { error } ) => {
     <Result status={ setStatus( error.status ) }
             title={ translateMessage( error.error ) }
             subTitle={translateMessage(error.message)}
-            extra={ <Button type='primary'>Back Home</Button> } />
+            extra={ <Button type='primary'>Regresar al Inicio</Button> } />
   );
 };
 

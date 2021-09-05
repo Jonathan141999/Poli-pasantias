@@ -176,7 +176,7 @@ const RegisterPublication = () => {
                                    ]}
                                    hasFeedback
                         >
-                            <Input  placeholder='Nombre de la Empresa'/>
+                            <Input  placeholder='Nombre de la Publicación'/>
                         </Form.Item>
                 
                         <Form.Item name='location'
@@ -188,7 +188,7 @@ const RegisterPublication = () => {
                                    ]}
                                    hasFeedback
                         >
-                            <Input  placeholder='Dirección de la empresa'/>
+                            <Input  placeholder='Dirección'/>
                         </Form.Item>
 
                         <Form.Item name='phone'

@@ -24,9 +24,9 @@ const loadableOptions = {fallback: <Loading/>};
 //const AsyncHome = loadable(() => import( '../pages/Index' ), loadableOptions);
 const AsyncLogin = loadable(() => import( '../pages/Login' ), loadableOptions);
 const AsyncStudentPublications = loadable(() => import( '../pages/StudentPublication' ), loadableOptions);
-const AsyncOwnerProducts = loadable(() => import( '../pages/OwnerProducts' ), loadableOptions);
+const AsyncOwnerPublications = loadable(() => import( '../pages/OwnerPublications' ), loadableOptions);
 const AsyncRegister = loadable(() => import ('../pages/RegisterUser'),loadableOptions);
-const AsyncRegisterProduct = loadable(() => import ('../pages/RegisterProduct'),loadableOptions);
+const AsyncRegisterPublication = loadable(() => import ('../pages/RegisterPublication'),loadableOptions);
 const AsyncDailyOrder = loadable(() => import('../pages/DailyOrdersClient' ), loadableOptions);
 const AsyncLogout = loadable(() => import( '../pages/Logout' ), loadableOptions);
 const AsyncProfile = loadable(() => import( '../pages/Profile' ), loadableOptions);
@@ -60,10 +60,10 @@ const AppRouter = () => (
         <PrivateRoute path={Routes.DAILYORDER} component={AsyncDailyOrder}/>
         <PrivateRoute path={Routes.PROFILE} component={AsyncProfile}/>
         <PrivateRoute path={Routes.CLIENTPRODUCTS} component={AsyncStudentPublications}/>
-        <PrivateRoute path={Routes.OWNERPRODUCTS} component={AsyncOwnerProducts}/>
+        <PrivateRoute path={Routes.OWNERPRODUCTS} component={AsyncOwnerPublications}/>
         <PrivateRoute path={Routes.REGISTER} component={AsyncRegister}/>
         <PrivateRoute path={Routes.LOGOUT} component={AsyncLogout}/>
-        <PrivateRoute path={Routes.REGISTERPRODUCT} component={AsyncRegisterProduct}/>
+        <PrivateRoute path={Routes.REGISTERPRODUCT} component={AsyncRegisterPublication}/>
         <PrivateRoute path={Routes.NEWORDER} component={AsyncNewOrder}/>
         <PrivateRoute path={Routes.REPORTS} component={AsyncReports}/>
         <PrivateRoute path={Routes.EDITUSER} component={AsyncEditUser}/>

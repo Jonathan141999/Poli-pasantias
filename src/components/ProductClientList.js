@@ -204,13 +204,14 @@ const ProductClientList = () => {
                                 closable={false}
                                 footer={[
                                     <IonButton type='primary' htmlType='submit' onClick={onCreate} className='login-form-button'>Postular</IonButton>,
-                                    <IonButton onClick={() => setShowInfo(false)}>Cancelar</IonButton>
+                                    <IonButton onClick={() => setShowInfo(false)}>Cerrar</IonButton>
                                 ]}
                             >
                                 <IonCard>
                                     <IonImg style={{ height: "100px" }} src={`http://localhost:8000/storage/${product.image}`}
                                     />
                                     <IonCardContent>
+                                        <IonCardSubtitle>{product.product.name}</IonCardSubtitle>
                                         <IonCardSubtitle><strong>Dirección: </strong>{product.product.location}</IonCardSubtitle>
                                         <IonCardSubtitle><strong>Telefóno: </strong>{product.product.phone}</IonCardSubtitle>
                                         <IonCardSubtitle><strong>Correo de Contacto: </strong>{product.product.email}</IonCardSubtitle>
@@ -239,7 +240,7 @@ const ProductClientList = () => {
                                                 message: 'Escriba los lenguajes que domina'
                                             }
                                         ]}
-                                        hasFeedback
+                                        
                                     >
                                         <Input placeholder='Lenguajes' />
                                     </Form.Item>
@@ -251,7 +252,7 @@ const ProductClientList = () => {
                                                 message: 'Detalles de Experiencia'
                                             }
                                         ]}
-                                        hasFeedback
+                                        
                                     >
                                         <Input.TextArea placeholder='Experiencia' />
                                     </Form.Item>
@@ -263,7 +264,7 @@ const ProductClientList = () => {
                                                 message: 'Escriba en que semestre esta'
                                             }
                                         ]}
-                                        hasFeedback
+                                        
                                     >
                                         <Input placeholder='Semestre' />
                                     </Form.Item>
@@ -279,7 +280,7 @@ const ProductClientList = () => {
                                         ]}
                                     >
                                         <Select
-                                            placeholder="Select a option and change input text above"
+                                            placeholder="Seleccione el tipo de entrevista"
                                             allowClear
                                         >
                                             <Option value="online">Virtual</Option>

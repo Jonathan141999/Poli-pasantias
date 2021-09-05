@@ -99,7 +99,7 @@ const EditUserPage = (props) => {
                             ]}
                             hasFeedback
                         >
-                            <Input.TextArea prefix={<BookOutlined />} placeholder='Descripción, Ejemplo: Hobbie, Dedicación, Gustos,' />
+                            <Input.TextArea prefix={<BookOutlined />} placeholder='Descripción, Ejemplo: Hobbie, Gustos o Pasatiempo' />
                         </Form.Item>
 
                         <Form.Item>
