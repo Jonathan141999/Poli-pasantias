@@ -218,7 +218,6 @@ const ProductClientList = () => {
                                         <IonCardSubtitle><strong>Empresa: </strong>{product.product.type}</IonCardSubtitle>
                                         <IonCardSubtitle><strong>Horas: </strong>{product.product.hour}</IonCardSubtitle>
                                         <IonCardSubtitle><strong>Carrera: </strong>{product.product.category}</IonCardSubtitle>
-                                        <IonCardSubtitle><strong>Fecha de Publicación: </strong>{product.product.created_at}</IonCardSubtitle>
                                         <IonCardSubtitle><strong>Detalle:</strong>{product.product.details}</IonCardSubtitle>
                                     </IonCardContent>
                                 </IonCard>
