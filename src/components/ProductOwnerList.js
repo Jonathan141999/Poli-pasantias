@@ -139,7 +139,7 @@ const ProductOwnerList = () => {
                             searchProduct.map((search, i) => (
                                 <IonCol size="6">
                                     <IonCard key={i} onClick={() => showDetail(search.id)} >
-                                        <IonImg style={{ height: "100px" }} src={`http://localhost:8000/storage/${search.image}`}
+                                        <IonImg style={{ height: "100px" }} src={`https://backend-practicas-cnwr6.ondigitalocean.app/storage/${search.image}`}
                                         />
                                         <IonCardContent>
                                             <IonCardTitle><p>{search.name}</p></IonCardTitle>
@@ -157,7 +157,7 @@ const ProductOwnerList = () => {
                             products.map((product, i) => (
                                 <IonCol size="6">
                                     <IonCard key={i} onClick={() => showDetails(i)} >
-                                        <IonImg style={{ height: "100px" }} src={`http://localhost:8000/storage/${product.image}`}
+                                        <IonImg style={{ height: "100px" }} src={`https://backend-practicas-cnwr6.ondigitalocean.app/storage/${product.image}`}
                                         />
                                         <IonCardContent>
                                             <IonCardTitle><p>{product.name}</p></IonCardTitle>
