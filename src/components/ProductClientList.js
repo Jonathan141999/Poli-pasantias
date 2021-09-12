@@ -215,7 +215,10 @@ const ProductClientList = () => {
                                         <IonCardSubtitle><strong>Dirección: </strong>{product.product.location}</IonCardSubtitle>
                                         <IonCardSubtitle><strong>Telefóno: </strong>{product.product.phone}</IonCardSubtitle>
                                         <IonCardSubtitle><strong>Correo de Contacto: </strong>{product.product.email}</IonCardSubtitle>
-                                        <IonCardSubtitle><strong>Empresa: </strong>{product.product.type}</IonCardSubtitle>
+                                        <IonCardSubtitle><strong>Empresa: </strong>{product.product.type==='public'
+                                        ? "Pública"
+                                        : "Privada"
+                                        }</IonCardSubtitle>
                                         <IonCardSubtitle><strong>Horas: </strong>{product.product.hour}</IonCardSubtitle>
                                         <IonCardSubtitle><strong>Carrera: </strong>{product.product.category}</IonCardSubtitle>
                                         <IonCardSubtitle><strong>Detalle:</strong>{product.product.details}</IonCardSubtitle>
@@ -282,7 +285,7 @@ const ProductClientList = () => {
                                             placeholder="Seleccione el tipo de entrevista"
                                             allowClear
                                         >
-                                            <Option value="online">Virtual</Option>
+                                            <Option value="online">En Línea</Option>
                                             <Option value="face">Presencial</Option>
                                         </Select>
                                     </Form.Item>

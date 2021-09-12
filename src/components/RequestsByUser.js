@@ -85,7 +85,7 @@ const RequestsByUser = () => {
                                                 ? "Rechazado"
                                                 : ""}</p></div>
                                 <div><p><strong>Semestre: </strong>{requests.career}</p></div>
-                                <div><p><strong>Tipo de entrevista: </strong>{requests.type ==='face'
+                                <div><p><strong>Tipo de entrevista: </strong>{requests.type === 'face'
                                     ? "Presencial"
                                     : "En Línea"
                                 }
@@ -175,6 +175,14 @@ const RequestsByUser = () => {
                                                                     ? "Presencial"
                                                                     : "En Linea"
                                                                 }</IonCardSubtitle>
+                                                            <IonCardSubtitle><strong>Estado: </strong>
+                                                                {detailRequest.detailRequest.status === "new"
+                                                                    ? "Nueva"
+                                                                    : detailRequest.detailRequest.status === "accepted"
+                                                                        ? "Aceptado"
+                                                                        : detailRequest.detailRequest.status === "rejected"
+                                                                            ? "Rechazado"
+                                                                            : ""}</IonCardSubtitle>
                                                             <IonCardSubtitle><strong>Experiencia Laboral: </strong>{detailRequest.detailRequest.work_experience}</IonCardSubtitle>
                                                         </IonCardContent>
                                                     </IonCol>
