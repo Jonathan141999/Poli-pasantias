@@ -208,7 +208,7 @@ const ProductClientList = () => {
                                 ]}
                             >
                                 <IonCard>
-                                    <IonImg style={{ height: "100px" }} src={`https://backend-practicas-cnwr6.ondigitalocean.app/storage/${product.image}`}
+                                    <IonImg style={{ height: "100px" }} src={`https://backend-practicas-cnwr6.ondigitalocean.app/storage/${product.product.image}`}
                                     />
                                     <IonCardContent>
                                         <IonCardSubtitle>{product.product.name}</IonCardSubtitle>
