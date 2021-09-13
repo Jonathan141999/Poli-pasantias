@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.polipasantias",
-  "appName": "test",
+  "appName": "polipasantias",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",
