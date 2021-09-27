@@ -91,10 +91,10 @@ const Navigation = (props) => {
                         <Link to={Routes.NEWORDER} style={linkStyle}>Nuevas Postulaciones</Link>
                     </Menu.Item>
                     <Menu.Item key={Routes.PROFILE} icon = {<UserOutlined/>}>
-                        <Link to={Routes.PROFILE} style={linkStyle}>Perfil de Usuario</Link>
+                        <Link to={Routes.PROFILE} style={linkStyle}>Perfil</Link>
                     </Menu.Item></>
                 :   <Menu.Item key={Routes.PROFILE} icon = {<UserOutlined/>}>
-                        <Link to={Routes.PROFILE} style={linkStyle}>Perfil de Usuario</Link>
+                        <Link to={Routes.PROFILE} style={linkStyle}>Perfil</Link>
                     </Menu.Item>
                 }
                 <Menu.Item key={Routes.LOGIN}>

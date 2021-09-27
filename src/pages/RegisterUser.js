@@ -125,7 +125,7 @@ const RegisterUser = () => {
                                        {
                                             min: 10,
                                             max: 13,
-                                            message: 'El número telefonico debe tener 10 dígitos'
+                                            message: 'El número telefónico debe tener 10 dígitos'
                                         }
                                    ]}
                                    hasFeedback

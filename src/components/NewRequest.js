@@ -95,18 +95,18 @@ const NewRequest = () => {
                 {
                     requests.map((orders, i) => (
                         <IonItem key={i} onClick={() => handleShowDetail(i)}>
-                            <IonList>
-                                <IonCol>
-                                    <IonCardSubtitle><p><strong>Nombre: </strong>{orders.name} {orders.last_name}</p></IonCardSubtitle>
-                                    <IonCardSubtitle><p><strong>Publicación: </strong>{orders.publication_name}</p></IonCardSubtitle>
-                                    <IonCardSubtitle><p><strong>Horas a ofertar: </strong>{orders.hour}</p></IonCardSubtitle>
+                            <IonLabel>
+                            
+                                    <div><p><strong>Nombre: </strong>{orders.name} {orders.last_name}</p></div>
+                                    <div><p><strong>Publicación: </strong>{orders.publication_name}</p></div>
+                                    <div><p><strong>Horas a ofertar: </strong>{orders.hour}</p></div>
                                     {orders.type === 'face'
-                                        ? <IonLabel><p><strong>Entrevista Personal</strong></p></IonLabel>
-                                        : <IonLabel><p><strong>Entrevista En Línea</strong></p></IonLabel>
+                                        ? <div><p><strong>Entrevista Personal</strong></p></div>
+                                        : <div><p><strong>Entrevista En Línea</strong></p></div>
                                     }
 
-                                </IonCol>
-                            </IonList>
+                               
+                            </IonLabel>
                         </IonItem>
                     ))
                 }

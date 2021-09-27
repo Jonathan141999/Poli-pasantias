@@ -162,7 +162,7 @@ const RequestsByUser = () => {
                                                 <IonList>
                                                     <IonCol>
                                                         <IonCardContent>
-                                                            <IonCardSubtitle><strong>Nombre de la Empresa: </strong>{detailRequest.detailRequest.publication_name}</IonCardSubtitle>
+                                                            <IonCardSubtitle><strong>Nombre de la Publicación: </strong>{detailRequest.detailRequest.publication_name}</IonCardSubtitle>
                                                             <IonCardSubtitle><strong>Horas: </strong>{detailRequest.detailRequest.hour}</IonCardSubtitle>
                                                             <IonCardSubtitle><strong>Nombre: </strong>{detailRequest.detailRequest.name}</IonCardSubtitle>
                                                             <IonCardSubtitle><strong>Apellido: </strong>{detailRequest.detailRequest.last_name}</IonCardSubtitle>

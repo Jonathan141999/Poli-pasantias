@@ -251,7 +251,7 @@ const ProductClientList = () => {
                                         rules={[
                                             {
                                                 required: true,
-                                                message: 'Detalles de Experiencia'
+                                                message: 'Detalles de la Experiencia'
                                             }
                                         ]}
                                         
