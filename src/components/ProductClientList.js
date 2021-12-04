@@ -239,7 +239,8 @@ const ProductClientList = () => {
                                         rules={[
                                             {
                                                 required: true,
-                                                unique:true,
+                                                whitespace: true,
+                                                //unique:true,
                                                 message: 'Escriba los lenguajes que domina'
                                             }
                                         ]}
@@ -254,6 +255,7 @@ const ProductClientList = () => {
                                         rules={[
                                             {
                                                 required: true,
+                                                whitespace: true,
                                                 message: 'Detalles de la Experiencia'
                                             }
                                         ]}
@@ -267,6 +269,7 @@ const ProductClientList = () => {
                                         rules={[
                                             {
                                                 required: true,
+                                                whitespace: true,
                                                 message: 'Escriba en que semestre esta'
                                             }
                                         ]}

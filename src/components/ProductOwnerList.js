@@ -195,19 +195,19 @@ const ProductOwnerList = () => {
                                         remember: true,
                                     }}
                                 >
-                                    <Form.Item label="Nombre de Empresa" name='name' hasFeedback>
+                                    <Form.Item label="Nombre de la Publicación o Empresa" name='name' rules={[{required:true, whitespace:true, message:'Ingrese correctamente el nombre de la publicación o empresa'}]} hasFeedback>
                                         <Input placeholder={product.product.name} />
                                     </Form.Item>
-                                    <Form.Item label="Dirección" name='location' hasFeedback>
+                                    <Form.Item label="Dirección" name='location' rules={[{required:true, whitespace:true, message:'Ingrese nuevamente la dirección'}]}hasFeedback>
                                         <Input placeholder={product.product.location} />
                                     </Form.Item>
-                                    <Form.Item label="Telefono" name='phone' hasFeedback>
+                                    <Form.Item label="Teléfono" name='phone' rules={[{required:true, whitespace:true, message:'Ingrese correctamente el número teléfonico'}]}hasFeedback>
                                         <Input type="number" min="7" max="13" placeholder={product.product.phone} />
                                     </Form.Item>
-                                    <Form.Item label="Horas a Ofertar" name='hour' hasFeedback>
+                                    <Form.Item label="Horas a Ofertar" name='hour' rules={[{required:true, whitespace:true, message:'Ingrese nuevamente las horas a ofertar'}]}hasFeedback>
                                         <Input placeholder={product.product.hour} />
                                     </Form.Item>
-                                    <Form.Item label="Descripcion de la práctica preprofesional" name='details' hasFeedback>
+                                    <Form.Item label="Descripcion de la práctica preprofesional" name='details' rules={[{required:true, whitespace:true, message:'Escriba los detalles de la práctica preprofesional'}]}hasFeedback>
                                         <Input.TextArea placeholder={product.product.details} />
                                     </Form.Item>
                                 </Form>
