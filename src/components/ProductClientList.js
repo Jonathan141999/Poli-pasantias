@@ -239,9 +239,12 @@ const ProductClientList = () => {
                                         rules={[
                                             {
                                                 required: true,
+                                                unique:true,
                                                 message: 'Escriba los lenguajes que domina'
                                             }
                                         ]}
+                                   hasFeedback
+
                                         
                                     >
                                         <Input placeholder='Lenguajes' />
@@ -254,6 +257,7 @@ const ProductClientList = () => {
                                                 message: 'Detalles de la Experiencia'
                                             }
                                         ]}
+                                   hasFeedback
                                         
                                     >
                                         <Input.TextArea placeholder='Experiencia' />
@@ -266,6 +270,7 @@ const ProductClientList = () => {
                                                 message: 'Escriba en que semestre esta'
                                             }
                                         ]}
+                                   hasFeedback
                                         
                                     >
                                         <Input placeholder='Semestre' />
