@@ -78,10 +78,12 @@ const EditUserPage = (props) => {
                             rules={[
                                 {
                                     required: true,
+                                    whitespace: true,
                                     message: 'Ingresa tu email'
                                 },
                                 {
                                     type: 'email',
+                                    whitespace: true,
                                     message: 'Ingresa un correo válido'
                                 }
                             ]}
@@ -94,6 +96,7 @@ const EditUserPage = (props) => {
                             rules={[
                                 {
                                     required: true,
+                                    whitespace: true,
                                     message: 'Ingresa una pequeña descripción'
                                 }
                             ]}

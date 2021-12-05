@@ -98,6 +98,7 @@ const RegisterUser = () => {
                                    rules={[
                                        {
                                            required: true,
+                                           whitespace: true,
                                            message: 'Ingresa tu nombre'
                                        }
                                    ]}
@@ -109,6 +110,7 @@ const RegisterUser = () => {
                                    rules={[
                                        {
                                            required: true,
+                                           whitespace: true,
                                            message: 'Ingresa tu apellido'
                                        }
                                    ]}
@@ -120,27 +122,29 @@ const RegisterUser = () => {
                                    rules={[
                                        {
                                            required: true,
+                                           whitespace: true,
                                            message: 'Ingresa tu número telefónico'
                                        },
                                        {
                                             min: 10,
                                             max: 13,
-                                            message: 'El número telefónico debe tener 10 dígitos'
+                                            message: 'El número teléfonico debe tener 10 dígitos'
                                         }
                                    ]}
                                    hasFeedback
                         >
-                            <Input prefix={<NumberOutlined/>} placeholder='Número de telefóno'/>
+                            <Input prefix={<NumberOutlined/>} placeholder='Número de teléfono'/>
                         </Form.Item>
                         <Form.Item name='email'
                                    rules={[
                                        {
                                             required: true,
+                                            whitespace: true,
                                             message: 'Ingresa tu email'
                                        },
                                        {
                                             type: 'email',
-                                            message: 'Ingresa un correo válido'
+                                            message: 'Ingresa un correo electronico válido'
                                        }
                                    ]}
                                    hasFeedback
@@ -152,6 +156,7 @@ const RegisterUser = () => {
                                    rules={[
                                         {
                                             required: true,
+                                            whitespace: true,
                                             message: 'Ingresa tu contraseña',
                                         },
                                         {
@@ -172,6 +177,7 @@ const RegisterUser = () => {
                                    rules={[
                                        {
                                            required: true,
+                                           whitespace: true,
                                            message: 'Confirma tu contraseña',
                                        },
                                        ({getFieldValue}) => ({
@@ -193,7 +199,8 @@ const RegisterUser = () => {
                                    rules={[
                                        {
                                             required: true,
-                                            message: 'Ingresa tu dirección'
+                                            whitespace: true,
+                                            message: 'Ingresa la dirección correcta'
                                        }
                                    ]}
                                    hasFeedback
@@ -221,6 +228,7 @@ const RegisterUser = () => {
                                    rules={[
                                        {
                                            required: true,
+                                           whitespace: true,
                                            message: 'Ingresa una pequeña descripción'
                                        }
                                    ]}

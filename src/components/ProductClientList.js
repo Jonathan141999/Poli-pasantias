@@ -239,9 +239,13 @@ const ProductClientList = () => {
                                         rules={[
                                             {
                                                 required: true,
+                                                whitespace: true,
+                                                //unique:true,
                                                 message: 'Escriba los lenguajes que domina'
                                             }
                                         ]}
+                                   hasFeedback
+
                                         
                                     >
                                         <Input placeholder='Lenguajes' />
@@ -251,9 +255,11 @@ const ProductClientList = () => {
                                         rules={[
                                             {
                                                 required: true,
+                                                whitespace: true,
                                                 message: 'Detalles de la Experiencia'
                                             }
                                         ]}
+                                   hasFeedback
                                         
                                     >
                                         <Input.TextArea placeholder='Experiencia' />
@@ -263,9 +269,11 @@ const ProductClientList = () => {
                                         rules={[
                                             {
                                                 required: true,
+                                                whitespace: true,
                                                 message: 'Escriba en que semestre esta'
                                             }
                                         ]}
+                                   hasFeedback
                                         
                                     >
                                         <Input placeholder='Semestre' />
